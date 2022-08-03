@@ -1,0 +1,65 @@
+h5#staticBackdropLabel {
+    margin-left: 197px;
+}
+p.text-start.text-primary:hover {
+
+    color: black;
+
+}
+i.fa-solid.fa-minus.text-primary.mt-2 {
+    margin-left: 221px;
+}
+i.fa-solid.fa-plus.text-primary.mt-2 {
+    margin-left: 100px;
+}
+p.zero {
+    margin-left: 318px;
+    margin-top: -24px;
+    position: absolute;
+}
+.tabs{
+    list-style: none;
+    
+}
+.tabs li{
+    font-size: 1.3rem;
+    font-weight: 600;
+    cursor: pointer;
+    position: relative;
+}
+.tabs li::after{
+    content: '';
+    position: absolute;
+    bottom: -20%;
+    left: -3%;
+    width: 0%;
+    height: 5px;
+    background-color: black;
+    transition: width 0.8s ease;
+}
+.tabs li.active::after{
+    width: 104%;
+}
+.text-block.position-absolute {
+    margin-top: -298px;
+    margin-left: 77px;
+}
+p.nightt {
+    margin-top: -21px;
+}
+button.Explorr.position-absolute {
+    margin-top: -202px;
+    margin-left: 479px;
+}
+.justify-content-between.position-absolute {
+    margin-top: -54px;
+    margin-left: 25px;
+}
+
+ul li{
+    padding: 8px;
+    list-style: none;
+    margin-left: 5px;
+    cursor: pointer;
+    font-size: 18px;
+}
