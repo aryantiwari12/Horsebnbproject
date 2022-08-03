@@ -17,8 +17,7 @@ function App() {
   return (
 
     <div className="App">
-      {/* <Header /> */}
-      <Secondheader/>
+      <Header />
       <Home />
       <ExplorehorseBnB />
       <Aboutus />
