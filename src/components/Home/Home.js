@@ -2,6 +2,14 @@ import React from 'react'
 import "../Home/home.css"
 import IMAGE from "../../IMG/search_grey.png"
 import { useState } from 'react'
+import ExplorehorseBnB from './ExplorehorseBnB'
+import Aboutus from './Aboutus'
+import Shorttermsstalls from './Shorttermsstalls'
+import Guestaccommodations from './Guestaccommodations'
+import Monthly from './Monthly'
+import Horseadventures from './Horseadventures'
+import Header from '../header/Header'
+import Footer from '../Footer/Footer'
 const Home = () => {
 
     const [counter, setCounter] = useState(0)
@@ -68,6 +76,7 @@ const Home = () => {
 
     return (
         <div>
+            <Header />
             <div className='container  mt-5 '>
                 <section>
                     <ul className='tabs d-flex gap-5 '>
@@ -255,11 +264,15 @@ const Home = () => {
                                 </div>
                             </div>
                         </div> : ""}
-
-
-
                 </section>
             </div >
+            <ExplorehorseBnB />
+            <Aboutus />
+            <Shorttermsstalls />
+            <Guestaccommodations />
+            <Monthly />
+            <Horseadventures />
+            <Footer />
         </div >
     )
 }

@@ -1,6 +1,6 @@
 import React from 'react'
 
-const shorttermsstalls = () => {
+const Shorttermsstalls = () => {
   return (
     <div>
       <div className='container mt-5 text-start'>
@@ -24,4 +24,4 @@ const shorttermsstalls = () => {
   )
 }
 
-export default shorttermsstalls
+export default Shorttermsstalls

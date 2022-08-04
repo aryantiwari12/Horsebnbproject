@@ -4,17 +4,24 @@ import "../header/style.css";
 import 'react-phone-number-input/style.css'
 import { useState } from 'react';
 import { useContext } from 'react';
-import { Navigate } from "react-router-dom";
+import {Link, useNavigate} from 'react-router-dom';
 import { CounterContext } from "../context/CounterContext"
 import heneceforthApi from "../henceforthApi";
 import PhoneInput, { formatPhoneNumber, formatPhoneNumberIntl } from 'react-phone-number-input'
 import { contains } from 'rsuite/esm/DOMHelper';
 import Secondheader from './Secondheader';
+import { useEffect } from 'react';
+import IMAGE1 from "../../IMG/search_grey.png";
+import axios from 'axios';
 const Header = () => {
 
+
+    // heneceforthApi.setToken(localStorage.getItem('token'))
+
     const [values, setValues] = useState()
+    const navigate = useNavigate();
+    const [post, setpost] = useState()
     const [isLoading, setIsLoading] = useState(false);
-    const [showheader, setshowheader] = useState(false)
     const [profiledata, setprofiledata] = useState({
         firstName: "",
         lastName: "",
@@ -36,6 +43,9 @@ const Header = () => {
         deviceType: 3,
         fcmId: "string"
     })
+
+  
+
 
     const changesdata = (e) => {
 
@@ -74,6 +84,7 @@ const Header = () => {
         let res = await heneceforthApi.Auth.login(logindata)
         localStorage.setItem("token", res.data.token);
         console(res.data.token)
+        
     }
 
     const showheaderdata = () => {
@@ -81,11 +92,90 @@ const Header = () => {
     }
 
 
+    heneceforthApi.setToken(localStorage.getItem('token'))
+
+    const getprofile = async () => {
+
+        let res = await heneceforthApi.Auth.getdata()
+        .then((res)=>{
+            setprofiledata(res.data.attributes.profile)
+            console.log(res)
+        })
+        
+
+
+    }
+
+    useEffect(() => {
+        return () => {
+            getprofile()
+        };
+    }, [])
+
+
+const logoutdata=()=>{
+    localStorage.clear()
+    navigate('');
+    
+}
+
+
+
     return (
         <div>
             {
                 localStorage.getItem('token') ?
-                    <Secondheader name={profiledata.firstName}/> :
+                    // <Secondheader firstName={profiledata.firstName} lastname={profiledata.lastName}/>
+                    <nav class="navbar navbar-expand-lg bg-light shadow">
+                    <div class="container-fluid">
+                        <img src={IMAGE}></img>
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center">
+                                <li class="nav-item border rounded">
+                                    <a href='' class="pointer search-btn col-lg-12 col-md-6">
+                                        <span>Start your search</span>
+                                        <span className='search-icon-btn p-2 '>
+                                            <img src={IMAGE1}></img>
+                                        </span>
+                                    </a>
+                                </li>
+                                <li className='nav-item'>
+                                    <a href='#'>Host your Stalls</a>
+                                </li>
+                                <li className='nav-item'>
+                                    <a href='#'>Host Guests</a>
+                                </li>
+                                <li className='nav-item'>
+                                    <a href='#'>Host an Adventure</a>
+                                </li>
+                                <li className='nav-item'>
+                                    <img src="https://horsebnb.com/assets/img/chat-bubble.svg"></img>
+                                </li>
+                                <li className='nav-item'>
+                                    <div class="dropdown">
+                                        <button class="btn border dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <img src="https://horsebnb.com/assets/img/default.png" className='pe-2' height="35px" width="35px" alt=""></img>
+                                            <span>{profiledata.firstName} {profiledata.lastName}</span>
+                                            
+                                        </button>
+                                        <ul class="dropdown-menu" >
+                                            <li><a class="dropdown-item" href="#">Booking</a></li>
+                                            <li><a class="dropdown-item" href="#">Dashboard</a></li>
+                                            <li><a class="dropdown-item" href="#">Manage Listing</a></li>
+                                            <li><a class="dropdown-item" href="#"><Link to="/myaccount">Account</Link></a></li>
+                                            <li><a class="dropdown-item" href="/" onClick={logoutdata}>Logout</a></li>
+                                        </ul>
+                                    </div>
+                                </li>
+    
+                            </ul>
+                           
+                        </div>
+                    </div>
+                </nav>  :
                     <nav class="navbar navbar-expand-lg shadow">
                         <div class="container-fluid">
                             <img src={IMAGE}></img>
@@ -146,7 +236,7 @@ const Header = () => {
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <input type="text" className='form-control' onChange={changesdata} value={profiledata.firstName} name="firstname" placeholder='first Name'></input>
+                            <input type="text" className='form-control' onChange={changesdata} value={profiledata.firstName} name="firstName" placeholder='first Name'></input>
                             <input type="text" className='form-control mt-2' onChange={changesdata} value={profiledata.lastName} name="lastName" placeholder='Last Name'></input>
                             <input type="text" className='form-control mt-2' onChange={changesdata} value={profiledata.email} name="email" placeholder='Enter Email'></input>
                             {/* <PhoneInput placeholder="Enter phone number"  name="phoneNumber" className='form-control mt-2' value={values}  onChange={(e)=>{country(e);changesdata()}}

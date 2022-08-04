@@ -22,7 +22,7 @@ import _superagent from "superagent";
     let token = null;
     const tokenPlugin = (req) => {
         if (token) {
-            req.set("token", `${token}`);
+            req.set("Authorization", `${token}`);
         }
     };
 
@@ -49,6 +49,7 @@ import _superagent from "superagent";
     };
 
     const Auth = {
+        getdata: (info) => requests.get("/current_user/show", info),
         login: (info) => requests.post("/login", info),
         signup: (info) => requests.post("/current_user/create", info),
         forgotPassword: (info) => requests.post("forgot-password", info),

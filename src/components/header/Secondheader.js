@@ -3,10 +3,10 @@ import IMAGE from "../../IMG/logo_horse.png";
 import IMAGE1 from "../../IMG/search_grey.png";
 import { Navigate } from 'react-router-dom';
 import { useEffect } from 'react';
-const Secondheader = ({name}) => {
+const Secondheader = ({firstName,lastname}) => {
 
 
-   
+ console.log(firstName)   
 
     return (
 
@@ -43,7 +43,8 @@ const Secondheader = ({name}) => {
                                 <div class="dropdown">
                                     <button class="btn border dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                         <img src="https://horsebnb.com/assets/img/default.png" className='pe-2' height="35px" width="35px" alt=""></img>
-                                        <span>{name}</span>
+                                        <span>{firstName}{lastname}</span>
+                                        
                                     </button>
                                     <ul class="dropdown-menu" >
                                         <li><a class="dropdown-item" href="#">Booking</a></li>
