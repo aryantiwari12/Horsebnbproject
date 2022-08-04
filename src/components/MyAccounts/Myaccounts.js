@@ -3,7 +3,9 @@ import { Link } from 'react-router-dom';
 
 const Myaccounts = () => {
   return (
-    <div>Myaccounts</div>
+    <div>
+      <h1>Hellohjvjvjvh</h1>
+    </div>
   )
 }
 

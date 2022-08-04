@@ -76,7 +76,7 @@ const Home = () => {
 
     return (
         <div>
-            <Header />
+            
             <div className='container  mt-5 '>
                 <section>
                     <ul className='tabs d-flex gap-5 '>
@@ -272,7 +272,7 @@ const Home = () => {
             <Guestaccommodations />
             <Monthly />
             <Horseadventures />
-            <Footer />
+            
         </div >
     )
 }
