@@ -13,16 +13,24 @@ import Monthly from './components/Home/Monthly';
 import Horseadventures from './components/Home/Horseadventures';
 import Secondheader from './components/header/Secondheader';
 import Myaccounts from './components/MyAccounts/Myaccounts';
+import Personalinfo from './components/MyAccounts/Personalinfo';
+import { Profiler } from 'react';
 
 
 function App() {
+
+  
+
+
+
   return (
     <Router>
       <div>
-        <Header />
+        <Header/>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/Myaccounts" element={<Myaccounts/>}/>
+          <Route path="/Myaccounts/Personalinfo"  element={<Personalinfo/>}/>
         </Routes>
         <Footer />
       </div>

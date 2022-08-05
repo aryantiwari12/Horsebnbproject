@@ -1,0 +1,20 @@
+link{
+    text-decoration: none;
+    color:black;
+}
+#hello{
+    text-decoration: none;
+}
+p.text-center {
+    margin-top: -29px;
+    position: absolute;
+    margin-left: 106px;
+}
+i.fa-solid.fa-angle-right.text {
+    position: absolute;
+    margin-top: -24px;
+    margin-left: 80px;
+}
+a dropdown-item:hover{
+    background-color: blueviolet;
+}
