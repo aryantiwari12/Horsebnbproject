@@ -13,6 +13,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Monthly from './components/Home/Monthly';
 import Horseadventures from './components/Home/Horseadventures';
 import Secondheader from './components/header/Secondheader';
+import Myaccounts from './components/MyAccounts/Myaccounts';
 
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
         <Routes>
           
           <Route path="/" element={<Home />} />
+          <Route path="/Myaccounts" element={<Myaccounts/>}/>
         </Routes>
       </BrowserRouter>
 
