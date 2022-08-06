@@ -1,7 +1,9 @@
 import React from 'react'
 import { Button } from 'rsuite'
 import IMAGE from "../../IMG/profile.png"
-import { useState } from 'react'
+import { useState,useRef } from 'react'
+import { Link } from 'react-router-dom';
+import heneceforthApi from '../henceforthApi';
 const Personalinfo = () => {
 
     const [legals, setlegals] = useState(false)
@@ -12,7 +14,38 @@ const Personalinfo = () => {
     const [about, setabout] = useState(false)
     const [Address, setAddress] = useState(false)
     const [Language, setLanguage] = useState(false)
+    const [profiledata, setprofiledata] = useState({
+        firstName: "",
+        lastName: "",
+        email: "",
+        password: "",
+        deviceId: "string",
+        protectedData: {
+            phoneNumber: ""
+        },
+        publicData: {
+            country_code: "",
+            gender:""
+        }
 
+    })
+
+    const changeingvalue=(e)=>{
+        let name = e.target.name;
+        let value = e.target.value;
+
+        setprofiledata({
+            ...profiledata,
+            [name]:value
+        })
+        console.log(name)
+        console.log(value)
+
+        
+    }
+
+
+    const fileRef = useRef();
 
     const editdata = () => {
         setlegals(true)
@@ -51,12 +84,32 @@ const Personalinfo = () => {
     const editLanguage=()=>{
         setLanguage(true)
     }
+    const Savename= async ()=>{
+        
+        let res = await heneceforthApi.Auth.editdata(profiledata)
+    }
+    const Savegender=async()=>{
+        let res=await heneceforthApi.Auth.editdata(profiledata)
+        document.getElementById('Male')
+    }
+    const Saveemail=async()=>{
+        let res=await heneceforthApi.Auth.editdata(profiledata)
+    }
+    const Savephone=async()=>{
+        // let res=await heneceforthApi.Auth.editdata(profiledata)
+        let res=await heneceforthApi.Auth.editdata({
+            protectedData: {phoneNumber: phoneNumber }
+        })
+    }
+
 
     return (
         <div>
             <div className='container'>
                 <div className='mt-5'>
-                    <h6 className='text-start'>Account</h6>
+                    <Link to="/myaccounts">
+                      <h6 className='text-start'>Account</h6>
+                    </Link>
                     <i class="fa-solid fa-angle-right text"></i>
                     <p className='text-center'>Personal info</p>
                     <h1 className='heading-large mt-0 mb-5 text-black line-height-space'>Personal Info</h1>
@@ -67,7 +120,10 @@ const Personalinfo = () => {
                                     <div className='book-img mx-auto mb-3 w-100 h-100 position-relative'>
                                         <img src={IMAGE} className='rounded-circle border border-success w-25 h-25'></img>
                                     </div>
-                                    <Button className='bg-success border-0 rounded text-white p-2'>Upload</Button>
+                                    <div className=''></div>
+                                    <input ref={fileRef} hidden type="file" accept="image/*"/>
+                                    <Button onClick={() =>  fileRef.current.click()} className='bg-success border-0 rounded text-white p-2'>Upload</Button>
+                                    
                                 </div>
                             </div>
                             <div className='border px-4 py-4 mb-4'>
@@ -92,14 +148,14 @@ const Personalinfo = () => {
                                         <p>This is the name on your travel document, which could be a licence or a passport.</p>
                                         <div className='col-md-6'>
                                             <strong>First Name</strong>
-                                            <input type="text" className='form-control'></input>
+                                            <input type="text" value={profiledata.firstName} className='form-control' onChange={changeingvalue} name="firstName"></input>
                                         </div>
                                         <div className='col-md-6'>
                                             <strong>Last Name</strong>
-                                            <input type="text" className='form-control'></input>
+                                            <input type="text" value={profiledata.lastName} className='form-control' onChange={changeingvalue} name="lastName"></input>
                                         </div>
                                         <div className='col-md-12 mt-2'>
-                                            <button className='bg-success text-white border p-2 '>Save</button>
+                                            <button className='bg-success text-white border p-2' onClick={Savename}>Save</button>
                                         </div>
                                     </div> : ""}
 
@@ -118,11 +174,11 @@ const Personalinfo = () => {
                                                 Choose Gender
                                             </button>
                                             <ul class="dropdown-menu w-100">
-                                                <li><a class="dropdown-item" href="#">Male</a></li>
-                                                <li><a class="dropdown-item" href="#">Female</a></li>
+                                                <li><a class="dropdown-item" id="male" value={profiledata.Male} name="Male" onChange={changeingvalue} href="#">Male</a></li>
+                                                <li><a class="dropdown-item" id="female" value={profiledata.Female} name="female" onChange={changeingvalue} href="#">Female</a></li>
                                             </ul>
                                         </div>
-                                        <button className='bg-success mt-2 border-0 text-white p-2 '>Save</button>
+                                        <button className='bg-success mt-2 border-0 text-white p-2' onClick={Savegender}>Save</button>
                                     </div> : <p>Male</p>}
                             </div>
                             <div className='border px-4 py-3 mb-4'>
@@ -145,15 +201,15 @@ const Personalinfo = () => {
                                     <h5 className='flex-grow-1'>Email address</h5>
                                     <h5 className='pe-2 text-success' role="button">Verify</h5>
                                     {emailaddress == true ?
-                                        <h5 className='text-success' role="button" onClick={canceldata}>Cancel</h5>
+                                        <h5 className='text-success'  role="button" onClick={canceldata}>Cancel</h5>
                                         : <h5 className='text-success' role="button" onClick={editemail}>Edit</h5>}
                                 </div>
                                 <p>aryan.tiwari@gmail.com</p>
                                 {emailaddress == true ?
                                     <div className='col-md-12'>
 
-                                        <input type="Email" placeholder='Email' className='form-control'></input>
-                                        <button className='bg-success mt-2 border-0 text-white p-2'>Save</button>
+                                        <input type="Email" placeholder='Email' value={profiledata.email} onChange={changeingvalue} className='form-control' name="email"></input>
+                                        <button className='bg-success mt-2 border-0 text-white p-2' onClick={Saveemail}>Save</button>
 
                                     </div>
                                     : ""}
@@ -168,8 +224,8 @@ const Personalinfo = () => {
                                 {phoneNumber==true?
                                 <div className='col-md-12'>
                                     <p>For notifications, reminders, and help logging in</p>
-                                    <input type="tel" className='form-control' placeholder='Enter phone Number' />
-                                    <button className='bg-success mt-2 border-0 text-white p-2'>Save</button>
+                                    <input type="tel" className='form-control' value={profiledata.phoneNumber} onChange={changeingvalue} placeholder='Enter phone Number' name="phoneNumber" />
+                                    <button className='bg-success mt-2 border-0 text-white p-2' onClick={Savephone} >Save</button>
                                 </div>:<p>98584545645</p>}
                                 
                             </div>

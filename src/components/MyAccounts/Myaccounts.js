@@ -1,13 +1,47 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 import "../MyAccounts/myaccounts.css";
+import { useState, useEffect } from 'react';
+import henceforthApi from '../henceforthApi';
 const Myaccounts = () => {
+
+
+  const [prtofiledata, setprofiledata] = useState({
+    email: ""
+  })
+
+
+
+  const getprofile = async () => {
+
+    let res = await henceforthApi.Auth.getdata()
+      .then((res) => {
+        setprofiledata(res.data.attributes)
+        console.log(res)
+      })
+
+
+
+  }
+
+  useEffect(() => {
+    return () => {
+      getprofile()
+    };
+  }, [])
+
+
+
+
+
+
+
   return (
     <div>
       <div className="container ">
         <div className='mt-5'>
           <h3 className='text-start'>My Account</h3>
-          <p className='fs-5'>Henece Forth , <span className='fs-6'>aryan.tiwari@gmail.com</span></p>
+          <p className='fs-5'>Henece Forth , <span className='fs-6'>{prtofiledata.email}</span></p>
 
         </div>
         <div className="row ">
