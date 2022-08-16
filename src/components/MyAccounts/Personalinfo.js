@@ -7,13 +7,20 @@ import heneceforthApi from '../henceforthApi';
 const Personalinfo = () => {
 
     const [legals, setlegals] = useState(false)
-    const [gender, setgender] = useState(false)
+    const [Gender, setGender] = useState(false)
     const [dateofbirth, setdateofbirth] = useState(false)
     const [emailaddress, setemailaddress] = useState(false)
-    const [phoneNumber, setphoneNumber] = useState(false)
+    const [PhoneNumber, setPhoneNumber] = useState(false)
     const [about, setabout] = useState(false)
     const [Address, setAddress] = useState(false)
     const [Language, setLanguage] = useState(false)
+
+    const [genderdata,setgenderdata]=useState("") // Genderstate 
+    const [languagedata,setlanguagedata]=useState("")// languagedata
+    
+
+    
+
     const [profiledata, setprofiledata] = useState({
         firstName: "",
         lastName: "",
@@ -25,8 +32,12 @@ const Personalinfo = () => {
         },
         publicData: {
             country_code: "",
-            gender:""
-        }
+            gender:"",
+            address:"",
+            age:"",
+            language:""
+        },
+        bio:""
 
     })
 
@@ -53,17 +64,17 @@ const Personalinfo = () => {
     }
     const canceldata = () => {
         setlegals(false)
-        setgender(false)
+        setGender(false)
         setdateofbirth(false)
         setemailaddress(false)
-        setphoneNumber(false)
+        setPhoneNumber(false)
         setabout(false)
         setAddress(false)
         setLanguage(false)
 
     }
     const editgender = () => {
-        setgender(true)
+        setGender(true)
 
     }
     const editDate = () => {
@@ -73,7 +84,7 @@ const Personalinfo = () => {
         setemailaddress(true)
     }
     const editphone = () => {
-        setphoneNumber(true)
+        setPhoneNumber(true)
     }
     const editabout=()=>{
         setabout(true)
@@ -89,16 +100,46 @@ const Personalinfo = () => {
         let res = await heneceforthApi.Auth.editdata(profiledata)
     }
     const Savegender=async()=>{
-        let res=await heneceforthApi.Auth.editdata(profiledata)
-        document.getElementById('Male')
+        // let res=await heneceforthApi.Auth.editdata({
+        //     publicData:{gender:profiledata.publicData.gender}
+            
+        // })
+        // // console.log(profiledata.gender)
+        // console.log(document.getElementsByName('gender'));
+        // // let ele = document.getElementsByName('gender');
+        
+         let res=await heneceforthApi.Auth.editdata({
+            publicData:{gender:genderdata}
+            
+        })
+        
+       
+    }
+    const Dateofbirth=async()=>{
+        let res=await heneceforthApi.Auth.editdata({
+            publicData:{age:profiledata.age}
+        })
     }
     const Saveemail=async()=>{
         let res=await heneceforthApi.Auth.editdata(profiledata)
     }
     const Savephone=async()=>{
-        // let res=await heneceforthApi.Auth.editdata(profiledata)
         let res=await heneceforthApi.Auth.editdata({
-            protectedData: {phoneNumber: phoneNumber }
+            protectedData: {phoneNumber:profiledata.phoneNumber}
+        })
+    }
+    const Savebio=async()=>{
+        let res=await heneceforthApi.Auth.editdata(profiledata)
+
+    }
+    const Saveaddress=async()=>{
+        let res=await heneceforthApi.Auth.editdata({
+            publicData:{address:profiledata.address}
+        })
+    }
+    const Languagechange=async()=>{
+        let res=await heneceforthApi.Auth.editdata({
+            publicData:{language:languagedata}
         })
     }
 
@@ -163,23 +204,21 @@ const Personalinfo = () => {
                             <div className='border px-4 py-3 mb-4'>
                                 <div className='d-flex justify-content-between mb-3'>
                                     <h5>Gender</h5>
-                                    {gender == true ?
+                                    {Gender == true ?
                                         <h5 className='text-success' role="button" onClick={canceldata}>Cancel</h5>
                                         : <h5 className='text-success' role="button" onClick={editgender}>Edit</h5>}
                                 </div>
-                                {gender == true ?
+                                {Gender == true ?
                                     <div className='col-md-12'>
                                         <div class="dropdown">
-                                            <button class="dropdown-toggle w-100 text-start border bg-white p-2 rounded" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                Choose Gender
-                                            </button>
-                                            <ul class="dropdown-menu w-100">
-                                                <li><a class="dropdown-item" id="male" value={profiledata.Male} name="Male" onChange={changeingvalue} href="#">Male</a></li>
-                                                <li><a class="dropdown-item" id="female" value={profiledata.Female} name="female" onChange={changeingvalue} href="#">Female</a></li>
-                                            </ul>
+                                            <select className='w-100 border p-2' id="rdoSelect" value={genderdata}  onChange={(e)=>setgenderdata(e.target.value)} >
+                                                <option> Choose Gender</option>
+                                                <option name="gender" value="Male">Male</option>
+                                                <option name="gender" value="Female">Female</option>
+                                            </select>
                                         </div>
                                         <button className='bg-success mt-2 border-0 text-white p-2' onClick={Savegender}>Save</button>
-                                    </div> : <p>Male</p>}
+                                    </div> : <p></p>}
                             </div>
                             <div className='border px-4 py-3 mb-4'>
                                 <div className='d-flex justify-content-between mb-3'>
@@ -191,9 +230,9 @@ const Personalinfo = () => {
                                 {dateofbirth == true ?
                                     <div className='col-md-12'>
 
-                                        <input type="date" placeholder='select Date of Birth' className='form-control'></input>
+                                        <input type="date" placeholder='select Date of Birth' className='form-control' value={profiledata.age} onChange={changeingvalue} name="age"></input>
 
-                                        <button className='bg-success mt-2 border-0 text-white p-2'>Save</button>
+                                        <button className='bg-success mt-2 border-0 text-white p-2' onClick={Dateofbirth}>Save</button>
                                     </div> : <p>Not spacefied</p>}
                             </div>
                             <div className='border px-4 py-3 mb-4'>
@@ -217,11 +256,11 @@ const Personalinfo = () => {
                             <div className='border px-4 py-3 mb-4'>
                                 <div className='d-flex justify-content-between mb-3'>
                                     <h5>Phone Number</h5>
-                                    {phoneNumber==true?
+                                    {PhoneNumber==true?
                                     <h5 className='text-success' role="button" onClick={canceldata}>Cancel</h5>
                                     :<h5 className='text-success' role="button" onClick={editphone}>Edit</h5>}
                                 </div>
-                                {phoneNumber==true?
+                                {PhoneNumber==true?
                                 <div className='col-md-12'>
                                     <p>For notifications, reminders, and help logging in</p>
                                     <input type="tel" className='form-control' value={profiledata.phoneNumber} onChange={changeingvalue} placeholder='Enter phone Number' name="phoneNumber" />
@@ -238,8 +277,8 @@ const Personalinfo = () => {
                                 </div>
                                 {about==true?
                                 <div className='col-md-12'>
-                                    <textarea className='w-100' placeholder='Tell me yourself' />
-                                    <button className='bg-success mt-2 border-0 text-white p-2'>Save</button>
+                                    <textarea className='w-100' placeholder="Tell me yourself" value={profiledata.bio} onChange={changeingvalue} name="bio" />
+                                    <button className='bg-success mt-2 border-0 text-white p-2' onClick={Savebio}>Save</button>
                                 </div>:<p>Not spacefied</p>}
                                 
                             </div>
@@ -252,8 +291,8 @@ const Personalinfo = () => {
                                 </div>
                                 {Address==true?
                                 <div className='col-md-12'>
-                                    <input type="text" className='form-control w-100' />
-                                    <button className='bg-success mt-2 border-0 text-white p-2'>Save</button>
+                                    <input type="text" className='form-control w-100' value={profiledata.address} onChange={changeingvalue} name="address" />
+                                    <button className='bg-success mt-2 border-0 text-white p-2' onClick={Saveaddress}>Save</button>
                                 </div>:<p>Not spacefied</p>}
                                 
                             </div>
@@ -267,15 +306,14 @@ const Personalinfo = () => {
                                 {Language==true?
                                 <div className='col-md-12'>
                                     <div class="dropdown">
-                                        <button class="bg-white border dropdown-toggle w-100 text-start rounded p-2" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                            Choose Language
-                                        </button>
-                                        <ul class="dropdown-menu w-100">
-                                            <li><a class="dropdown-item" href="#">Hindi</a></li>
-                                            <li><a class="dropdown-item" href="#">English</a></li>
-                                            <li><a class="dropdown-item" href="#">German</a></li>
-                                        </ul>
+                                        <select class=" w-100 p-2" value={languagedata} onChange={(e)=>setlanguagedata(e.target.value)}>
+                                            <option>select Language</option>
+                                            <option value="Hindi">Hindi</option>
+                                            <option value="English">English</option>
+                                            <option value="German">German</option>
+                                        </select>
                                     </div>
+                                    <button className='bg-success mt-2 border-0 text-white p-2' onClick={Languagechange}> Save </button>
                                 </div>:<p>Not spacefied</p>}
                             </div>
 
