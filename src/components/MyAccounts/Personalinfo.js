@@ -1,7 +1,7 @@
 import React from 'react'
 import { Button } from 'rsuite'
 import IMAGE from "../../IMG/profile.png"
-import { useState,useRef } from 'react'
+import { useState,useRef,useEffect } from 'react'
 import { Link } from 'react-router-dom';
 import heneceforthApi from '../henceforthApi';
 const Personalinfo = () => {
@@ -15,8 +15,11 @@ const Personalinfo = () => {
     const [Address, setAddress] = useState(false)
     const [Language, setLanguage] = useState(false)
 
+    const [file, setFile] = useState(null); // upload picture 
+
     const [genderdata,setgenderdata]=useState("") // Genderstate 
     const [languagedata,setlanguagedata]=useState("")// languagedata
+    
     
 
     
@@ -35,7 +38,8 @@ const Personalinfo = () => {
             gender:"",
             address:"",
             age:"",
-            language:""
+            language:"",
+            image:""
         },
         bio:""
 
@@ -98,15 +102,10 @@ const Personalinfo = () => {
     const Savename= async ()=>{
         
         let res = await heneceforthApi.Auth.editdata(profiledata)
+        showalldata()
     }
     const Savegender=async()=>{
-        // let res=await heneceforthApi.Auth.editdata({
-        //     publicData:{gender:profiledata.publicData.gender}
-            
-        // })
-        // // console.log(profiledata.gender)
-        // console.log(document.getElementsByName('gender'));
-        // // let ele = document.getElementsByName('gender');
+      
         
          let res=await heneceforthApi.Auth.editdata({
             publicData:{gender:genderdata}
@@ -144,6 +143,50 @@ const Personalinfo = () => {
     }
 
 
+
+    const uploadfile = (e) => {
+        console.log(e.target.files);
+        setFile(e.target.files[0])
+        console.log(file)
+
+    }
+
+
+
+    const uploadimages=async()=>{
+        if (file == null) {
+            return ""
+        }
+        let res=await heneceforthApi.Auth.editdata({
+            publicData:{image:file.name}
+        })
+        const formdata = new FormData()
+        formdata.append("image", file)
+       
+        let filename = res.data.filename
+        console.log(filename)
+    }
+   
+
+    
+
+    //Get all data fetch the API
+
+    const showalldata= async ()=>{
+        let res=await heneceforthApi.Auth.getdata()
+        .then((res)=>{
+            // setprofiledata(res.data.attributes.profile)
+            setprofiledata(res.data)
+            setgenderdata(res.data.attributes.profile.publicData)
+            setlanguagedata(res.data.attributes.profile.publicData)
+        })
+    }
+    useEffect(()=>{
+        return()=>{
+            showalldata()
+        }
+    },[])
+
     return (
         <div>
             <div className='container'>
@@ -159,11 +202,11 @@ const Personalinfo = () => {
                             <div className="border p-4 mb-4">
                                 <div className='text-center'>
                                     <div className='book-img mx-auto mb-3 w-100 h-100 position-relative'>
-                                        <img src={IMAGE} className='rounded-circle border border-success w-25 h-25'></img>
+                                        <img src={file ? URL.createObjectURL(file):''} className='rounded-circle border border-success w-25 h-25'></img>
                                     </div>
                                     <div className=''></div>
-                                    <input ref={fileRef} hidden type="file" accept="image/*"/>
-                                    <Button onClick={() =>  fileRef.current.click()} className='bg-success border-0 rounded text-white p-2'>Upload</Button>
+                                    <input ref={fileRef} hidden type="file" accept="image/*"  onChange={uploadfile}/>
+                                    <Button onClick={() =>  {fileRef.current.click();uploadimages()}} className='bg-success border-0 rounded text-white p-2'>Upload</Button>
                                     
                                 </div>
                             </div>
@@ -181,9 +224,10 @@ const Personalinfo = () => {
                                         <h5 className='text-success' role="button" onClick={canceldata}>Cancel</h5>
                                         : <h5 className='text-success' role="button" onClick={editdata}>Edit</h5>}
                                 </div>
-                                {legals == true ? "" : <p>Aryan Tiwari</p>}
+                                {legals == true ? "" : <p>{profiledata?.attributes?.profile?.firstName} {profiledata?.attributes?.profile?.lastName}</p>}
 
-
+{/* {console.log(profiledata.attributes?.email)}
+{console.log(profiledata?.attributes?.profile?.firstName)} */}
                                 {legals == true ?
                                     <div className='row'>
                                         <p>This is the name on your travel document, which could be a licence or a passport.</p>
@@ -218,7 +262,7 @@ const Personalinfo = () => {
                                             </select>
                                         </div>
                                         <button className='bg-success mt-2 border-0 text-white p-2' onClick={Savegender}>Save</button>
-                                    </div> : <p></p>}
+                                    </div> : <p>{genderdata.gender}</p>}
                             </div>
                             <div className='border px-4 py-3 mb-4'>
                                 <div className='d-flex justify-content-between mb-3'>
@@ -233,7 +277,7 @@ const Personalinfo = () => {
                                         <input type="date" placeholder='select Date of Birth' className='form-control' value={profiledata.age} onChange={changeingvalue} name="age"></input>
 
                                         <button className='bg-success mt-2 border-0 text-white p-2' onClick={Dateofbirth}>Save</button>
-                                    </div> : <p>Not spacefied</p>}
+                                    </div> : <p>{profiledata?.attributes?.profile?.publicData?.age}</p>}
                             </div>
                             <div className='border px-4 py-3 mb-4'>
                                 <div className='d-flex justify-content-between mb-3'>
@@ -243,11 +287,11 @@ const Personalinfo = () => {
                                         <h5 className='text-success'  role="button" onClick={canceldata}>Cancel</h5>
                                         : <h5 className='text-success' role="button" onClick={editemail}>Edit</h5>}
                                 </div>
-                                <p>aryan.tiwari@gmail.com</p>
+                                <p>{profiledata.attributes?.email}</p>
                                 {emailaddress == true ?
                                     <div className='col-md-12'>
 
-                                        <input type="Email" placeholder='Email' value={profiledata.email} onChange={changeingvalue} className='form-control' name="email"></input>
+                                        <input type="Email" placeholder='Email' value={profiledata.attributes?.email} onChange={changeingvalue} className='form-control' name="email"></input>
                                         <button className='bg-success mt-2 border-0 text-white p-2' onClick={Saveemail}>Save</button>
 
                                     </div>
@@ -265,7 +309,7 @@ const Personalinfo = () => {
                                     <p>For notifications, reminders, and help logging in</p>
                                     <input type="tel" className='form-control' value={profiledata.phoneNumber} onChange={changeingvalue} placeholder='Enter phone Number' name="phoneNumber" />
                                     <button className='bg-success mt-2 border-0 text-white p-2' onClick={Savephone} >Save</button>
-                                </div>:<p>98584545645</p>}
+                                </div>:<p>{profiledata?.attributes?.profile?.protectedData?.phoneNumber}</p>}
                                 
                             </div>
                             <div className='border px-4 py-3 mb-4'>
@@ -279,7 +323,7 @@ const Personalinfo = () => {
                                 <div className='col-md-12'>
                                     <textarea className='w-100' placeholder="Tell me yourself" value={profiledata.bio} onChange={changeingvalue} name="bio" />
                                     <button className='bg-success mt-2 border-0 text-white p-2' onClick={Savebio}>Save</button>
-                                </div>:<p>Not spacefied</p>}
+                                </div>:<p>{profiledata?.attributes?.profile?.bio}</p>}
                                 
                             </div>
                             <div className='border px-4 py-3 mb-4'>
@@ -293,7 +337,7 @@ const Personalinfo = () => {
                                 <div className='col-md-12'>
                                     <input type="text" className='form-control w-100' value={profiledata.address} onChange={changeingvalue} name="address" />
                                     <button className='bg-success mt-2 border-0 text-white p-2' onClick={Saveaddress}>Save</button>
-                                </div>:<p>Not spacefied</p>}
+                                </div>:<p>{profiledata?.attributes?.profile?.publicData?.location}</p>}
                                 
                             </div>
                             <div className='border px-4 py-3 mb-4'>
@@ -314,7 +358,7 @@ const Personalinfo = () => {
                                         </select>
                                     </div>
                                     <button className='bg-success mt-2 border-0 text-white p-2' onClick={Languagechange}> Save </button>
-                                </div>:<p>Not spacefied</p>}
+                                </div>:<p>{languagedata.language}</p>}
                             </div>
 
                         </div>

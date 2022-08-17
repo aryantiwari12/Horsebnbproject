@@ -16,6 +16,7 @@ import Myaccounts from './components/MyAccounts/Myaccounts';
 import Personalinfo from './components/MyAccounts/Personalinfo';
 import { useState,useEffect } from 'react';
 import heneceforthApi from './components/henceforthApi';
+import Changespassword from './components/MyAccounts/Changespassword';
 
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/Myaccounts" element={<Myaccounts/>}/>
           <Route path="/Myaccounts/Personalinfo"  element={<Personalinfo/>}/>
+          <Route path="/Myaccounts/Changespassword"  element={<Changespassword/>}/>
         </Routes>
         <Footer />
       </div>

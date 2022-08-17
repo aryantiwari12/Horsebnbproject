@@ -56,7 +56,7 @@ const Myaccounts = () => {
 
           <div className="col border m-2  shadow">
             <img src="https://horsebnb.com/assets/img/Key.svg" className="float-start mt-5" alt="" />
-            <Link to={'/changepassword'} id="hello">
+            <Link to={'/Myaccounts/Changespassword'} id="hello">
               <p className='mt-5'><b>Change Password</b> <i class="fa-solid fa-angle-right text-success"></i></p>
               <p className="mt-5 text-start">Update your Password and secure your account</p>
             </Link>
