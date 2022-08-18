@@ -143,7 +143,9 @@ const logoutdata=()=>{
                                     </a>
                                 </li>
                                 <li className='nav-item'>
+                                    <Link to="/host-stalls">
                                     <a href='#'>Host your Stalls</a>
+                                    </Link>
                                 </li>
                                 <li className='nav-item'>
                                     <a href='#'>Host Guests</a>

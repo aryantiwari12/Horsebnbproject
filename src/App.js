@@ -14,23 +14,37 @@ import Horseadventures from './components/Home/Horseadventures';
 import Secondheader from './components/header/Secondheader';
 import Myaccounts from './components/MyAccounts/Myaccounts';
 import Personalinfo from './components/MyAccounts/Personalinfo';
-import { useState,useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import heneceforthApi from './components/henceforthApi';
 import Changespassword from './components/MyAccounts/Changespassword';
+import Payments from './components/MyAccounts/Payments';
+import Hoststalls from './components/menubar/Hoststalls';
+import HeaderRounting from './components/HeaderRounting';
+import Createstall from './components/menubar/Createstall';
 
 
 function App() {
 
-  
+
   return (
     <Router>
       <div>
-        <Header/>
+        {/* <Header /> */}
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/Myaccounts" element={<Myaccounts/>}/>
-          <Route path="/Myaccounts/Personalinfo"  element={<Personalinfo/>}/>
-          <Route path="/Myaccounts/Changespassword"  element={<Changespassword/>}/>
+          <Route path="*" element={
+            <HeaderRounting name={
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/Myaccounts" element={<Myaccounts />} />
+                <Route path="/Myaccounts/Personalinfo" element={<Personalinfo />} />
+                <Route path="/Myaccounts/Changespassword" element={<Changespassword />} />
+                <Route path="/Myaccounts/Payments" element={<Payments/>}/>
+              </Routes>
+            }>
+            </HeaderRounting>} />
+          <Route path="/host-stalls" element={<Hoststalls />} />
+          <Route path="/create-stall/step1" element={<Createstall />} />
+
         </Routes>
         <Footer />
       </div>

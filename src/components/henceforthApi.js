@@ -50,6 +50,7 @@ import _superagent from "superagent";
 
     const Auth = {
         editdata: (info) => requests.post("/current_user/update_profile", info),
+        changespassword: (info) => requests.post("/current_user/change_password", info),
         getdata: (info) => requests.get("/current_user/show", info),
         login: (info) => requests.post("/login", info),
         signup: (info) => requests.post("/current_user/create", info),

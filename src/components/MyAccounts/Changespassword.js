@@ -1,12 +1,23 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
+import heneceforthApi from '../henceforthApi';
 
 const Changespassword = () => {
 
-    const [currentpassworddata,setcurrentpassworddata]=useState("")
-    const [newpassworddata,setnewpassworddata]=useState("")
+    // const [currentpassworddata,setcurrentpassworddata]=useState({
+    //     currentPassword:""
+    // })
+    // const [newpassworddata,setnewpassworddata]=useState({
+    //     newPassword:""
+    // })
     const [hide, sethide] = useState(false)
+
+    const [passwordchanges,setpasswordchanges]=useState({
+        currentPassword:"",
+        newPassword:"",
+        confirmPassword:""
+    })
 
     const hidedata = () => {
         hide ? sethide(false) : sethide(true)
@@ -17,21 +28,21 @@ const Changespassword = () => {
         let name=e.target.name;
         let value=e.target.value;
 
-        setcurrentpassworddata({
-            ...currentpassworddata,
-            [name]:value
-        })
-        setnewpassworddata({
-            ...newpassworddata,
+        setpasswordchanges({
+            ...passwordchanges,
             [name]:value
         })
         console.log(name)
         console.log(value)
+        
          
     }
-    const updatedpassword=()=>{
+    const updatedpassword= async ()=>{
+        
+        let res = await heneceforthApi.Auth.changespassword(passwordchanges)
         
     }
+    
     
 
     return (
@@ -59,11 +70,11 @@ const Changespassword = () => {
                                 {hide === true ?
                                     <div>
                                         <p className='fs-6 mt-2'>Current password</p>
-                                        <input type="text" className='form-control' value={currentpassworddata.currentPassword} placeholder='Enter current password' onChange={changeingvalue} name="currentPassword"/>
+                                        <input type="password" className='form-control' value={passwordchanges.currentPassword} placeholder='Enter current password' onChange={changeingvalue} name="currentPassword"/>
                                         <p className='fs--6 mt-2'>New password</p>
-                                        <input type="text" className='form-control' placeholder='Enter New password' />
+                                        <input type="password" className='form-control' placeholder='Enter New password' value={passwordchanges.newPassword} onChange={changeingvalue} name="newPassword"/>
                                         <p className='fs--6 mt-2'>confirm password</p>
-                                        <input type="text" className='form-control' value={newpassworddata.newPassword} placeholder='Enter confirm password' onChange={changeingvalue} name="newPassword" />
+                                        <input type="password" className='form-control'  placeholder='Enter confirm password' value={passwordchanges.confirmPassword} onChange={changeingvalue}  name="confirmPassword" />
                                         <button className='mt-5 bg-success border-0 p-2 text-white' onClick={updatedpassword}>Update password</button>
                                     </div>
                                     : ""}

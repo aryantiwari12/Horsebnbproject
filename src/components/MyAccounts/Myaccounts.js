@@ -37,7 +37,7 @@ const Myaccounts = () => {
 
 
   return (
-    <div>
+    <div className='myaccount'>
       <div className="container ">
         <div className='mt-5'>
           <h3 className='text-start'>My Account</h3>
@@ -62,9 +62,9 @@ const Myaccounts = () => {
             </Link>
           </div>
           <div className="col border m-2  shadow">
-            <Link to={'/Notificationsetting'} id="hello">
+            <Link to={'/Myaccounts/Payments'} id="hello">
               <img src="https://horsebnb.com/assets/img/line.svg" className="float-start mt-5" alt="" />
-              <p className='mt-5'><b>Notification Setting</b> <i class="fa-solid fa-angle-right text-success"></i></p>
+              <p className='mt-5'><b>Payments</b> <i class="fa-solid fa-angle-right text-success"></i></p>
               <p className="mt-5 text-start">Review payments,payouts,copouns,Gift cards,and taxes</p>
             </Link>
           </div>
