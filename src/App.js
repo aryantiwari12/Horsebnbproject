@@ -21,7 +21,8 @@ import Payments from './components/MyAccounts/Payments';
 import Hoststalls from './components/menubar/Hoststalls';
 import HeaderRounting from './components/HeaderRounting';
 import Createstall from './components/menubar/Createstall';
-
+import Createstallstep3 from './components/menubar/Createstallstep3';
+import Location from './components/menubar/Location';
 
 function App() {
 
@@ -32,19 +33,19 @@ function App() {
         {/* <Header /> */}
         <Routes>
           <Route path="*" element={
-            <HeaderRounting name={
+            <HeaderRounting>
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/Myaccounts" element={<Myaccounts />} />
                 <Route path="/Myaccounts/Personalinfo" element={<Personalinfo />} />
                 <Route path="/Myaccounts/Changespassword" element={<Changespassword />} />
-                <Route path="/Myaccounts/Payments" element={<Payments/>}/>
+                <Route path="/Myaccounts/Payments" element={<Payments />} />
               </Routes>
-            }>
             </HeaderRounting>} />
           <Route path="/host-stalls" element={<Hoststalls />} />
           <Route path="/create-stall/step1" element={<Createstall />} />
-
+          <Route path="/create-stall/step3/651" element={<Createstallstep3 />} />
+          <Route path="/create-stall/step5/657" element={<Location />} />
         </Routes>
         <Footer />
       </div>

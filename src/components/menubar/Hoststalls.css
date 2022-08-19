@@ -6,3 +6,6 @@ button.position-absolute.bg-white {
     margin-left: 965px;
     margin-top: 261px;
 }
+p.float-start.p-2 {
+    margin-top: -13px;
+}

@@ -58,6 +58,8 @@ import _superagent from "superagent";
         checkOtp: (info) => requests.post("check-email-otp", info),
         resetPassword: (info) => requests.post("reset/password", info),
         changePassword: (info) => requests.put("admin/change-password", info),
+        createdraftlisting: (info) => requests.post("/own_listings/create_draft", info),
+        Updatedlisting: (info) => requests.post("/own_listings/update", info),
     };
 
     export default {

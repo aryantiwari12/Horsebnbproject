@@ -1,11 +1,11 @@
 import React from 'react'
 import Header from './header/Header';
 
-const HeaderRounting = ({name}) => {
+const HeaderRounting = ({children}) => {
   return (
     <div>
          <Header/>
-         {name}
+         {children}
     </div>
   )
 }
