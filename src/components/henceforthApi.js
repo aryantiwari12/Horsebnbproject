@@ -60,6 +60,7 @@ import _superagent from "superagent";
         changePassword: (info) => requests.put("admin/change-password", info),
         createdraftlisting: (info) => requests.post("/own_listings/create_draft", info),
         Updatedlisting: (info) => requests.post("/own_listings/update", info),
+        Uploadimage: (info) => requests.post("/upload/aws?storageType=1&environment=4&isDefaultAsset=0", info),
     };
 
     export default {

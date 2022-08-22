@@ -157,8 +157,10 @@ const Personalinfo = () => {
         if (file == null) {
             return ""
         }
-        let res=await heneceforthApi.Auth.editdata({
-            publicData:{image:file.name}
+        let res=await heneceforthApi.Auth.Uploadimage({
+            message:"",
+            filename:filename,
+           
         })
         const formdata = new FormData()
         formdata.append("image", file)

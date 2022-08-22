@@ -23,6 +23,8 @@ import HeaderRounting from './components/HeaderRounting';
 import Createstall from './components/menubar/Createstall';
 import Createstallstep3 from './components/menubar/Createstallstep3';
 import Location from './components/menubar/Location';
+import Amenities from './components/menubar/Amenities';
+import Photos from './components/menubar/Photos';
 
 function App() {
 
@@ -46,6 +48,8 @@ function App() {
           <Route path="/create-stall/step1" element={<Createstall />} />
           <Route path="/create-stall/step3/651" element={<Createstallstep3 />} />
           <Route path="/create-stall/step5/657" element={<Location />} />
+          <Route path="/create-stall/step6/670" element={<Amenities />} />
+          <Route path="/create-stall/step7/675" element={<Photos />} />
         </Routes>
         <Footer />
       </div>

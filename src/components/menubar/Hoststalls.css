@@ -9,3 +9,7 @@ button.position-absolute.bg-white {
 p.float-start.p-2 {
     margin-top: -13px;
 }
+.p-3.rounded.btn-square.overflow-y-auto {
+    border-style: dotted;
+    border-color:darkgray;
+}

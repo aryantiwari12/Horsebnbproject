@@ -1,7 +1,14 @@
 import React from 'react'
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
+// import { Search } from 'react-router-dom'
+
+
+
 
 const Location = () => {
+
+
 
   const [show, setshow] = useState(false)
 
@@ -38,9 +45,12 @@ const Location = () => {
               <p className='fs-3 fw-bold text-start'>Where is your place located?</p>
               <p className='text-start'>Please input your exact address. Guests will not be able to see your exact address until they have made a booking.</p>
               <button type="button" class="btn btn-outline-primary float-start p-2 mb-4" onClick={showdata}><i class="fa-solid fa-location-arrow"></i>  Use current Location </button>
+              <span></span>
               <input type="text" className='form-control mt-2' placeholder='Enter the location' />
+             
               {show===true?
               <div className='mt-2'>
+                 <div class="mapouter"><div class="gmap_canvas"><iframe width="600" height="500" id="gmap_canvas" src="https://maps.google.com/maps?q=Chanidarh&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe><a href="https://123movies-to.org">123 movies</a><style>.mapouter</style><a href="https://www.embedgooglemap.net">embed a google map</a><style>.gmap_canvas </style></div></div>
                 <p className='text-start'>Country/Region</p>
                 <input type="text" className='form-control'/>
                 <p className='text-start mt-2'>State</p>
@@ -56,9 +66,9 @@ const Location = () => {
                 
                   <p className='float-start p-2' role="button">Back</p>
                 
-              
+                  <Link to="/create-stall/step6/670">
                   <button className='float-end border-0 bg-primary  p-2 text-white' >Next</button>
-                
+                  </Link>
               </div>
             </div>
 
