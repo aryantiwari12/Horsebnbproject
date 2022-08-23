@@ -60,7 +60,12 @@ import _superagent from "superagent";
         changePassword: (info) => requests.put("admin/change-password", info),
         createdraftlisting: (info) => requests.post("/own_listings/create_draft", info),
         Updatedlisting: (info) => requests.post("/own_listings/update", info),
-        Uploadimage: (info) => requests.post("/upload/aws?storageType=1&environment=4&isDefaultAsset=0", info),
+        Uploadimage: (info) => requests.post("/upload/aws?storageType=5&environment=2&isDefaultAsset=0", info),
+        getalllisting: (info) => requests.get("/listings/query?pub_type=1&perPage=8&page=1", info),
+        montnlygetalllisting: (info) => requests.get("/listings/query?pub_type=2&perPage=8&page=1", info),
+        Guestgetalllisting: (info) => requests.get("/listings/query?pub_type=4&perPage=8&page=1", info),
+        Equestrian: (info) => requests.get("/listings/query?pub_type=3&perPage=8&page=1", info),
+        
     };
 
     export default {

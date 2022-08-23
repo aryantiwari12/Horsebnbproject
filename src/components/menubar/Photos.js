@@ -1,6 +1,52 @@
 import React from 'react'
 import IMAGE from '../../IMG/publish.png';
+import { useState,useRef } from 'react';
+import axios from 'axios';
+
+
+const imageurl=`https://horsebnb.s3.us-east-2.amazonaws.com/Uploads/Images/Small/`;
+
+
+
 const Photos = () => {
+
+    const fileRef = useRef();
+    const [show, setshow] = useState(false)
+    const [file,setfile]=useState("")
+
+    const showimage=async()=>{
+        setshow(true)
+    }
+    const uploadfile = (e) => {
+        console.log(e.target.files);
+        setfile(e.target.files[0])
+
+    }
+
+    const uploadImages=async()=>{
+
+        if (file == null) {
+            return ""
+        }
+
+        const url = `https://horsebnb.com:3001/v1/api/upload/aws?storageType=5&environment=4&isDefaultAsset=0`;
+        const formdata = new FormData()
+        formdata.append("file", file)
+        const config = {
+            headers: {
+                "content-type": "multipart/form-data",
+                'Authorization': localStorage.getItem("token")
+            },
+
+
+        };
+        let res = await axios.post(url, formdata, config)
+        let filename = res.data.filename
+        console.log(filename)
+        
+    }
+
+
     return (
         <div>
             <nav class="navbar navbar-expand-lg bg-light">
@@ -29,15 +75,17 @@ const Photos = () => {
                             <p className='text-start fs-3'>Add photos to your listing</p>
                             <p className='text-start'>Upload at least one photo to publish your listing. We strongly suggest adding multiple photos to attract attention to your listing. Do not include images of your barn name or contact information.</p>
                             <img src={IMAGE} /><br />
-                            <button className='border-0 bg-success text-white p-2'>Upload Photos</button><br/>
+                            <input ref={fileRef} type="file" accept="image/*" hidden onChange={uploadfile} />
+                            <button className='border-0 bg-success text-white p-2'   onClick={() => { fileRef.current.click(); showimage(); uploadImages() }}>Upload Photos</button><br/>
                           
                         </div>
+                        {show===true?
                         <div className='p-2 border w-50 mt-2'>
                                    <button className='float-start border '>Cover photo</button>
                                    <span><i class="fa-solid fa-trash" role="button"></i></span>
                                    <span className='ms-2'><i class="fa-solid fa-pen" role="button"></i></span>
-                                   <img src="https://horsebnb.s3.us-east-2.amazonaws.com/Uploads/Images/Medium/1661163350343-cancel_black.png" className='w-100'/>
-                            </div>
+                                   <img src={file ? URL.createObjectURL(file):`${imageurl}`} className='w-100'/>
+                            </div>:""}
                         <hr />
                         <div className=''>
                             <i class="fa-solid fa-angle-left float-start" role="button"></i>

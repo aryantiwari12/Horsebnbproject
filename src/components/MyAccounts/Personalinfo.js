@@ -4,10 +4,16 @@ import IMAGE from "../../IMG/profile.png"
 import { useState,useRef,useEffect } from 'react'
 import { Link } from 'react-router-dom';
 import heneceforthApi from '../henceforthApi';
+import axios from 'axios';
 const Personalinfo = () => {
+
+    const imageurl=`https://horsebnb.s3.us-east-2.amazonaws.com/Uploads/Images/Small/`;
+
+    let id = (localStorage.getItem('id'))
 
     const [legals, setlegals] = useState(false)
     const [Gender, setGender] = useState(false)
+    const fileRef = useRef();
     const [dateofbirth, setdateofbirth] = useState(false)
     const [emailaddress, setemailaddress] = useState(false)
     const [PhoneNumber, setPhoneNumber] = useState(false)
@@ -16,6 +22,7 @@ const Personalinfo = () => {
     const [Language, setLanguage] = useState(false)
 
     const [file, setFile] = useState(null); // upload picture 
+    const [store,setstore]=useState()
 
     const [genderdata,setgenderdata]=useState("") // Genderstate 
     const [languagedata,setlanguagedata]=useState("")// languagedata
@@ -60,7 +67,7 @@ const Personalinfo = () => {
     }
 
 
-    const fileRef = useRef();
+   
 
     const editdata = () => {
         setlegals(true)
@@ -143,6 +150,43 @@ const Personalinfo = () => {
     }
 
 
+    const uploadimages=async(file)=>{
+        // let res=await heneceforthApi.Auth.Uploadimage(
+        //     {
+        //         massage:file.massage,
+        //         filename:file,
+        //         id:id
+        //     }
+        // )
+        // const formdata = new FormData()
+        // formdata.append("file",file)
+       
+    
+        // // let filename = res.data.filename
+        // // console.log(filename)
+        if (file == null) {
+            return ""
+        }
+
+        const url = `https://horsebnb.com:3001/v1/api/upload/aws?storageType=5&environment=4&isDefaultAsset=0`;
+        const formdata = new FormData()
+        formdata.append("file", file)
+        const config = {
+            headers: {
+                "content-type": "multipart/form-data",
+                'Authorization': localStorage.getItem("token")
+            },
+
+
+        };
+        let res = await axios.post(url, formdata, config)
+        let filename = res.data.filename
+        console.log(filename)
+        setstore(filename)
+        
+
+    }
+
 
     const uploadfile = (e) => {
         console.log(e.target.files);
@@ -153,21 +197,7 @@ const Personalinfo = () => {
 
 
 
-    const uploadimages=async()=>{
-        if (file == null) {
-            return ""
-        }
-        let res=await heneceforthApi.Auth.Uploadimage({
-            message:"",
-            filename:filename,
-           
-        })
-        const formdata = new FormData()
-        formdata.append("image", file)
-       
-        let filename = res.data.filename
-        console.log(filename)
-    }
+  
    
 
     
@@ -188,7 +218,7 @@ const Personalinfo = () => {
             showalldata()
         }
     },[])
-
+    
     return (
         <div>
             <div className='container'>
@@ -204,11 +234,12 @@ const Personalinfo = () => {
                             <div className="border p-4 mb-4">
                                 <div className='text-center'>
                                     <div className='book-img mx-auto mb-3 w-100 h-100 position-relative'>
-                                        <img src={file ? URL.createObjectURL(file):''} className='rounded-circle border border-success w-25 h-25'></img>
+                                        <img src={file ? URL.createObjectURL(file):`${imageurl}${store}`} className='rounded-circle border border-success w-25 h-25'></img>
+                                        {console.log(store)}
                                     </div>
                                     <div className=''></div>
                                     <input ref={fileRef} hidden type="file" accept="image/*"  onChange={uploadfile}/>
-                                    <Button onClick={() =>  {fileRef.current.click();uploadimages()}} className='bg-success border-0 rounded text-white p-2'>Upload</Button>
+                                    <button  onClick={(e) => { fileRef.current.click(e); uploadimages(file) }} className='bg-success border-0 rounded text-white p-2'>Upload</button>
                                     
                                 </div>
                             </div>

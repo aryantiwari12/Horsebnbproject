@@ -13,6 +13,7 @@ import Secondheader from './Secondheader';
 import { useEffect } from 'react';
 import IMAGE1 from "../../IMG/search_grey.png";
 import axios from 'axios';
+import Loadingspinear from '../Loading/Loadingspinear';
 const Header = () => {
 
 
@@ -213,9 +214,10 @@ const logoutdata=()=>{
                                 </div>
                                 <div className='col-6  text-end pt-2 p-3'>
                                     <p className='text-success'>Forgot Password?</p>
+                                    
                                 </div>
                             </div>
-                            <button className='w-100 border-0 p-2  text-white rounded' onClick={Logindatavalue} style={{ backgroundColor: "#54BAB9" }}>Log in</button>
+                            <button className='w-100   border-0 p-2  text-white rounded'  onClick={Logindatavalue} style={{ backgroundColor: "#54BAB9" }} id="spin" >  Log in</button>
                             <div className='mt-2'>
                                 <strong className='mt-2'>Or Continue with</strong>
 

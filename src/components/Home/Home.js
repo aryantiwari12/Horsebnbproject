@@ -1,7 +1,7 @@
 import React from 'react'
 import "../Home/home.css"
 import IMAGE from "../../IMG/search_grey.png"
-import { useState } from 'react'
+import { useState,useEffect } from 'react'
 import ExplorehorseBnB from './ExplorehorseBnB'
 import Aboutus from './Aboutus'
 import Shorttermsstalls from './Shorttermsstalls'
@@ -10,6 +10,7 @@ import Monthly from './Monthly'
 import Horseadventures from './Horseadventures'
 import Header from '../header/Header'
 import Footer from '../Footer/Footer'
+import heneceforthApi from '../henceforthApi'
 const Home = () => {
 
     const [counter, setCounter] = useState(0)
@@ -71,6 +72,8 @@ const Home = () => {
         });
 
     });
+
+  
 
 
 
