@@ -26,7 +26,8 @@ const Personalinfo = () => {
 
     const [genderdata,setgenderdata]=useState("") // Genderstate 
     const [languagedata,setlanguagedata]=useState("")// languagedata
-    
+
+    const [images1,setimages1]=useState("")
     
 
     
@@ -148,22 +149,17 @@ const Personalinfo = () => {
             publicData:{language:languagedata}
         })
     }
+    // const editimage=async()=>{
+    //     let res=await heneceforthApi.Auth.editdata(
+    //         {
+    //             publicData:{image:profiledata.publicData.image}
+    //         }
+    //     )
+    // }
 
 
-    const uploadimages=async(file)=>{
-        // let res=await heneceforthApi.Auth.Uploadimage(
-        //     {
-        //         massage:file.massage,
-        //         filename:file,
-        //         id:id
-        //     }
-        // )
-        // const formdata = new FormData()
-        // formdata.append("file",file)
-       
-    
-        // // let filename = res.data.filename
-        // // console.log(filename)
+    const uploadimages=async()=>{
+     
         if (file == null) {
             return ""
         }
@@ -184,9 +180,16 @@ const Personalinfo = () => {
         console.log(filename)
         setstore(filename)
         
+     
 
     }
-
+    const editimage=async(filename)=>{
+        let res=await heneceforthApi.Auth.editdata(
+            {
+                publicData:{image:filename}
+            }
+        )
+    }
 
     const uploadfile = (e) => {
         console.log(e.target.files);
@@ -211,6 +214,7 @@ const Personalinfo = () => {
             setprofiledata(res.data)
             setgenderdata(res.data.attributes.profile.publicData)
             setlanguagedata(res.data.attributes.profile.publicData)
+            setimages1(res.data.attributes.profile.publicData.profile_image)
         })
     }
     useEffect(()=>{
@@ -234,13 +238,13 @@ const Personalinfo = () => {
                             <div className="border p-4 mb-4">
                                 <div className='text-center'>
                                     <div className='book-img mx-auto mb-3 w-100 h-100 position-relative'>
-                                        <img src={file ? URL.createObjectURL(file):`${imageurl}${store}`} className='rounded-circle border border-success w-25 h-25'></img>
+                                        <img src={file ? URL.createObjectURL(file):`${imageurl}${images1}`} className='rounded-circle border border-success w-25 h-25'></img>
                                         {console.log(store)}
                                     </div>
                                     <div className=''></div>
                                     <input ref={fileRef} hidden type="file" accept="image/*"  onChange={uploadfile}/>
-                                    <button  onClick={(e) => { fileRef.current.click(e); uploadimages(file) }} className='bg-success border-0 rounded text-white p-2'>Upload</button>
-                                    
+                                    <button  onClick={(e) => { fileRef.current.click(e) ; editimage()}} className='bg-success border-0 rounded text-white p-2'>Upload</button>
+                                    <button onClick={uploadimages}>click</button>
                                 </div>
                             </div>
                             <div className='border px-4 py-4 mb-4'>

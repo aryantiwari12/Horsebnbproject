@@ -25,6 +25,8 @@ import Createstallstep3 from './components/menubar/Createstallstep3';
 import Location from './components/menubar/Location';
 import Amenities from './components/menubar/Amenities';
 import Photos from './components/menubar/Photos';
+import Description from './components/menubar/Description';
+import Calendarandavailability from './components/menubar/Calendarandavailability';
 
 function App() {
 
@@ -50,6 +52,9 @@ function App() {
           <Route path="/create-stall/step5/657" element={<Location />} />
           <Route path="/create-stall/step6/670" element={<Amenities />} />
           <Route path="/create-stall/step7/675" element={<Photos />} />
+          <Route path="/create-stall/step8/687" element={<Description />} />
+          <Route path="/create-stall/step8/687" element={<Description />} />
+          <Route path="/create-stall/sucessfull-hosting/703" element={<Calendarandavailability />} />
         </Routes>
         <Footer />
       </div>

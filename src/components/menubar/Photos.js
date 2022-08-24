@@ -1,34 +1,34 @@
 import React from 'react'
 import IMAGE from '../../IMG/publish.png';
-import { useState,useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
+import heneceforthApi from '../henceforthApi';
 
+const imageurl = `https://horsebnb.s3.us-east-2.amazonaws.com/Uploads/Images/Small/`;
 
-const imageurl=`https://horsebnb.s3.us-east-2.amazonaws.com/Uploads/Images/Small/`;
 
 
 
 const Photos = () => {
 
-    const fileRef = useRef();
-    const [show, setshow] = useState(false)
-    const [file,setfile]=useState("")
+    let id = (localStorage.getItem('id'))
 
-    const showimage=async()=>{
-        setshow(true)
-    }
+    const [store,setstore]=useState()
+    const fileRef = useRef();
+    // const [show, setshow] = useState(false)
+    const [file, setfile] = useState("")
     const uploadfile = (e) => {
         console.log(e.target.files);
         setfile(e.target.files[0])
 
     }
 
-    const uploadImages=async()=>{
+    const uploadImages = async () => {
 
         if (file == null) {
             return ""
         }
-
         const url = `https://horsebnb.com:3001/v1/api/upload/aws?storageType=5&environment=4&isDefaultAsset=0`;
         const formdata = new FormData()
         formdata.append("file", file)
@@ -37,14 +37,40 @@ const Photos = () => {
                 "content-type": "multipart/form-data",
                 'Authorization': localStorage.getItem("token")
             },
-
-
         };
         let res = await axios.post(url, formdata, config)
         let filename = res.data.filename
         console.log(filename)
-        
+        setstore(filename)
+        localStorage.setItem("imageId",3546)
     }
+    let imagedata = (localStorage.getItem('imageId'))
+    const updateimage=async(filename)=>{
+       
+        let res=await heneceforthApi.Auth.editdata(
+            {
+                id:id,
+                images:[imagedata],
+                publicData:{
+                    cover_photo:{
+                        id:id,
+                        url:filename,
+                        caption:""
+                        
+                    },
+                    images:[]
+                    
+                }
+                
+            }
+        )
+         
+    }
+
+
+
+
+
 
 
     return (
@@ -76,25 +102,25 @@ const Photos = () => {
                             <p className='text-start'>Upload at least one photo to publish your listing. We strongly suggest adding multiple photos to attract attention to your listing. Do not include images of your barn name or contact information.</p>
                             <img src={IMAGE} /><br />
                             <input ref={fileRef} type="file" accept="image/*" hidden onChange={uploadfile} />
-                            <button className='border-0 bg-success text-white p-2'   onClick={() => { fileRef.current.click(); showimage(); uploadImages() }}>Upload Photos</button><br/>
-                          
+                            <button className='border-0 bg-success text-white p-2' onClick={() => { fileRef.current.click();}}>Upload Photos</button><br />
+                            <button onClick={()=>{uploadImages();updateimage()}}>Click</button>
                         </div>
-                        {show===true?
+                        {/* {show===true? */}
                         <div className='p-2 border w-50 mt-2'>
-                                   <button className='float-start border '>Cover photo</button>
-                                   <span><i class="fa-solid fa-trash" role="button"></i></span>
-                                   <span className='ms-2'><i class="fa-solid fa-pen" role="button"></i></span>
-                                   <img src={file ? URL.createObjectURL(file):`${imageurl}`} className='w-100'/>
-                            </div>:""}
+                            <button className='float-start border '>Cover photo</button>
+                            <span><i class="fa-solid fa-trash" role="button"></i></span>
+                            <span className='ms-2'><i class="fa-solid fa-pen" role="button"></i></span>
+                            <img src={file ? URL.createObjectURL(file) : `${imageurl}`} className='w-100' />
+                        </div>
                         <hr />
                         <div className=''>
                             <i class="fa-solid fa-angle-left float-start" role="button"></i>
 
                             <p className='float-start p-2' role="button">Back</p>
 
-                            
+                            <Link to="/create-stall/step8/687">
                                 <button className='float-end border-0 bg-primary  p-2 text-white' >Next</button>
-                           
+                            </Link>
                         </div>
                     </div>
                     <div class="col p-5">

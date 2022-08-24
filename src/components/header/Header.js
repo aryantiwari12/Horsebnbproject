@@ -14,6 +14,10 @@ import { useEffect } from 'react';
 import IMAGE1 from "../../IMG/search_grey.png";
 import axios from 'axios';
 import Loadingspinear from '../Loading/Loadingspinear';
+
+
+const imageurl=`https://horsebnb.s3.us-east-2.amazonaws.com/Uploads/Images/Small/`;
+
 const Header = () => {
 
 
@@ -22,6 +26,7 @@ const Header = () => {
     const [values, setValues] = useState()
     const navigate = useNavigate();
     const [post, setpost] = useState()
+    const [images1,setimages1]=useState("")
     const [isLoading, setIsLoading] = useState(false);
     const [profiledata, setprofiledata] = useState({
         firstName: "",
@@ -101,6 +106,7 @@ const Header = () => {
         let res = await heneceforthApi.Auth.getdata()
         .then((res)=>{
             setprofiledata(res.data.attributes.profile)
+            setimages1(res.data.attributes.profile.publicData.profile_image)
             console.log(res)
         })
         
@@ -161,7 +167,7 @@ const logoutdata=()=>{
                                 <li className='nav-item'>
                                     <div class="dropdown">
                                         <button class="btn border dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                            <img src="https://horsebnb.com/assets/img/default.png" className='pe-2' height="35px" width="35px" alt=""></img>
+                                            <img src={`${imageurl}${images1}`} className='pe-2 rounded-circle' height="30px" width="40px" alt=""></img>
                                             <span>{profiledata.firstName} {profiledata.lastName}</span>
                                             
                                         </button>
