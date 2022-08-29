@@ -2,19 +2,27 @@ import React from 'react'
 import IMAGE from '../../IMG/publish.png';
 import { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link,useMatch } from 'react-router-dom';
 import heneceforthApi from '../henceforthApi';
 
-const imageurl = `https://horsebnb.s3.us-east-2.amazonaws.com/Uploads/Images/Small/`;
-
-
+heneceforthApi.setToken(localStorage.getItem("token"))
+let id = (localStorage.getItem('id'))
 
 
 const Photos = () => {
 
-    let id = (localStorage.getItem('id'))
 
-    const [store,setstore]=useState()
+    // const match = useMatch('/create-stall/step7/:id')
+    const imageurl = `https://horsebnb.s3.us-east-2.amazonaws.com/Uploads/Images/Small/`;
+
+    const baseURLid = `https://horsebnb.com:3001/v1/api/own_listings/show?id=${id}`;
+
+
+    const [images, setimages] = useState("")
+
+
+    const match = useMatch('/create-stall/step7/:id')
+    const [store, setstore] = useState()
     const fileRef = useRef();
     // const [show, setshow] = useState(false)
     const [file, setfile] = useState("")
@@ -40,32 +48,48 @@ const Photos = () => {
         };
         let res = await axios.post(url, formdata, config)
         let filename = res.data.filename
-        console.log(filename)
+        // console.log(filename)
         setstore(filename)
-        localStorage.setItem("imageId",3546)
+        updateimage(filename)
+
+
     }
-    let imagedata = (localStorage.getItem('imageId'))
-    const updateimage=async(filename)=>{
-       
-        let res=await heneceforthApi.Auth.editdata(
+
+    const updateimage = async (filename) => {
+
+        let res = await heneceforthApi.Auth.Updatedlisting(
             {
-                id:id,
-                images:[imagedata],
-                publicData:{
-                    cover_photo:{
-                        id:id,
-                        url:filename,
-                        caption:""
-                        
+                id: id,
+                images: [],
+                publicData: {
+                    cover_photo: {
+                        id: id,
+                        url: filename,
+                        caption: ""
+
                     },
-                    images:[]
-                    
+                    images: []
+
                 }
-                
+
             }
         )
-         
+
     }
+
+    const showalldata = async () => {
+        
+        let res = await heneceforthApi.Auth.Listid(match?.params.id)
+        setimages(res.data.attributes.publicData.cover_photo.url)
+    }
+    useEffect(() => {
+        return () => {
+            showalldata()
+        }
+    }, [])
+
+
+
 
 
 
@@ -102,15 +126,16 @@ const Photos = () => {
                             <p className='text-start'>Upload at least one photo to publish your listing. We strongly suggest adding multiple photos to attract attention to your listing. Do not include images of your barn name or contact information.</p>
                             <img src={IMAGE} /><br />
                             <input ref={fileRef} type="file" accept="image/*" hidden onChange={uploadfile} />
-                            <button className='border-0 bg-success text-white p-2' onClick={() => { fileRef.current.click();}}>Upload Photos</button><br />
-                            <button onClick={()=>{uploadImages();updateimage()}}>Click</button>
+                            <button className='border-0 bg-success text-white p-2' onClick={() => { fileRef.current.click(); }}>Upload Photos</button><br />
+                            <button onClick={uploadImages}>Click</button>
                         </div>
                         {/* {show===true? */}
                         <div className='p-2 border w-50 mt-2'>
                             <button className='float-start border '>Cover photo</button>
                             <span><i class="fa-solid fa-trash" role="button"></i></span>
                             <span className='ms-2'><i class="fa-solid fa-pen" role="button"></i></span>
-                            <img src={file ? URL.createObjectURL(file) : `${imageurl}`} className='w-100' />
+                            <img src={file ? URL.createObjectURL(file) : `${imageurl}${images}`} className='w-100' />
+                            {console.log(store)}
                         </div>
                         <hr />
                         <div className=''>
@@ -118,7 +143,7 @@ const Photos = () => {
 
                             <p className='float-start p-2' role="button">Back</p>
 
-                            <Link to="/create-stall/step8/687">
+                            <Link to={`/create-stall/step8/${match?.params.id}`}>
                                 <button className='float-end border-0 bg-primary  p-2 text-white' >Next</button>
                             </Link>
                         </div>

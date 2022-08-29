@@ -1,13 +1,19 @@
 import React from 'react'
 import "../menubar/Hoststalls.css";
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import heneceforthApi from '../henceforthApi';
-import { Link } from 'react-router-dom';
+import { Link,useMatch} from 'react-router-dom';
+
+let id = (localStorage.getItem('id'))
 
 const Createstallstep3 = () => {
 
+   
+
+
+    const match=useMatch('/create-stall/step3/:id')
     heneceforthApi.setToken(localStorage.getItem("token"))
-    let id = (localStorage.getItem('id'))
+    
 
     const [counter, setCounter] = useState(0)
     const minus = () => {
@@ -21,7 +27,7 @@ const Createstallstep3 = () => {
     const plus = () => {
         setCounter(counter + 1)
     }
-
+   
     const changeingvalue = (e) => {
         let name = e.target.name;
         let value = e.target.value;
@@ -50,6 +56,16 @@ const Createstallstep3 = () => {
 
 
     }
+
+    const showalldata=async()=>{
+        let res = await heneceforthApi.Auth.Listid(match?.params.id)
+        console.log(match.params.id)
+    }
+    useEffect(() => {
+        return () => {
+            showalldata()
+        };
+    }, [])
 
 
 
@@ -93,7 +109,7 @@ const Createstallstep3 = () => {
                                 <Link to="/create-stall/step1">
                                     <p className='float-start p-2' role="button">Back</p>
                                 </Link>
-                                <Link to="/create-stall/step5/657">
+                                <Link to={`/create-stall/step5/${match?.params.id}`}>
                                 <button className='float-end border-0 bg-primary  p-2 text-white' onClick={nextdata}>Next</button>
                                 </Link>
                             </div>

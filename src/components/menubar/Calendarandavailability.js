@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
-import heneceforthApi from '../henceforthApi'
-
+import React, { useState,useEffect } from 'react'
+import { Link,useMatch } from 'react-router-dom'
+import heneceforthApi from '../henceforthApi';
 
 heneceforthApi.setToken(localStorage.getItem("token"))
 let id = (localStorage.getItem('id'))
@@ -9,6 +9,7 @@ let id = (localStorage.getItem('id'))
 const Calendarandavailability = () => {
 
 
+    const match = useMatch('/create-stall/sucessfull-hosting/:id')
     const [agree, setAgree] = useState(false);
 
     const handleChange = () => {
@@ -31,6 +32,15 @@ const Calendarandavailability = () => {
         })
 
     }
+    const showalldata=async()=>{
+        let res = await heneceforthApi.Auth.Listid(match?.params.id)
+        console.log(match.params.id)
+    }
+    useEffect(() => {
+        return () => {
+            showalldata()
+        };
+    }, [])
 
 
 
@@ -70,7 +80,9 @@ const Calendarandavailability = () => {
                         <div className='mt-2'>
                             <i class="fa-solid fa-angle-left float-start" role="button"></i>
                             <p className='float-start p-2' role="button">Back</p>
+                            <Link to="/create-stall/step11/1/754">
                             <button className='float-end border-0 bg-primary  p-2 text-white' onClick={calendardata}>Next</button>
+                            </Link>
                         </div>
                     </div>
                     <div class="col p-5">

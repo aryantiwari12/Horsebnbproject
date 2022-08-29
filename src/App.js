@@ -27,6 +27,12 @@ import Amenities from './components/menubar/Amenities';
 import Photos from './components/menubar/Photos';
 import Description from './components/menubar/Description';
 import Calendarandavailability from './components/menubar/Calendarandavailability';
+import Calendarand from './components/menubar/Calendarand';
+import CheckinCheckout from './components/menubar/CheckinCheckout';
+import CalendarData from './components/menubar/CalendarData';
+import Pricestall from './components/menubar/Pricestall';
+import Stripe from './components/menubar/Stripe';
+import Finish from './components/menubar/Finish';
 
 function App() {
 
@@ -48,13 +54,18 @@ function App() {
             </HeaderRounting>} />
           <Route path="/host-stalls" element={<Hoststalls />} />
           <Route path="/create-stall/step1" element={<Createstall />} />
-          <Route path="/create-stall/step3/651" element={<Createstallstep3 />} />
-          <Route path="/create-stall/step5/657" element={<Location />} />
-          <Route path="/create-stall/step6/670" element={<Amenities />} />
-          <Route path="/create-stall/step7/675" element={<Photos />} />
-          <Route path="/create-stall/step8/687" element={<Description />} />
-          <Route path="/create-stall/step8/687" element={<Description />} />
-          <Route path="/create-stall/sucessfull-hosting/703" element={<Calendarandavailability />} />
+          <Route path="/create-stall/step3/:id" element={<Createstallstep3 />} />
+          <Route path="/create-stall/step5/:id" element={<Location />} />
+          <Route path="/create-stall/step6/:id" element={<Amenities />} />
+          <Route path="/create-stall/step7/:id" element={<Photos />} />
+          <Route path="/create-stall/step8/:id" element={<Description />} />
+          {/* <Route path="/create-stall/step8/687" element={<Description />} /> */}
+          <Route path="/create-stall/sucessfull-hosting/:id" element={<Calendarandavailability />} />
+          <Route path="/create-stall/step11/1/754" element={<CalendarData />} />
+          <Route path="/create-stall/checkin-and-checkout/:id" element={<CheckinCheckout />} />
+          <Route path="/create-stall/step12/772" element={<Pricestall />} />
+          <Route path="/create-stall/step13/772" element={<Stripe />} />
+          <Route path="/create-stall/last-step/772" element={<Finish />} />
         </Routes>
         <Footer />
       </div>

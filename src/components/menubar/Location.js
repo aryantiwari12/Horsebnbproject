@@ -1,6 +1,7 @@
 import React from 'react'
-import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { useState,useEffect } from 'react'
+import { Link, useMatch } from 'react-router-dom'
+import heneceforthApi from '../henceforthApi'
 // import { Search } from 'react-router-dom'
 
 
@@ -9,13 +10,23 @@ import { Link } from 'react-router-dom'
 const Location = () => {
 
 
-
+  const match = useMatch('/create-stall/step5/:id')
   const [show, setshow] = useState(false)
 
 
-  const showdata=()=>{
-    show?setshow(false): setshow(true)
+  const showdata = () => {
+    show ? setshow(false) : setshow(true)
   }
+  const showalldata = async () => {
+    let res = await heneceforthApi.Auth.Listid(match?.params.id)
+    console.log(match.params.id)
+  }
+  useEffect(() => {
+    return () => {
+      showalldata()
+    };
+  }, [])
+
 
 
   return (
@@ -47,28 +58,28 @@ const Location = () => {
               <button type="button" class="btn btn-outline-primary float-start p-2 mb-4" onClick={showdata}><i class="fa-solid fa-location-arrow"></i>  Use current Location </button>
               <span></span>
               <input type="text" className='form-control mt-2' placeholder='Enter the location' />
-             
-              {show===true?
-              <div className='mt-2'>
-                 <div class="mapouter"><div class="gmap_canvas"><iframe width="600" height="500" id="gmap_canvas" src="https://maps.google.com/maps?q=Chanidarh&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe><a href="https://123movies-to.org">123 movies</a><style>.mapouter</style><a href="https://www.embedgooglemap.net">embed a google map</a><style>.gmap_canvas </style></div></div>
-                <p className='text-start'>Country/Region</p>
-                <input type="text" className='form-control'/>
-                <p className='text-start mt-2'>State</p>
-                <input type="text" className='form-control'/>
-                <p className='text-start mt-2'>City</p>
-                <input type="text" className='form-control'/>
-                <p className='text-start'>Zip Code</p>
-                <input type="text" className='form-control'/>
-              </div>:""}
+
+              {show === true ?
+                <div className='mt-2'>
+                  <div class="mapouter"><div class="gmap_canvas"><iframe width="600" height="500" id="gmap_canvas" src="https://maps.google.com/maps?q=Chanidarh&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe><a href="https://123movies-to.org">123 movies</a><style>.mapouter</style><a href="https://www.embedgooglemap.net">embed a google map</a><style>.gmap_canvas </style></div></div>
+                  <p className='text-start'>Country/Region</p>
+                  <input type="text" className='form-control' />
+                  <p className='text-start mt-2'>State</p>
+                  <input type="text" className='form-control' />
+                  <p className='text-start mt-2'>City</p>
+                  <input type="text" className='form-control' />
+                  <p className='text-start'>Zip Code</p>
+                  <input type="text" className='form-control' />
+                </div> : ""}
               <hr />
               <div className=''>
                 <i class="fa-solid fa-angle-left float-start" role="button"></i>
-                
-                  <p className='float-start p-2' role="button">Back</p>
-                
-                  <Link to="/create-stall/step6/670">
+
+                <p className='float-start p-2' role="button">Back</p>
+
+                <Link to={`/create-stall/step6/${match?.params.id}`}>
                   <button className='float-end border-0 bg-primary  p-2 text-white' >Next</button>
-                  </Link>
+                </Link>
               </div>
             </div>
 

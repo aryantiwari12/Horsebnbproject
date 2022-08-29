@@ -1,6 +1,6 @@
 import React from 'react'
-import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { useState,useEffect } from 'react'
+import { Link,useMatch } from 'react-router-dom'
 import heneceforthApi from '../henceforthApi'
 
 
@@ -12,7 +12,7 @@ const Description = () => {
 
 
 
-
+    const match = useMatch('/create-stall/step8/:id')
     const [descriptionadd, setdescriptionadd] = useState("")
     const [extra, setextra] = useState("")
     const [agree, setAgree] = useState(false);
@@ -40,6 +40,16 @@ const Description = () => {
         )
 
     }
+    const showalldata=async()=>{
+        let res = await heneceforthApi.Auth.Listid(match?.params.id)
+        console.log(match.params.id)
+    }
+    useEffect(() => {
+        return () => {
+            showalldata()
+        };
+    }, [])
+
 
 
 
@@ -87,7 +97,7 @@ const Description = () => {
 
                                 <p className='float-start p-2' role="button">Back</p>
 
-                                <Link to="/create-stall/sucessfull-hosting/703">
+                                <Link to={`/create-stall/checkin-and-checkout/${match?.params.id}`}>
                                     <button className='float-end border-0 bg-primary  p-2 text-white' onClick={Descriptiondata}>Next</button>
                                 </Link>
                             </div>

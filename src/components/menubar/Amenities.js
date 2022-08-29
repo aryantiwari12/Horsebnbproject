@@ -1,6 +1,6 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
-import { useState, } from 'react'
+import { Link,useMatch } from 'react-router-dom'
+import { useState,useEffect } from 'react'
 import "../menubar/Hoststalls.css";
 import heneceforthApi from '../henceforthApi'
 const Amenities = () => {
@@ -9,6 +9,8 @@ const Amenities = () => {
     let id = (localStorage.getItem('id'))
     const [amenitiesdata, setamenitiesdata] = useState([])
     // amenities:[})
+
+    const match = useMatch('/create-stall/step6/:id')
 
 
     const handlechange = (e) => {
@@ -22,16 +24,7 @@ const Amenities = () => {
         console.log("handlechange name",name)
         console.log("handlechange value",value)
 
-        // const { value, checked } = e.target;
-        // // const { languages } = amenitiesdata;
-        // console.log(`${value} is ${checked}`);
-        // if (checked) {
-        //     setamenitiesdata({
-        //     //   languages: [...languages, value],
-        //     //   response: [...languages, value],
-        //     });
-        //   }
-
+       
 
 
 
@@ -48,7 +41,16 @@ const Amenities = () => {
         )
 
     }
-
+    const showalldata = async () => {
+        let res = await heneceforthApi.Auth.Listid(match?.params.id)
+        console.log(match.params.id)
+      }
+      useEffect(() => {
+        return () => {
+          showalldata()
+        };
+      }, [])
+    
 
 
 
@@ -135,7 +137,7 @@ const Amenities = () => {
 
                                 <p className='float-start p-2' role="button">Back</p>
 
-                                <Link to="/create-stall/step7/675">
+                                <Link to={`/create-stall/step7/${match?.params.id}`}>
                                     <button className='float-end border-0 bg-primary  p-2 text-white' onClick={dataamenities}>Next</button>
                                 </Link>
                             </div>

@@ -65,6 +65,7 @@ import _superagent from "superagent";
         montnlygetalllisting: (info) => requests.get("/listings/query?pub_type=2&perPage=8&page=1", info),
         Guestgetalllisting: (info) => requests.get("/listings/query?pub_type=4&perPage=8&page=1", info),
         Equestrian: (info) => requests.get("/listings/query?pub_type=3&perPage=8&page=1", info),
+        Listid: (id) => requests.get(`/own_listings/show?id=${id}`),
         
     };
 

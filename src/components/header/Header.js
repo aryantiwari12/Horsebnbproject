@@ -12,6 +12,8 @@ import { contains } from 'rsuite/esm/DOMHelper';
 import Secondheader from './Secondheader';
 import { useEffect } from 'react';
 import IMAGE1 from "../../IMG/search_grey.png";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
 import Loadingspinear from '../Loading/Loadingspinear';
 
@@ -23,10 +25,12 @@ const Header = () => {
 
     // heneceforthApi.setToken(localStorage.getItem('token'))
 
+    const notify = () => toast("user Login sucessfully!");
     const [values, setValues] = useState()
     const navigate = useNavigate();
     const [post, setpost] = useState()
     const [images1,setimages1]=useState("")
+    const [agree, setAgree] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [profiledata, setprofiledata] = useState({
         firstName: "",
@@ -75,11 +79,12 @@ const Header = () => {
 
     const Signupdata = async () => {
 
-
+        setIsLoading(true)
         let res = await heneceforthApi.Auth.signup(profiledata, {
             protectedData: profiledata.phoneNumber
         })
-        setIsLoading(true);
+        setIsLoading(false)
+        
         localStorage.setItem("token", res.data.token)
         //  console.log(res)
     }
@@ -87,9 +92,12 @@ const Header = () => {
 
     const Logindatavalue = async () => {
 
+        setIsLoading(true)
         let res = await heneceforthApi.Auth.login(logindata)
+        setIsLoading(false)
         localStorage.setItem("token", res.data.token);
         console(res.data.token)
+        
         
         
     }
@@ -97,6 +105,11 @@ const Header = () => {
     const showheaderdata = () => {
         // setshowheader(true)
     }
+    const checkboxHandler = () => {
+      
+        setAgree(!agree);
+       
+      }
 
 
     heneceforthApi.setToken(localStorage.getItem('token'))
@@ -215,15 +228,17 @@ const logoutdata=()=>{
                             <input type="text" className='form-control mt-2' onChange={changesdata} value={logindata.password} name="password" placeholder='Password'></input>
                             <div className='d-flex algin-item-center justifiy-content-center'>
                                 <div className='col-6 text-start  d-flex'>
-                                    <input type="checkbox" className='pt-2 px-2'></input>
-                                    <p className=' pt-2 px-2'>Remember me</p>
+                                    <input type="checkbox" className='pt-2 px-2' onChange={checkboxHandler}></input>
+                                    <p className=' pt-2 px-2' >Remember me</p>
                                 </div>
                                 <div className='col-6  text-end pt-2 p-3'>
                                     <p className='text-success'>Forgot Password?</p>
                                     
                                 </div>
                             </div>
-                            <button className='w-100   border-0 p-2  text-white rounded'  onClick={Logindatavalue} style={{ backgroundColor: "#54BAB9" }} id="spin" >  Log in</button>
+                            <ToastContainer />
+                           { !isLoading &&<button className='w-100   border-0 p-2  text-white rounded'  onClick={(e)=>{Logindatavalue();notify()}} style={{ backgroundColor: "#54BAB9" }} id="spin" disabled={!agree} >  Login</button>}
+                           { isLoading &&<button className='w-100   border-0 p-2  text-white rounded '  style={{ backgroundColor: "#54BAB9" }} role="status" disabled><i class="fas  fa-spinner fa-spin fs-2"></i></button>}
                             <div className='mt-2'>
                                 <strong className='mt-2'>Or Continue with</strong>
 
@@ -265,10 +280,11 @@ const logoutdata=()=>{
                             <input type="password" className='form-control mt-2' onChange={changesdata} value={profiledata.password} name="password" placeholder='Password'></input>
                             <input type="password" className='form-control mt-2' onChange={changesdata} value={profiledata.confirm} name="confirmpassword" placeholder='Confirm password'></input>
                             <div className='text-start d-flex'>
-                                <input type="checkbox" className='pt-1'></input>
+                                <input type="checkbox" className='pt-1' onChange={checkboxHandler}></input>
                                 <p className='pt-3 px-2'>Agree To <a href='#'><span className='text-danger'>Term & condition </span></a> </p>
                             </div>
-                            <button className='w-100 p-2 border-0 text-white rounded' onClick={Signupdata} style={{ backgroundColor: "#54BAB9" }} >Sign Up</button>
+                           {!isLoading &&<button className='w-100 p-2 border-0 text-white rounded' onClick={Signupdata} style={{ backgroundColor: "#54BAB9" }} disabled={!agree}>Sign Up</button>}
+                           {isLoading &&<button className='w-100 p-2 border-0 text-white rounded'  style={{ backgroundColor: "#54BAB9" }} disabled><i class="fas  fa-spinner fa-spin fs-2"></i></button>}
 
                             <p className='mt-3'>or with Continue</p>
                             <button className='w-100 '>Continue with Facebook</button>

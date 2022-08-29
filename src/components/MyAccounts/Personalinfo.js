@@ -179,10 +179,12 @@ const Personalinfo = () => {
         let filename = res.data.filename
         console.log(filename)
         setstore(filename)
+        editimage(filename)
         
      
 
     }
+    // const value1 =useState(filename)
     const editimage=async(filename)=>{
         let res=await heneceforthApi.Auth.editdata(
             {
@@ -243,7 +245,7 @@ const Personalinfo = () => {
                                     </div>
                                     <div className=''></div>
                                     <input ref={fileRef} hidden type="file" accept="image/*"  onChange={uploadfile}/>
-                                    <button  onClick={(e) => { fileRef.current.click(e) ; editimage()}} className='bg-success border-0 rounded text-white p-2'>Upload</button>
+                                    <button onClick={(e) => { fileRef.current.click(e)}} className='bg-success border-0 rounded text-white p-2'>Upload</button>
                                     <button onClick={uploadimages}>click</button>
                                 </div>
                             </div>

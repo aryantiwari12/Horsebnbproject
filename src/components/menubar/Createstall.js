@@ -2,9 +2,11 @@ import React from 'react'
 import IAMGE from '../../IMG/image.png'
 import { useState } from 'react'
 import henceforthApi from '../henceforthApi'
-import { Link } from 'react-router-dom';
+import { Link,useNavigate } from 'react-router-dom';
 
 const Createstall = () => {
+
+    const navigate=useNavigate(null)
 
     henceforthApi.setToken(localStorage.getItem("token"))
 
@@ -33,9 +35,13 @@ const Createstall = () => {
     localStorage.setItem("id",res.data.id.uuid)
     console.log(res.data.id.uuid)
 
-
+    navigate(`/create-stall/step3/${res.data.id.uuid}`)
    }
-  
+
+
+
+   
+    
 
     return (
         <div>
@@ -69,9 +75,9 @@ const Createstall = () => {
                                 <p className='fs-1'>Create a title for your listing?</p>
                                 <p>Catch guest's attention with a listing title that highlights what makes your place special. This can not be your business name.</p>
                                 <input type="text" className='form-control'  placeholder='Enter a Title' value={titledata.title} onChange={(e)=>settitledata(e.target.value)} name="title" required/>
-                                <Link to="/create-stall/step3/651">
+                                {/* <Link to="/create-stall/step3/651"> */}
                                 <button className='mt-5 bg-success border p-2 text-white' value="Validate"  onClick={Continuedata}>Continue</button>
-                                </Link>
+                                {/* </Link> */}
                         </div>
                     </div>
                     <div class="col">
