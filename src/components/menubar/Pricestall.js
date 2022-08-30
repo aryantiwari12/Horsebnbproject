@@ -1,6 +1,6 @@
 import React from 'react'
-import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { useState,useEffect } from 'react'
+import { Link,useMatch } from 'react-router-dom'
 import heneceforthApi from '../henceforthApi'
 
 
@@ -10,6 +10,7 @@ let id = (localStorage.getItem('id'))
 const Pricestall = () => {
 
     const [pricedata, setpricedata] = useState()
+    const match = useMatch('/create-stall/step12/:id')
 
     const priceupdate = async () => {
 
@@ -30,6 +31,15 @@ const Pricestall = () => {
         )
 
     }
+    const showalldata=async()=>{
+        let res = await heneceforthApi.Auth.Listid(match?.params.id)
+        console.log(match.params.id)
+    }
+    useEffect(() => {
+        return () => {
+            showalldata()
+        };
+    }, []) 
 
 
 
@@ -68,8 +78,8 @@ const Pricestall = () => {
                     <div className=''>
                         <p className='ms-5'>Do you want to allow guests to make instant bookings?</p>
                         <div class="form-check ms-5">
-                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" />
-                            <label class="form-check-label" className='ms-2' for="flexRadioDefault1">
+                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked />
+                            <label class="form-check-label" className='ms-2' for="flexRadioDefault1" >
                                 Yes
                             </label>
 
@@ -85,7 +95,7 @@ const Pricestall = () => {
                         <div className='mt-5'>
                             <i class="fa-solid fa-angle-left float-start" role="button"></i>
                             <p className='float-start p-2' role="button">Back</p>
-                            <Link to="/create-stall/step13/772">
+                            <Link to={`/create-stall/step13/${match?.params.id}`}>
                                 <button className='float-end border-0 bg-primary  p-2 text-white' onClick={priceupdate}>Next</button>
                             </Link>
                         </div>

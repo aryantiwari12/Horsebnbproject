@@ -1,41 +1,41 @@
 import React from 'react'
-import { Link,useMatch } from 'react-router-dom'
-import { useState,useEffect } from 'react'
+import { Link, useMatch } from 'react-router-dom'
+import { useState, useEffect } from 'react'
 import "../menubar/Hoststalls.css";
 import heneceforthApi from '../henceforthApi'
+import { map } from 'rsuite/esm/utils/ReactChildren';
+
+
 const Amenities = () => {
 
     heneceforthApi.setToken(localStorage.getItem("token"))
     let id = (localStorage.getItem('id'))
-    const [amenitiesdata, setamenitiesdata] = useState([])
-    // amenities:[})
+    let Arraylist = ["Climate Controlled Barn", "Indoor Arena", "Outdoor Arena", "Hot Walker", "Round Pen", "Tack Room", "Tack Locker", "Wash Rack", "Hot Water", "Lighted Arena", "Trail  Riding Accessible", "Horse Trailer Parking", "Dog Friendly", "Bathroom", "Wifi", "Shavings Included",
+        "Paddock", "Box Stall", "Box Stall with Run", "Stall Fans", "Matted Stalls", "Private Pasture", "Automatic Water Feeder", "Feed Buckets", "Water Buckets", "Electric Fencing", "Pasture", "Turn Out", "Mare Motel", "Accepts Stallions"];
 
     const match = useMatch('/create-stall/step6/:id')
 
-
-    const handlechange = (e) => {
-        let name = e.target.name;
-        let value = e.target.value;
-
-        setamenitiesdata({
-            ...amenitiesdata,
-            [name]: value
-        })
-        console.log("handlechange name",name)
-        console.log("handlechange value",value)
-
-       
-
-
+    let List = new Map()
+    const Amenitiesdata = (values, checked) => {
+        if (checked) {
+            List.set(values,values)
+        } else {
+            List.delete(values)
+        }
 
     }
 
     const dataamenities = async () => {
+        let AmenitiesList = []
+        List.forEach((data) => {
+            AmenitiesList.push(data)
+        })
         let res = await heneceforthApi.Auth.Updatedlisting(
             {
                 id: id,
                 publicData: {
-                    amenities: [amenitiesdata.dataname]
+                    amenities: { AmenitiesList },
+                    stepsCompleted: [1, 3, 5, 6, 7, 8, 9, 14, 15, 11, 12, 12, 6]
                 }
             }
         )
@@ -44,13 +44,13 @@ const Amenities = () => {
     const showalldata = async () => {
         let res = await heneceforthApi.Auth.Listid(match?.params.id)
         console.log(match.params.id)
-      }
-      useEffect(() => {
+    }
+    useEffect(() => {
         return () => {
-          showalldata()
+            showalldata()
         };
-      }, [])
-    
+    }, [])
+
 
 
 
@@ -84,51 +84,21 @@ const Amenities = () => {
                             <p className='fs-3 text-start'>What amenities do you offer?</p>
                             <p className='text-start'>You will be able to add more amenities in your write up for your listing.</p>
                             <div class="overflow-scroll text-start">
-                                <input className="form-check-input text-start" name='dataname' id="flexCheckDefault" type="checkbox" value="Climate Controlled Ban" onChange={handlechange} />
-                                <label className='ms-4' for="flexCheckDefault">Climate Controlled Ban</label><br />
-                                <input className="form-check-input text-start" name='dataname' type="checkbox" id="flexCheckDefault" value="Indoor Arena" onChange={handlechange}></input>
-                                <label className='ms-4' for="flexCheckDefault">Indoor Arena</label><br />
-                                <input className="form-check-input text-start" name='dataname' id="flexCheckDefault" type="checkbox" value="Outdoor Arena" onChange={handlechange}></input>
-                                <label className='ms-4'   for="flexCheckDefault" >Outdoor Arena</label><br />
-                                <input className="form-check-input text-start" type="checkbox" ></input>
-                                <label className='ms-4'>Hot walker</label><br />
-                                <input className="form-check-input text-start" type="checkbox" ></input>
-                                <label className='ms-4'>Round pen</label><br />
-                                <input className="form-check-input text-start" type="checkbox" ></input>
-                                <label className='ms-4'>Tack Room</label><br />
-                                <input className="form-check-input text-start" type="checkbox" ></input>
-                                <label className='ms-4'>Tack Locker</label><br />
-                                <input className="form-check-input text-start" type="checkbox" ></input>
-                                <label className='ms-4'>Wach Rack</label><br />
-                                <input className="form-check-input text-start" type="checkbox" ></input>
-                                <label className='ms-4'>Hot water </label><br />
-                                <input className="form-check-input text-start" type="checkbox" ></input>
-                                <label className='ms-4'>Loghted Arena </label><br />
-                                <input className="form-check-input text-start" type="checkbox" ></input>
-                                <label className='ms-4'>Trail Riding Accessible </label><br />
-                                <input className="form-check-input text-start" type="checkbox" ></input>
-                                <label className='ms-4'>Horse TRail parking</label><br />
-                                <input className="form-check-input text-start" type="checkbox" ></input>
-                                <label className='ms-4'>Dog Friendly </label><br />
-                                <input className="form-check-input text-start" type="checkbox" ></input>
-                                <label className='ms-4'>Barthroom </label><br />
-                                <input className="form-check-input text-start" type="checkbox" ></input>
-                                <label className='ms-4'>Wifi </label><br />
-                                <input className="form-check-input text-start" type="checkbox" ></input>
-                                <label className='ms-4'>Saving INcluded </label><br />
-                                {/* {amenitiesdata.map((amenitiesdata, index) => {
+                                {Arraylist.map((result) => {
                                     return (
                                         <>
-                                            <input
-                                                type="checkbox"
-                                                name="amenitiesdata"
-                                                value={amenitiesdata}
-                                                // onClick={handlecheckbox}
+                                            <input type="checkbox"
+                                                value={result}
+                                                className="me-3"
+                                                onChange={(e) => { Amenitiesdata(result, e.target.checked); { console.log(result, e.target.checked) } }}
+
                                             />
-                                            {amenitiesdata}
+                                            <span className="font">{result}</span><br />
+
                                         </>
-                                    );
-                                })} */}
+                                    )
+                                })}
+
 
                             </div>
                             <hr></hr>

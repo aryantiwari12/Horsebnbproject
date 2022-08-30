@@ -1,9 +1,11 @@
 import React from 'react'
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import Calendar from 'react-calendar';
 import moment from 'moment';
 import 'react-calendar/dist/Calendar.css';
 import { Link,useMatch } from 'react-router-dom';
+import henceforthApi from '../henceforthApi';
+
 const CalendarData = () => {
 
 
@@ -15,6 +17,16 @@ const CalendarData = () => {
 
 
     }
+
+    const showalldata=async()=>{
+        let res = await henceforthApi.Auth.Listid(match?.params.id)
+        console.log(match.params.id)
+    }
+    useEffect(() => {
+        return () => {
+            showalldata()
+        };
+    }, [])    
 
     return (
         <div>
@@ -81,7 +93,7 @@ const CalendarData = () => {
                         <div className='mt-2'>
                             <i class="fa-solid fa-angle-left float-start" role="button"></i>
                             <p className='float-start p-2' role="button">Back</p>
-                            <Link to="/create-stall/step12/772">
+                            <Link to={`/create-stall/step12/${match?.params.id}`}>
                                 <button className='float-end border-0 bg-primary  p-2 text-white'>Next</button>
                             </Link>
                         </div>

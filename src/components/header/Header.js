@@ -187,7 +187,7 @@ const logoutdata=()=>{
                                         <ul class="dropdown-menu" >
                                             <li><a class="dropdown-item" href="#">Booking</a></li>
                                             <li><a class="dropdown-item" href="#">Dashboard</a></li>
-                                            <li><a class="dropdown-item" href="#">Manage Listing</a></li>
+                                            <li><a class="dropdown-item" href="#"><Link to="/manage-listing">Manage Listing</Link></a></li>
                                             <li><a class="dropdown-item" href="#"><Link to={"/Myaccounts"}>Account</Link></a></li>
                                             <li><a class="dropdown-item" href="/" onClick={logoutdata}>Logout</a></li>
                                         </ul>
@@ -220,7 +220,7 @@ const logoutdata=()=>{
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Login</h5>
+                            <h4 class="modal-title" id="exampleModalLabel">Login</h4>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
@@ -258,7 +258,7 @@ const logoutdata=()=>{
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Sign Up</h5>
+                            <h4 class="modal-title" id="exampleModalLabel">Sign Up</h4>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">

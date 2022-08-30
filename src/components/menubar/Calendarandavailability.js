@@ -80,7 +80,7 @@ const Calendarandavailability = () => {
                         <div className='mt-2'>
                             <i class="fa-solid fa-angle-left float-start" role="button"></i>
                             <p className='float-start p-2' role="button">Back</p>
-                            <Link to="/create-stall/step11/1/754">
+                            <Link to={`/create-stall/step11/1/${match?.params.id}`}>
                             <button className='float-end border-0 bg-primary  p-2 text-white' onClick={calendardata}>Next</button>
                             </Link>
                         </div>

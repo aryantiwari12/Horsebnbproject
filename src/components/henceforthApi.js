@@ -66,7 +66,8 @@ import _superagent from "superagent";
         Guestgetalllisting: (info) => requests.get("/listings/query?pub_type=4&perPage=8&page=1", info),
         Equestrian: (info) => requests.get("/listings/query?pub_type=3&perPage=8&page=1", info),
         Listid: (id) => requests.get(`/own_listings/show?id=${id}`),
-        
+        publishData: (info) => requests.post(`/own_listings/publish_draft`,info),
+        listedalltype: (info) => requests.get("/own_listings/query?perPage=10&page=1", info),
     };
 
     export default {

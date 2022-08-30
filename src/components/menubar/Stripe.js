@@ -1,7 +1,23 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-
+import React, { useState,useEffect } from 'react'
+import { Link, useMatch } from 'react-router-dom'
+import henceforthApi from '../henceforthApi';
 const Stripe = () => {
+
+
+  const match = useMatch('/create-stall/step13/:id')
+
+
+  const showalldata = async () => {
+    let res = await henceforthApi.Auth.Listid(match?.params.id)
+    console.log(match.params.id)
+  }
+  useEffect(() => {
+    return () => {
+      showalldata()
+    };
+  }, [])
+
+
   return (
     <div>
       <nav class="navbar navbar-expand-lg bg-light">
@@ -30,13 +46,13 @@ const Stripe = () => {
               <div className='text-start'>
                 <button className='bg-success text-white'>s</button>
                 <button className='bg-success text-white'>Connect with stripe</button>
-                <Link to="/create-stall/last-step/772">
-                <button className='float-end bg-primary text-white'>Skip for Now</button>
+                <Link to={`/create-stall/last-step/${match?.params.id}`}>
+                  <button className='float-end bg-primary text-white'>Skip for Now</button>
                 </Link>
               </div>
-             
+
             </div>
-           
+
             <div className='mt-5'>
               <i class="fa-solid fa-angle-left float-start" role="button"></i>
               <p className='float-start p-2' role="button">Back</p>

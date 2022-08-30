@@ -13,3 +13,29 @@ p.float-start.p-2 {
     border-style: dotted;
     border-color:darkgray;
 }
+#exampleModal4 {
+	display: 'flex';
+	justify-content: 'center';
+	align-items: 'center';
+}
+.modal-dialog {
+    height: 60vh !important;
+    display: flex;
+  }
+  .modal-content {
+    margin: auto !important;
+    height: fit-content !important;
+  }
+  h5#exampleModalLabel {
+    margin-left: 62px;
+    text-align: center;
+    font-size: 30px;
+    
+}
+button.btn.btn-secondary {
+    margin-right: 107px;
+    position: absolute;
+}
+button.btn.btn-primary {
+    margin-right: 246px;
+}

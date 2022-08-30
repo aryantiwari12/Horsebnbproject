@@ -33,6 +33,8 @@ import CalendarData from './components/menubar/CalendarData';
 import Pricestall from './components/menubar/Pricestall';
 import Stripe from './components/menubar/Stripe';
 import Finish from './components/menubar/Finish';
+import Getready from './components/menubar/Getready';
+import Managelisting from './components/managelisting/Managelisting';
 
 function App() {
 
@@ -50,6 +52,8 @@ function App() {
                 <Route path="/Myaccounts/Personalinfo" element={<Personalinfo />} />
                 <Route path="/Myaccounts/Changespassword" element={<Changespassword />} />
                 <Route path="/Myaccounts/Payments" element={<Payments />} />
+                <Route path="/manage-listing/publish-listing/:id" element={<Getready />} />
+                <Route path="/manage-listing" element={<Managelisting />} />
               </Routes>
             </HeaderRounting>} />
           <Route path="/host-stalls" element={<Hoststalls />} />
@@ -59,13 +63,12 @@ function App() {
           <Route path="/create-stall/step6/:id" element={<Amenities />} />
           <Route path="/create-stall/step7/:id" element={<Photos />} />
           <Route path="/create-stall/step8/:id" element={<Description />} />
-          {/* <Route path="/create-stall/step8/687" element={<Description />} /> */}
           <Route path="/create-stall/sucessfull-hosting/:id" element={<Calendarandavailability />} />
-          <Route path="/create-stall/step11/1/754" element={<CalendarData />} />
+          <Route path="/create-stall/step11/1/:id" element={<CalendarData />} />
           <Route path="/create-stall/checkin-and-checkout/:id" element={<CheckinCheckout />} />
-          <Route path="/create-stall/step12/772" element={<Pricestall />} />
-          <Route path="/create-stall/step13/772" element={<Stripe />} />
-          <Route path="/create-stall/last-step/772" element={<Finish />} />
+          <Route path="/create-stall/step12/:id" element={<Pricestall />} />
+          <Route path="/create-stall/step13/:id" element={<Stripe />} />
+          <Route path="/create-stall/last-step/:id" element={<Finish />} />
         </Routes>
         <Footer />
       </div>
