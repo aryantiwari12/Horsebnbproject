@@ -66,7 +66,7 @@ const Pricestall = () => {
                 </div>
             </nav>
             <div className='row mx-0 p-5'>
-                <div className='col-lg-6 py-5  steps-frame-height overflow-scroll'>
+                <div className='col-lg-6 py-5  steps-frame-height '>
                     <div className='ms-5'>
                         <p className='fs-3'>Price your stall.</p>
                         <p>This will be your nightly price per stall</p>
@@ -100,8 +100,10 @@ const Pricestall = () => {
                             </Link>
                         </div>
                     </div>
+                   
 
                 </div>
+               
                 <div className='col-md-6 px-md-0 d-none d-lg-block mt-5 p-5'>
                     <div className='border w-75 p-5'>
                         <img src="https://horsebnb.com:8081/assets/img/lightbulb.svg" />

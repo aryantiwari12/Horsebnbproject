@@ -7,11 +7,14 @@ const Managelisting = () => {
 
 
     const [data, setdata] = useState([])
+    
 
     const showalllisteddata = async () => {
 
         let res = await heneceforthApi.Auth.listedalltype()
-        setdata(res.data)
+        setdata(res?.data)
+      
+    
     }
     useEffect(() => {
         return () => {
@@ -19,6 +22,8 @@ const Managelisting = () => {
 
         };
     }, [])
+
+   
 
 
 
@@ -45,7 +50,7 @@ const Managelisting = () => {
                                 return (
                                     <>
                                         <tr>
-                                            <th scope="row">{index}</th>
+                                            <th scope="row">{index}.</th>
 
                                             <td>
                                                 <img src={`${imageurl}${item?.attributes?.publicData?.cover_photo?.url}`} className='w-25 gap-5' />
@@ -54,7 +59,8 @@ const Managelisting = () => {
                                             <td>
                                                 <button type="button" class="btn btn-outline-primary">{item?.attributes?.state}</button>
                                             </td>
-                                            <td>Short Term</td>
+                                            <td>{item?.attributes?.publicData?.type===1?"short tem":"montly"}</td>
+                                            {console.log(data?.attributes?.publicData?.type)}
                                             <td>Mohali</td>
                                             <td>{item?.attributes?.createdAt}</td>
                                             <td role="button"><i class="fa-solid fa-ellipsis" data-bs-toggle="dropdown" aria-expanded="false"></i>

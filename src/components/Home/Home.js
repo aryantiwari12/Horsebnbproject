@@ -1,7 +1,7 @@
 import React from 'react'
 import "../Home/home.css"
 import IMAGE from "../../IMG/search_grey.png"
-import { useState,useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import ExplorehorseBnB from './ExplorehorseBnB'
 import Aboutus from './Aboutus'
 import Shorttermsstalls from './Shorttermsstalls'
@@ -73,13 +73,13 @@ const Home = () => {
 
     });
 
-  
+
 
 
 
     return (
         <div>
-            
+
             <div className='container  mt-5 '>
                 <section>
                     <ul className='tabs d-flex gap-5 '>
@@ -113,10 +113,11 @@ const Home = () => {
                                         <span class="form-control bg-white pl-0" style={{ color: "gray" }} data-bs-toggle="modal" data-bs-target="#exampleModal2">  Add stalls </span>
                                     </div>
                                     <div className=''>
-                                        <button className='btn btn-primary'>
+                                        <button className='btn btn-success'>
                                             <i class="fa-solid fa-magnifying-glass"></i> Search
                                         </button>
                                     </div>
+                                   
                                 </div>
 
                                 {/* number of stall modal */}
@@ -167,7 +168,7 @@ const Home = () => {
                                         <span class="form-control bg-white pl-0" style={{ color: "gray" }} data-bs-toggle="modal" data-bs-target="#exampleModal3">  Add stalls </span>
                                     </div>
                                     <div className=''>
-                                        <button className='btn btn-primary'>
+                                        <button className='btn btn-success'>
                                             <i class="fa-solid fa-magnifying-glass"></i> Search
                                         </button>
                                     </div>
@@ -220,7 +221,7 @@ const Home = () => {
                                         <span class="form-control bg-white pl-0" style={{ color: "gray" }} data-bs-toggle="modal" data-bs-target="#exampleModal4">  Add room </span>
                                     </div>
                                     <div className=''>
-                                        <button className='btn btn-primary'>
+                                        <button className='btn btn-success'>
                                             <i class="fa-solid fa-magnifying-glass"></i> Search
                                         </button>
                                     </div>
@@ -275,7 +276,7 @@ const Home = () => {
             <Guestaccommodations />
             <Monthly />
             <Horseadventures />
-            
+
         </div >
     )
 }

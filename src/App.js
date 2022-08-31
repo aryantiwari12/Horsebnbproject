@@ -35,6 +35,7 @@ import Stripe from './components/menubar/Stripe';
 import Finish from './components/menubar/Finish';
 import Getready from './components/menubar/Getready';
 import Managelisting from './components/managelisting/Managelisting';
+import Dashboard from './components/Dashboard/Dashboard';
 
 function App() {
 
@@ -54,6 +55,7 @@ function App() {
                 <Route path="/Myaccounts/Payments" element={<Payments />} />
                 <Route path="/manage-listing/publish-listing/:id" element={<Getready />} />
                 <Route path="/manage-listing" element={<Managelisting />} />
+                <Route path="/list-details/dashboard" element={<Dashboard/>} />
               </Routes>
             </HeaderRounting>} />
           <Route path="/host-stalls" element={<Hoststalls />} />
@@ -69,6 +71,7 @@ function App() {
           <Route path="/create-stall/step12/:id" element={<Pricestall />} />
           <Route path="/create-stall/step13/:id" element={<Stripe />} />
           <Route path="/create-stall/last-step/:id" element={<Finish />} />
+          <Route path="/create-stall/availability/2/:id" element={<Calendarand />} />
         </Routes>
         <Footer />
       </div>

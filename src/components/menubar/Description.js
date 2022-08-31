@@ -11,7 +11,7 @@ let id = (localStorage.getItem('id'))
 const Description = () => {
 
 
-
+    const [typedata,settypedata]=useState()
     const match = useMatch('/create-stall/step8/:id')
     const [descriptionadd, setdescriptionadd] = useState("")
     const [extra, setextra] = useState("")
@@ -40,9 +40,11 @@ const Description = () => {
         )
 
     }
+    
     const showalldata=async()=>{
         let res = await heneceforthApi.Auth.Listid(match?.params.id)
         console.log(match.params.id)
+        settypedata(res?.data)
     }
     useEffect(() => {
         return () => {
@@ -94,12 +96,14 @@ const Description = () => {
                             </div>
                             <div className='mt-2'>
                                 <i class="fa-solid fa-angle-left float-start" role="button"></i>
-
+                                {/* /sucessfull-hosting/ */}
                                 <p className='float-start p-2' role="button">Back</p>
-
-                                <Link to={`/create-stall/checkin-and-checkout/${match?.params.id}`}>
+                               
+                                <Link to={`/create-stall${typedata?.attributes?.publicData?.type===1?'/checkin-and-checkout/':'/sucessfull-hosting/'}${match?.params.id}`}>
                                     <button className='float-end border-0 bg-primary  p-2 text-white' onClick={Descriptiondata}>Next</button>
+                                    {console.log(typedata?.attributes?.publicData?.type)}
                                 </Link>
+
                             </div>
                         </div>
                     </div>

@@ -9,6 +9,7 @@ let id = (localStorage.getItem('id'))
 const Calendarandavailability = () => {
 
 
+    const [typedata,settypedata]=useState("")
     const match = useMatch('/create-stall/sucessfull-hosting/:id')
     const [agree, setAgree] = useState(false);
 
@@ -35,6 +36,7 @@ const Calendarandavailability = () => {
     const showalldata=async()=>{
         let res = await heneceforthApi.Auth.Listid(match?.params.id)
         console.log(match.params.id)
+        settypedata(res?.data)
     }
     useEffect(() => {
         return () => {
@@ -80,8 +82,9 @@ const Calendarandavailability = () => {
                         <div className='mt-2'>
                             <i class="fa-solid fa-angle-left float-start" role="button"></i>
                             <p className='float-start p-2' role="button">Back</p>
-                            <Link to={`/create-stall/step11/1/${match?.params.id}`}>
+                            <Link to={`/create-stall${typedata?.attributes?.publicData?.type===1?'/step11/1/':'/availability/2/'}${match?.params.id}`}>
                             <button className='float-end border-0 bg-primary  p-2 text-white' onClick={calendardata}>Next</button>
+                            {console.log(typedata?.attributes?.publicData?.type)}
                             </Link>
                         </div>
                     </div>

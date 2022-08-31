@@ -68,7 +68,9 @@ const Getready = () => {
                                         <h5 class="modal-title text-secondary fs-2" id="exampleModalLabel">Are you sure you want to publish this listing?</h5>
                                     </div>
                                     <div class="modal-footer ">
+                                        <Link to="/manage-listing">
                                         <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onClick={publishdata} >Publish</button>
+                                        </Link>
                                         <button type="button" class="btn btn-secondary">Save as draft</button>
                                     </div>
                                 </div>

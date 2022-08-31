@@ -68,6 +68,7 @@ import _superagent from "superagent";
         Listid: (id) => requests.get(`/own_listings/show?id=${id}`),
         publishData: (info) => requests.post(`/own_listings/publish_draft`,info),
         listedalltype: (info) => requests.get("/own_listings/query?perPage=10&page=1", info),
+        availabiltycreate: (info) => requests.post("/availability_exceptions/create", info),
     };
 
     export default {

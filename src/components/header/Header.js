@@ -186,7 +186,7 @@ const logoutdata=()=>{
                                         </button>
                                         <ul class="dropdown-menu" >
                                             <li><a class="dropdown-item" href="#">Booking</a></li>
-                                            <li><a class="dropdown-item" href="#">Dashboard</a></li>
+                                            <li><a class="dropdown-item" href="#"><Link to="/list-details/dashboard">Dashboard</Link></a></li>
                                             <li><a class="dropdown-item" href="#"><Link to="/manage-listing">Manage Listing</Link></a></li>
                                             <li><a class="dropdown-item" href="#"><Link to={"/Myaccounts"}>Account</Link></a></li>
                                             <li><a class="dropdown-item" href="/" onClick={logoutdata}>Logout</a></li>
