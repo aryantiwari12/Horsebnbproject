@@ -4,7 +4,7 @@ import "../header/style.css";
 import 'react-phone-number-input/style.css'
 import { useState } from 'react';
 import { useContext } from 'react';
-import {Link, useNavigate} from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { CounterContext } from "../context/CounterContext"
 import heneceforthApi from "../henceforthApi";
 import PhoneInput, { formatPhoneNumber, formatPhoneNumberIntl } from 'react-phone-number-input'
@@ -18,7 +18,7 @@ import axios from 'axios';
 import Loadingspinear from '../Loading/Loadingspinear';
 
 
-const imageurl=`https://horsebnb.s3.us-east-2.amazonaws.com/Uploads/Images/Small/`;
+const imageurl = `https://horsebnb.s3.us-east-2.amazonaws.com/Uploads/Images/Small/`;
 
 const Header = () => {
 
@@ -29,7 +29,7 @@ const Header = () => {
     const [values, setValues] = useState()
     const navigate = useNavigate();
     const [post, setpost] = useState()
-    const [images1,setimages1]=useState("")
+    const [images1, setimages1] = useState("")
     const [agree, setAgree] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [profiledata, setprofiledata] = useState({
@@ -54,7 +54,7 @@ const Header = () => {
         fcmId: "string"
     })
 
-  
+
 
 
     const changesdata = (e) => {
@@ -84,7 +84,7 @@ const Header = () => {
             protectedData: profiledata.phoneNumber
         })
         setIsLoading(false)
-        
+
         localStorage.setItem("token", res.data.token)
         //  console.log(res)
     }
@@ -97,19 +97,19 @@ const Header = () => {
         setIsLoading(false)
         localStorage.setItem("token", res.data.token);
         console(res.data.token)
-        
-        
-        
+
+
+
     }
 
     const showheaderdata = () => {
         // setshowheader(true)
     }
     const checkboxHandler = () => {
-      
+
         setAgree(!agree);
-       
-      }
+
+    }
 
 
     heneceforthApi.setToken(localStorage.getItem('token'))
@@ -117,12 +117,12 @@ const Header = () => {
     const getprofile = async () => {
 
         let res = await heneceforthApi.Auth.getdata()
-        .then((res)=>{
-            setprofiledata(res.data.attributes.profile)
-            setimages1(res.data.attributes.profile.publicData.profile_image)
-            console.log(res)
-        })
-        
+            .then((res) => {
+                setprofiledata(res.data.attributes.profile)
+                setimages1(res.data.attributes.profile.publicData.profile_image)
+                console.log(res)
+            })
+
 
 
     }
@@ -134,11 +134,11 @@ const Header = () => {
     }, [])
 
 
-const logoutdata=()=>{
-    localStorage.clear()
-    navigate('');
-    
-}
+    const logoutdata = () => {
+        localStorage.clear()
+        navigate('');
+
+    }
 
 
 
@@ -148,57 +148,59 @@ const logoutdata=()=>{
                 localStorage.getItem('token') ?
                     // <Secondheader firstName={profiledata.firstName} lastname={profiledata.lastName}/>
                     <nav class="navbar navbar-expand-lg bg-light shadow">
-                    <div class="container-fluid">
-                        <img src={IMAGE}></img>
-                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                            <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center">
-                                <li class="nav-item border rounded">
-                                    <a href='' class="pointer search-btn col-lg-12 col-md-6">
-                                        <span>Start your search</span>
-                                        <span className='search-icon-btn p-2 '>
-                                            <img src={IMAGE1}></img>
-                                        </span>
-                                    </a>
-                                </li>
-                                <li className='nav-item'>
-                                    <Link to="/host-stalls">
-                                    <a href='#'>Host your Stalls</a>
-                                    </Link>
-                                </li>
-                                <li className='nav-item'>
-                                    <a href='#'>Host Guests</a>
-                                </li>
-                                <li className='nav-item'>
-                                    <a href='#'>Host an Adventure</a>
-                                </li>
-                                <li className='nav-item'>
-                                    <img src="https://horsebnb.com/assets/img/chat-bubble.svg"></img>
-                                </li>
-                                <li className='nav-item'>
-                                    <div class="dropdown">
-                                        <button class="btn border dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                            <img src={`${imageurl}${images1}`} className='pe-2 rounded-circle' height="30px" width="40px" alt=""></img>
-                                            <span>{profiledata.firstName} {profiledata.lastName}</span>
-                                            
-                                        </button>
-                                        <ul class="dropdown-menu" >
-                                            <li><a class="dropdown-item" href="#">Booking</a></li>
-                                            <li><a class="dropdown-item" href="#"><Link to="/list-details/dashboard">Dashboard</Link></a></li>
-                                            <li><a class="dropdown-item" href="#"><Link to="/manage-listing">Manage Listing</Link></a></li>
-                                            <li><a class="dropdown-item" href="#"><Link to={"/Myaccounts"}>Account</Link></a></li>
-                                            <li><a class="dropdown-item" href="/" onClick={logoutdata}>Logout</a></li>
-                                        </ul>
-                                    </div>
-                                </li>
-    
-                            </ul>
-                           
+                        <div class="container-fluid">
+                            <img src={IMAGE}></img>
+                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+                            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center">
+                                    <li class="nav-item border rounded">
+                                        <a href='' class="pointer search-btn col-lg-12 col-md-6">
+                                            <span className="text-black">Start your search</span>
+                                            <span className='search-icon-btn p-2 '>
+                                                <img src={IMAGE1}></img>
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li className='nav-item'>
+                                        <Link to="/host-stalls">
+                                            <a href='#' className="text-black">Host your Stalls</a>
+                                        </Link>
+                                    </li>
+                                    <li className='nav-item'>
+                                        <Link to="/host-guests">
+                                            <a href='#' className="text-black">Host Guests</a>
+                                        </Link>
+                                    </li>
+                                    <li className='nav-item'>
+                                        <a href='#' className="text-black">Host an Adventure</a>
+                                    </li>
+                                    <li className='nav-item'>
+                                        <img src="https://horsebnb.com/assets/img/chat-bubble.svg"></img>
+                                    </li>
+                                    <li className='nav-item'>
+                                        <div class="dropdown">
+                                            <button class="btn border dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                <img src={`${imageurl}${images1}`} className='pe-2 rounded-circle' height="30px" width="40px" alt=""></img>
+                                                <span>{profiledata.firstName} {profiledata.lastName}</span>
+
+                                            </button>
+                                            <ul class="dropdown-menu" >
+                                                <li><a class="dropdown-item" href="#">Booking</a></li>
+                                                <li><a class="dropdown-item" href="#"><Link to="/list-details/dashboard" className="text-black">Dashboard</Link></a></li>
+                                                <li><a class="dropdown-item" href="#"><Link to="/manage-listing" className="text-black">Manage Listing</Link></a></li>
+                                                <li><a class="dropdown-item" href="#"><Link to={"/Myaccounts"} className="text-black">Account</Link></a></li>
+                                                <li><a class="dropdown-item" href="/" onClick={logoutdata}>Logout</a></li>
+                                            </ul>
+                                        </div>
+                                    </li>
+
+                                </ul>
+
+                            </div>
                         </div>
-                    </div>
-                </nav>  :
+                    </nav> :
                     <nav class="navbar navbar-expand-lg shadow">
                         <div class="container-fluid">
                             <img src={IMAGE}></img>
@@ -233,12 +235,12 @@ const logoutdata=()=>{
                                 </div>
                                 <div className='col-6  text-end pt-2 p-3'>
                                     <p className='text-success'>Forgot Password?</p>
-                                    
+
                                 </div>
                             </div>
                             <ToastContainer />
-                           { !isLoading &&<button className='w-100   border-0 p-2  text-white rounded'  onClick={(e)=>{Logindatavalue();notify()}} style={{ backgroundColor: "#54BAB9" }} id="spin" disabled={!agree} >  Login</button>}
-                           { isLoading &&<button className='w-100   border-0 p-2  text-white rounded '  style={{ backgroundColor: "#54BAB9" }} role="status" disabled><i class="fas  fa-spinner fa-spin fs-2"></i></button>}
+                            {!isLoading && <button className='w-100   border-0 p-2  text-white rounded' onClick={(e) => { Logindatavalue(); notify() }} style={{ backgroundColor: "#54BAB9" }} id="spin" disabled={!agree} >  Login</button>}
+                            {isLoading && <button className='w-100   border-0 p-2  text-white rounded ' style={{ backgroundColor: "#54BAB9" }} role="status" disabled><i class="fas  fa-spinner fa-spin fs-2"></i></button>}
                             <div className='mt-2'>
                                 <strong className='mt-2'>Or Continue with</strong>
 
@@ -283,8 +285,8 @@ const logoutdata=()=>{
                                 <input type="checkbox" className='pt-1' onChange={checkboxHandler}></input>
                                 <p className='pt-3 px-2'>Agree To <a href='#'><span className='text-danger'>Term & condition </span></a> </p>
                             </div>
-                           {!isLoading &&<button className='w-100 p-2 border-0 text-white rounded' onClick={Signupdata} style={{ backgroundColor: "#54BAB9" }} disabled={!agree}>Sign Up</button>}
-                           {isLoading &&<button className='w-100 p-2 border-0 text-white rounded'  style={{ backgroundColor: "#54BAB9" }} disabled><i class="fas  fa-spinner fa-spin fs-2"></i></button>}
+                            {!isLoading && <button className='w-100 p-2 border-0 text-white rounded' onClick={Signupdata} style={{ backgroundColor: "#54BAB9" }} disabled={!agree}>Sign Up</button>}
+                            {isLoading && <button className='w-100 p-2 border-0 text-white rounded' style={{ backgroundColor: "#54BAB9" }} disabled><i class="fas  fa-spinner fa-spin fs-2"></i></button>}
 
                             <p className='mt-3'>or with Continue</p>
                             <button className='w-100 '>Continue with Facebook</button>

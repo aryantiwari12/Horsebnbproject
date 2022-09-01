@@ -1,15 +1,19 @@
-import React from 'react';
-import IMAGE from '../../IMG/banner.jpg'
+import React from 'react'
+import { Link } from 'react-router-dom'
 import IMAGE1 from '../../IMG/ready_to_learn.svg'
-import "../menubar/Hoststalls.css";
-import { Link } from 'react-router-dom';
+import IMAGE from '../../IMG/explore_one.png'
 
-const Hoststalls = () => {
+const Hostguests = () => {
+
+    // const match = useMatch('/create-guest/step3/:id')
+
+
     return (
         <div>
             <nav class="navbar navbar-expand-lg">
                 <div class="container-fluid">
                     <img src="https://horsebnb.com:8081/assets/img/logo_new.svg"></img>
+                    
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
@@ -17,22 +21,20 @@ const Hoststalls = () => {
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         </ul>
                         <form class="d-flex" role="search">
-                            <Link to="/create-stall/step1">
+                            <Link to="/create-guest/step1">
                                 <button className='bg-primary rounded p-2 text-white border-0' type="submit">Get Started</button>
                             </Link>
                         </form>
                     </div>
                 </div>
             </nav>
-
             <div className='mt-5'>
-                <img src={IMAGE} class="w-100 "></img>
-                <p className='fw-bold fs-1 text-white position-absolute top-50 start-50 translate-middle text-center opacity-100'>Learn more about hosting with HorseBnB</p>
+                <img src={IMAGE} className="w-100" />
+                <p className='fw-bold fs-1 text-white position-absolute top-50 start-50 translate-middle text-center opacity-100'>Learn more about hosting with HorseBnB Accommodations</p>
 
             </div>
-            <Link to="/create-stall/step1">
-                <button className='btn btn-outline-secondary fs-4 position-absolute top-50 start-50 mt-5 ms-5 text-white border border-secondary p-2'>Get Started</button>
-            </Link>
+            <Link to="create-guest/step1"></Link>
+            <button className='btn btn-outline-secondary fs-4 position-absolute top-50 start-50 mt-5 ms-5 text-white border border-secondary p-2'>Get Started</button>
             <div className='row justify-content-between'>
                 <div className='col-md-5 mt-5 mx-auto'>
                     <div className='border rounded  p-5 h-100 text-center'>
@@ -73,9 +75,9 @@ const Hoststalls = () => {
                 </div>
             </div>
             <p className='position-absolute float-end fs-1 text-white'>Ready to earn ?</p>
-            <Link to="/create-stall/step1">
-                <button className='position-absolute bg-white border-0 p-2'>Get Started</button>
-            </Link>
+
+            <button className='position-absolute bg-white border-0 p-2'>Get Started</button>
+
             <div className='h-100 '>
                 <div className='bg-primary mt-5 h-100'>
                     <img src={IMAGE1} className="mt-5 " />
@@ -88,4 +90,4 @@ const Hoststalls = () => {
     )
 }
 
-export default Hoststalls
+export default Hostguests

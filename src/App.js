@@ -36,6 +36,11 @@ import Finish from './components/menubar/Finish';
 import Getready from './components/menubar/Getready';
 import Managelisting from './components/managelisting/Managelisting';
 import Dashboard from './components/Dashboard/Dashboard';
+import Hostguests from './components/hostguests/Hostguests';
+import Createguest from './components/hostguests/Createguest';
+import Guests from './components/hostguests/Guests';
+import Locationguests from './components/hostguests/Locationguests';
+import Amenitiesguest from './components/hostguests/Amenitiesguest';
 
 function App() {
 
@@ -72,6 +77,11 @@ function App() {
           <Route path="/create-stall/step13/:id" element={<Stripe />} />
           <Route path="/create-stall/last-step/:id" element={<Finish />} />
           <Route path="/create-stall/availability/2/:id" element={<Calendarand />} />
+          <Route path="/host-guests" element={<Hostguests />} />
+          <Route path="/create-guest/step1" element={<Createguest />} />
+          <Route path="/create-guest/step3/:id" element={<Guests />} />
+          <Route path="/create-guest/step5/:id" element={<Locationguests />} />
+          <Route path="/create-guest/step6/:id" element={<Amenitiesguest />} />
         </Routes>
         <Footer />
       </div>

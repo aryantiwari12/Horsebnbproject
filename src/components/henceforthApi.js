@@ -25,6 +25,7 @@ import _superagent from "superagent";
             req.set("Authorization", `${token}`);
         }
     };
+    let limit=10
 
     const requests = {
         del: (url) =>

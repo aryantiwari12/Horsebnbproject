@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import heneceforthApi from '../henceforthApi'
+import ReactPaginate from "react-paginate";
+import axios from 'axios';
+
+
 
 const imageurl = `https://horsebnb.s3.us-east-2.amazonaws.com/Uploads/Images/Small/`;
 
@@ -8,13 +12,18 @@ const Managelisting = () => {
 
     const [data, setdata] = useState([])
     
+    // let limit = 10;
+    
 
+
+    
     const showalllisteddata = async () => {
 
         let res = await heneceforthApi.Auth.listedalltype()
         setdata(res?.data)
-      
-    
+       
+
+
     }
     useEffect(() => {
         return () => {
@@ -23,8 +32,12 @@ const Managelisting = () => {
         };
     }, [])
 
+    
+    
+
    
 
+   
 
 
     return (
@@ -59,14 +72,14 @@ const Managelisting = () => {
                                             <td>
                                                 <button type="button" class="btn btn-outline-primary">{item?.attributes?.state}</button>
                                             </td>
-                                            <td>{item?.attributes?.publicData?.type===1?"short tem":"montly"}</td>
+                                            <td>{item?.attributes?.publicData?.type === 1 ? "short tem" : "montly"}</td>
                                             {console.log(data?.attributes?.publicData?.type)}
                                             <td>Mohali</td>
                                             <td>{item?.attributes?.createdAt}</td>
                                             <td role="button"><i class="fa-solid fa-ellipsis" data-bs-toggle="dropdown" aria-expanded="false"></i>
                                                 <ul class="dropdown-menu">
                                                     <li><a class="dropdown-item" href="#">Edit</a></li>
-                                                   {item?.attributes?.state==="published"?<li><a class="dropdown-item" href="#">Deactivate</a></li>:''}
+                                                    {item?.attributes?.state === "published" ? <li><a class="dropdown-item" href="#">Deactivate</a></li> : ''}
                                                     <li><a class="dropdown-item" href="#">Preview</a></li>
                                                 </ul>
                                             </td>
@@ -75,10 +88,17 @@ const Managelisting = () => {
                                 )
                             })}
 
+
                         </tbody>
                     </table>
+                    
                 </div>
+
+
             </div>
+
+
+
         </div>
     )
 }
