@@ -41,6 +41,8 @@ import Createguest from './components/hostguests/Createguest';
 import Guests from './components/hostguests/Guests';
 import Locationguests from './components/hostguests/Locationguests';
 import Amenitiesguest from './components/hostguests/Amenitiesguest';
+import Photosguest from './components/hostguests/Photosguest';
+import Descriptionguest from './components/hostguests/Descriptionguest';
 
 function App() {
 
@@ -60,7 +62,7 @@ function App() {
                 <Route path="/Myaccounts/Payments" element={<Payments />} />
                 <Route path="/manage-listing/publish-listing/:id" element={<Getready />} />
                 <Route path="/manage-listing" element={<Managelisting />} />
-                <Route path="/list-details/dashboard" element={<Dashboard/>} />
+                <Route path="/list-details/dashboard" element={<Dashboard />} />
               </Routes>
             </HeaderRounting>} />
           <Route path="/host-stalls" element={<Hoststalls />} />
@@ -82,6 +84,8 @@ function App() {
           <Route path="/create-guest/step3/:id" element={<Guests />} />
           <Route path="/create-guest/step5/:id" element={<Locationguests />} />
           <Route path="/create-guest/step6/:id" element={<Amenitiesguest />} />
+          <Route path="/create-guest/step7/:id" element={<Photosguest />} />
+          <Route path="/create-guest/step8/:id" element={<Descriptionguest />} />
         </Routes>
         <Footer />
       </div>

@@ -95,9 +95,9 @@ const Amenitiesguest = () => {
 
                                 <p className='float-start p-2' role="button">Back</p>
 
-                               
+                                   <Link to={`/create-guest/step7/${match?.params.id}`}>
                                     <button className='float-end border-0 bg-primary  p-2 text-white' onClick={dataamenities}>Next</button>
-                              
+                                    </Link>
                             </div>
 
                         </div>
