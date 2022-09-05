@@ -20,26 +20,7 @@ const Descriptionguest = () => {
 
 
 
-    // const handleChange = (e) => {
-    //     let name=e.target.name;
-    //     let value=e.target.value;
-        
-    //     setdescription({
-    //       ...description,
-    //       [value]:name
-    //     })
-    //     setextradetail({
-    //         ...extradetail,
-    //         [value]:name
-    //     })
-    //     seCount(e.target.value.length);
-
-    //     console.log("name",e.target.name)
-    //     console.log("value",e.target.value)
-
-
-
-    // };
+   
 
     const decriptiondata=async()=>{
 
@@ -87,12 +68,13 @@ const Descriptionguest = () => {
                         <div class="p-3 overflow-scroll">
                             <p className='text-start fs-3'>Describe your place to guests</p>
                             <p className='text-start fs-6'>Write a quick summary of your place. You can highlight what is special about your space, your business and how you will interact with guests.Do not include business name or contact information.</p>
-                            <textarea placeholder="Enter your text here" rows="10" cols="60" className="App__textarea" id="myText" onChange={(e)=>{seCount(e.target.value.length);}} /><br />
+                            <textarea placeholder="Enter your text here" rows="10" cols="60" className="App__textarea" id="myText" onChange={(e)=>{seCount(e.target.value.length);setdescription(e.target.value);{console.log(e.target.value)}}} /><br />
+                            
                             <span className="App__counter float-end">{`${count} / ${maxCount}`}</span>
 
                             <p className='text-start fs-2'>Want to add more info?</p>
                             <p className='text-start'>Use the additional fields below to share more details</p>
-                            <textarea className='float-start' rows={10} cols={62} ></textarea>
+                            <textarea className='float-start' rows={10} cols={62} onChange={(e)=>{setextradetail(e.target.value);setextradetail(e.target.value);{console.log(e.target.value)}}}></textarea>
 
                         </div>
 
@@ -102,9 +84,9 @@ const Descriptionguest = () => {
 
                             <p className='float-start p-2' role="button">Back</p>
 
-                            {/* <Link to={`/create-guest/step8/${match?.params.id}`}> */}
+                            <Link to={`/create-guest/checkin-and-checkout/${match?.params.id}`}>
                             <button className='float-end border-0 bg-primary  p-2 text-white' onClick={decriptiondata}>Next</button>
-                            {/* </Link> */}
+                            </Link>
                         </div>
                     </div>
 

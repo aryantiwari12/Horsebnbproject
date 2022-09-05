@@ -72,7 +72,8 @@ const Managelisting = () => {
                                             <td>
                                                 <button type="button" class="btn btn-outline-primary">{item?.attributes?.state}</button>
                                             </td>
-                                            <td>{item?.attributes?.publicData?.type === 1 ? "short tem" : "montly"}</td>
+                                            {/* <td>{item?.attributes?.publicData?.type === 1 ? "short tem" : "montly"}</td> */}
+                                            <td>{item?.attributes?.publicData?.type === 1 ? "short tem" : item?.attributes?.publicData?.type === 2 ?"Montly":item?.attributes?.publicData?.type === 3?"Guest Accommodations":"Adventure" }</td>
                                             {console.log(data?.attributes?.publicData?.type)}
                                             <td>Mohali</td>
                                             <td>{item?.attributes?.createdAt}</td>

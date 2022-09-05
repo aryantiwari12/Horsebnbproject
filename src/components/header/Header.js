@@ -174,7 +174,9 @@ const Header = () => {
                                         </Link>
                                     </li>
                                     <li className='nav-item'>
+                                        <Link to="/host-an-experience">
                                         <a href='#' className="text-black">Host an Adventure</a>
+                                        </Link>
                                     </li>
                                     <li className='nav-item'>
                                         <img src="https://horsebnb.com/assets/img/chat-bubble.svg"></img>

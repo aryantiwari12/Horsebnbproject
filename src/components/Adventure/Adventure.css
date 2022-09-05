@@ -1,0 +1,19 @@
+
+hr.w-25.mx-auto.d-block.fs-1.fw-bold {
+    border: 3px solid blue;
+}
+
+hr.w-25.rr {
+    border: 1px solid blue;
+}
+p.fw-bold.fs-1.text-black {
+    position: absolute;
+    margin-top: -561px;
+    margin-left: 573px;
+    /* margin: -19px; */
+}
+button.bg-dark.position-absolute.rounded.p-2 {
+    margin-top: -376px;
+    margin-left: 831px;
+    color: white;
+}

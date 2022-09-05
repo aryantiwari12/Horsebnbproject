@@ -43,6 +43,15 @@ import Locationguests from './components/hostguests/Locationguests';
 import Amenitiesguest from './components/hostguests/Amenitiesguest';
 import Photosguest from './components/hostguests/Photosguest';
 import Descriptionguest from './components/hostguests/Descriptionguest';
+import CheckInCheckhost from './components/hostguests/CheckInCheckhost';
+import Calendarandavailabilityhost from './components/hostguests/Calendarandavailabilityhost';
+import Calendaranddatehost from './components/hostguests/Calendaranddatehost';
+import Pricehost from './components/hostguests/Pricehost';
+import Stripconnecthost from './components/hostguests/Stripconnecthost';
+import Finishhost from './components/hostguests/Finishhost';
+import Readytohost from './components/hostguests/Readytohost';
+import Adventurehome from './components/Adventure/Adventurehome';
+import Adventuretitle from './components/Adventure/Adventuretitle';
 
 function App() {
 
@@ -63,6 +72,8 @@ function App() {
                 <Route path="/manage-listing/publish-listing/:id" element={<Getready />} />
                 <Route path="/manage-listing" element={<Managelisting />} />
                 <Route path="/list-details/dashboard" element={<Dashboard />} />
+                <Route path="/manage-listing/publish-listing/:id" element={<Readytohost />} />
+                
               </Routes>
             </HeaderRounting>} />
           <Route path="/host-stalls" element={<Hoststalls />} />
@@ -86,6 +97,14 @@ function App() {
           <Route path="/create-guest/step6/:id" element={<Amenitiesguest />} />
           <Route path="/create-guest/step7/:id" element={<Photosguest />} />
           <Route path="/create-guest/step8/:id" element={<Descriptionguest />} />
+          <Route path="/create-guest/checkin-and-checkout/:id" element={<CheckInCheckhost />} />
+          <Route path="/create-guest/sucessfull-hosting/:id" element={<Calendarandavailabilityhost />} />
+          <Route path="/create-guest/step11/1/:id" element={<Calendaranddatehost />} />
+          <Route path="/create-guest/step12/:id" element={<Pricehost />} />
+          <Route path="/create-guest/step13/:id" element={<Stripconnecthost />} />
+          <Route path="/create-guest/last-step/:id" element={<Finishhost />} />
+          <Route path="/host-an-experience" element={<Adventurehome />} />
+          <Route path="/add-experience/step1" element={<Adventuretitle />} />
         </Routes>
         <Footer />
       </div>

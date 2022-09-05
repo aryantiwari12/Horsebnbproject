@@ -37,7 +37,7 @@ const Guests = () => {
 
         let res = await henceforthApi.Auth.Updatedlisting(
             {
-                id: id,
+                id: match.params.id,
                 availabilityPlan: {
                     type: "availability-plan/day",
                     entries: [
