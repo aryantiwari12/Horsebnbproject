@@ -22,7 +22,7 @@ const Createguest = () => {
                 }
             }
             )
-            localStorage.setItem("secondID",res.data.id.uuid)
+        localStorage.setItem("secondID",res.data.id.uuid)
         navigate(`/create-guest/step3/${res.data.id.uuid}`)
     
     }

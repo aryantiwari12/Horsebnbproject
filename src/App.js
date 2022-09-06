@@ -52,6 +52,12 @@ import Finishhost from './components/hostguests/Finishhost';
 import Readytohost from './components/hostguests/Readytohost';
 import Adventurehome from './components/Adventure/Adventurehome';
 import Adventuretitle from './components/Adventure/Adventuretitle';
+import Locationadventure from './components/Adventure/Locationadventure';
+import Adventurepage from './components/Adventure/Adventurepage';
+import Adventurephotos from './components/Adventure/Adventurephotos';
+import Settingadventure from './components/Adventure/Settingadventure';
+import Settingability from './components/Adventure/Settingability';
+import SetyourAvailabilityAdventure from './components/Adventure/SetyourAvailabilityAdventure';
 
 function App() {
 
@@ -105,6 +111,12 @@ function App() {
           <Route path="/create-guest/last-step/:id" element={<Finishhost />} />
           <Route path="/host-an-experience" element={<Adventurehome />} />
           <Route path="/add-experience/step1" element={<Adventuretitle />} />
+          <Route path="/add-experience/step2/:id" element={<Locationadventure />} />
+          <Route path="/add-experience/step4/:id" element={<Adventurepage />} />
+          <Route path="/add-experience/step5/:id" element={<Adventurephotos />} />
+          <Route path="/add-experience/step6/:id" element={<Settingadventure />} />
+          <Route path="/add-experience/step10/:id" element={<Settingability />} />
+          <Route path="/add-experience/step7/:id" element={<SetyourAvailabilityAdventure />} />
         </Routes>
         <Footer />
       </div>

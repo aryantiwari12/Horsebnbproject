@@ -1,8 +1,12 @@
 import React, { useState } from 'react'
+import { Link,useNavigate } from 'react-router-dom'
 import henceforthApi from '../henceforthApi'
 
 
+
 const Adventuretitle = () => {
+
+    const navigate=useNavigate(null)
 
     const [titledata,settitledata]=useState("")
 
@@ -18,6 +22,7 @@ const Adventuretitle = () => {
                 }
             }
         )
+        navigate(`/add-experience/step2/${res.data.id.uuid}`)
 
     }
 
@@ -44,7 +49,7 @@ const Adventuretitle = () => {
                             <p className='text-start fs-2'>Start creating your Horse<br/> Adventure!</p>
                             <p className='text-start'>Please create a catchy and descriptive title for your listing. This is the first thing potential guests will see so try and stand out from the crowd.</p>
                             <input type="text" className='form-control' placeholder='please Enter Title' onChange={(e)=>{settitledata(e.target.value);{console.log(e.target.value)}}} />
-                            <button className='mt-5 float-start' onClick={continuetitle}>Continue</button>
+                            <button className='mt-5 float-start bg-success border-0 p-2 text-white' onClick={continuetitle}>Continue</button>
                         </div>
                     </div>
                     <div class="col">
