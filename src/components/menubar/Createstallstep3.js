@@ -1,19 +1,21 @@
 import React from 'react'
 import "../menubar/Hoststalls.css";
-import { useState,useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import heneceforthApi from '../henceforthApi';
-import { Link,useMatch} from 'react-router-dom';
+import { Link, useMatch } from 'react-router-dom';
 
 let id = (localStorage.getItem('id'))
 
+
+
 const Createstallstep3 = () => {
 
-   
 
 
-    const match=useMatch('/create-stall/step3/:id')
+
+    const match = useMatch('/create-stall/step3/:id')
     heneceforthApi.setToken(localStorage.getItem("token"))
-    
+
 
     const [counter, setCounter] = useState(0)
     const minus = () => {
@@ -27,7 +29,7 @@ const Createstallstep3 = () => {
     const plus = () => {
         setCounter(counter + 1)
     }
-   
+
     const changeingvalue = (e) => {
         let name = e.target.name;
         let value = e.target.value;
@@ -57,7 +59,7 @@ const Createstallstep3 = () => {
 
     }
 
-    const showalldata=async()=>{
+    const showalldata = async () => {
         let res = await heneceforthApi.Auth.Listid(match?.params.id)
         console.log(match.params.id)
     }
@@ -89,8 +91,12 @@ const Createstallstep3 = () => {
                     </div>
                 </div>
             </nav>
+            <div class="progress">
+                <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-label="Animated striped example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style={{ width: "14%" }}></div>
+            </div>
 
             <div class="container px-4 text-center p-5">
+
                 <div class="row gx-5">
                     <div class="col">
                         <div class="p-3 ">
@@ -110,7 +116,7 @@ const Createstallstep3 = () => {
                                     <p className='float-start p-2' role="button">Back</p>
                                 </Link>
                                 <Link to={`/create-stall/step5/${match?.params.id}`}>
-                                <button className='float-end border-0 bg-primary  p-2 text-white' onClick={nextdata}>Next</button>
+                                    <button className='float-end border-0 bg-primary  p-2 text-white' onClick={nextdata}>Next</button>
                                 </Link>
                             </div>
                         </div>

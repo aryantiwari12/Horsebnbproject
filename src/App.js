@@ -58,7 +58,10 @@ import Adventurephotos from './components/Adventure/Adventurephotos';
 import Settingadventure from './components/Adventure/Settingadventure';
 import Settingability from './components/Adventure/Settingability';
 import SetyourAvailabilityAdventure from './components/Adventure/SetyourAvailabilityAdventure';
-
+import Mulitpleavailability from './components/Adventure/Mulitpleavailability';
+import Calendarandadventure from './components/Adventure/Calendarandadventure';
+import SecondRounting from './components/SecondRounting';
+import PricingAdventure from './components/Adventure/PricingAdventure';
 function App() {
 
 
@@ -79,9 +82,21 @@ function App() {
                 <Route path="/manage-listing" element={<Managelisting />} />
                 <Route path="/list-details/dashboard" element={<Dashboard />} />
                 <Route path="/manage-listing/publish-listing/:id" element={<Readytohost />} />
-                
+
+
               </Routes>
             </HeaderRounting>} />
+
+            <Route path="/host-an-experience" element={
+            <SecondRounting>
+              <Routes>
+                <Route path="/" element={<Adventurehome />} />
+              </Routes>
+            </SecondRounting>}/>
+
+
+
+
           <Route path="/host-stalls" element={<Hoststalls />} />
           <Route path="/create-stall/step1" element={<Createstall />} />
           <Route path="/create-stall/step3/:id" element={<Createstallstep3 />} />
@@ -109,7 +124,7 @@ function App() {
           <Route path="/create-guest/step12/:id" element={<Pricehost />} />
           <Route path="/create-guest/step13/:id" element={<Stripconnecthost />} />
           <Route path="/create-guest/last-step/:id" element={<Finishhost />} />
-          <Route path="/host-an-experience" element={<Adventurehome />} />
+          {/* <Route path="/host-an-experience" element={<Adventurehome />} /> */}
           <Route path="/add-experience/step1" element={<Adventuretitle />} />
           <Route path="/add-experience/step2/:id" element={<Locationadventure />} />
           <Route path="/add-experience/step4/:id" element={<Adventurepage />} />
@@ -117,8 +132,11 @@ function App() {
           <Route path="/add-experience/step6/:id" element={<Settingadventure />} />
           <Route path="/add-experience/step10/:id" element={<Settingability />} />
           <Route path="/add-experience/step7/:id" element={<SetyourAvailabilityAdventure />} />
+          <Route path="/add-experience/step11/:id" element={<Mulitpleavailability />} />
+          <Route path="/add-experience/calender-availability/:id" element={<Calendarandadventure />} />
+          <Route path="/add-experience/step8/:id" element={<PricingAdventure/>} />
+
         </Routes>
-        <Footer />
       </div>
     </Router>
 

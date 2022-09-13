@@ -210,14 +210,24 @@ const Personalinfo = () => {
     //Get all data fetch the API
 
     const showalldata= async ()=>{
-        let res=await heneceforthApi.Auth.getdata()
-        .then((res)=>{
+        let res=(await heneceforthApi.Auth.getdata()).data.attributes
+        
             // setprofiledata(res.data.attributes.profile)
-            setprofiledata(res.data)
-            setgenderdata(res.data.attributes.profile.publicData)
-            setlanguagedata(res.data.attributes.profile.publicData)
-            setimages1(res.data.attributes.profile.publicData.profile_image)
-        })
+            setprofiledata({...profiledata,
+                firstName:res.profile.firstName,
+                lastName:res.profile.lastName,
+                email:res.email,
+                protectedData:{phoneNumber:res.profile.protectedData.phoneNumber},
+                publicData: {
+                    ...profiledata.publicData,
+                address:res.profile.publicData.location,
+                age:res.profile.publicData.age},
+            bio:res.profile.bio})
+            // console.log(res.profile.publicData.location)
+            setgenderdata(res.profile.publicData)
+            setlanguagedata(res.profile.publicData)
+            setimages1(res.profile.publicData.profile_image)
+        
     }
     useEffect(()=>{
         return()=>{
@@ -263,7 +273,7 @@ const Personalinfo = () => {
                                         <h5 className='text-success' role="button" onClick={canceldata}>Cancel</h5>
                                         : <h5 className='text-success' role="button" onClick={editdata}>Edit</h5>}
                                 </div>
-                                {legals == true ? "" : <p>{profiledata?.attributes?.profile?.firstName} {profiledata?.attributes?.profile?.lastName}</p>}
+                                {legals == true ? "" : <p>{profiledata.firstName} {profiledata.lastName}</p>}
 
 {/* {console.log(profiledata.attributes?.email)}
 {console.log(profiledata?.attributes?.profile?.firstName)} */}
@@ -313,10 +323,10 @@ const Personalinfo = () => {
                                 {dateofbirth == true ?
                                     <div className='col-md-12'>
 
-                                        <input type="date" placeholder='select Date of Birth' className='form-control' value={profiledata.age} onChange={changeingvalue} name="age"></input>
+                                        <input type="date" placeholder='select Date of Birth' className='form-control' value={profiledata.publicData.age} onChange={changeingvalue} name="age"></input>
 
                                         <button className='bg-success mt-2 border-0 text-white p-2' onClick={Dateofbirth}>Save</button>
-                                    </div> : <p>{profiledata?.attributes?.profile?.publicData?.age}</p>}
+                                    </div> : <p>{profiledata.publicData.age}</p>}
                             </div>
                             <div className='border px-4 py-3 mb-4'>
                                 <div className='d-flex justify-content-between mb-3'>
@@ -326,11 +336,11 @@ const Personalinfo = () => {
                                         <h5 className='text-success'  role="button" onClick={canceldata}>Cancel</h5>
                                         : <h5 className='text-success' role="button" onClick={editemail}>Edit</h5>}
                                 </div>
-                                <p>{profiledata.attributes?.email}</p>
+                                <p>{profiledata.email}</p>
                                 {emailaddress == true ?
                                     <div className='col-md-12'>
 
-                                        <input type="Email" placeholder='Email' value={profiledata.attributes?.email} onChange={changeingvalue} className='form-control' name="email"></input>
+                                        <input type="Email" placeholder='Email' value={profiledata.email} onChange={changeingvalue} className='form-control' name="email"></input>
                                         <button className='bg-success mt-2 border-0 text-white p-2' onClick={Saveemail}>Save</button>
 
                                     </div>
@@ -346,9 +356,9 @@ const Personalinfo = () => {
                                 {PhoneNumber==true?
                                 <div className='col-md-12'>
                                     <p>For notifications, reminders, and help logging in</p>
-                                    <input type="tel" className='form-control' value={profiledata.phoneNumber} onChange={changeingvalue} placeholder='Enter phone Number' name="phoneNumber" />
+                                    <input type="tel" className='form-control' value={profiledata.protectedData.phoneNumber} onChange={changeingvalue} placeholder='Enter phone Number' name="phoneNumber" />
                                     <button className='bg-success mt-2 border-0 text-white p-2' onClick={Savephone} >Save</button>
-                                </div>:<p>{profiledata?.attributes?.profile?.protectedData?.phoneNumber}</p>}
+                                </div>:<p>{profiledata.protectedData.phoneNumber}</p>}
                                 
                             </div>
                             <div className='border px-4 py-3 mb-4'>
@@ -362,7 +372,7 @@ const Personalinfo = () => {
                                 <div className='col-md-12'>
                                     <textarea className='w-100' placeholder="Tell me yourself" value={profiledata.bio} onChange={changeingvalue} name="bio" />
                                     <button className='bg-success mt-2 border-0 text-white p-2' onClick={Savebio}>Save</button>
-                                </div>:<p>{profiledata?.attributes?.profile?.bio}</p>}
+                                </div>:<p>{profiledata.bio}</p>}
                                 
                             </div>
                             <div className='border px-4 py-3 mb-4'>
@@ -374,9 +384,9 @@ const Personalinfo = () => {
                                 </div>
                                 {Address==true?
                                 <div className='col-md-12'>
-                                    <input type="text" className='form-control w-100' value={profiledata.address} onChange={changeingvalue} name="address" />
+                                    <input type="text" className='form-control w-100' value={profiledata.publicData.address} onChange={changeingvalue} name="address" />
                                     <button className='bg-success mt-2 border-0 text-white p-2' onClick={Saveaddress}>Save</button>
-                                </div>:<p>{profiledata?.attributes?.profile?.publicData?.location}</p>}
+                                </div>:<p>{profiledata.publicData.address}</p>}
                                 
                             </div>
                             <div className='border px-4 py-3 mb-4'>

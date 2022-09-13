@@ -123,7 +123,7 @@ const Adventurephotos = () => {
                             <span className='ms-2'><i class="fa-solid fa-pen" role="button"></i></span>
 
 
-                            <img src={`${imageurl}${images?.attributes?.publicData?.cover_photo?.url}`} className="mt-2 w-100" />
+                            <img src={file ? URL.createObjectURL(file):`${imageurl}${images?.attributes?.publicData?.cover_photo?.url}`} className="mt-2 w-100" />
                             {/* {console.log(store)} */}
                         </div>
                         <div className='mt-5'>

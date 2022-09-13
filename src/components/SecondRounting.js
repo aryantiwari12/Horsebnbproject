@@ -2,14 +2,14 @@ import React from 'react'
 import Footer from './Footer/Footer';
 import Header from './header/Header';
 
-const HeaderRounting = ({children}) => {
+
+const SecondRounting = ({children}) => {
   return (
     <div>
-         <Header/>
-         {children}
-         <Footer />
+        {children}
+        <Footer />
     </div>
   )
 }
 
-export default HeaderRounting
+export default SecondRounting

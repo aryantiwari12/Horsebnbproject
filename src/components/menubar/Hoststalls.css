@@ -50,3 +50,8 @@ img.text-center.w-25 {
 p.data.mt-2.fs-1 {
     margin-left: 129px;
 }
+.progress{
+    --bs-progress-height: 0.6rem !important;
+    --bs-progress-bar-bg: #00A4B4 !important;
+}
+

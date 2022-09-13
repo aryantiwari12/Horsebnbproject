@@ -54,8 +54,10 @@ const Settingability = () => {
                     </div>
                     <div class="col p-5">
                         <div class="p-3 ">
-                            <i class="fa-solid fa-calendar-days fa-10x text-success" role="button"></i>
-                            <p className='fs-2 mt-2' role="button">Multiple Day Adventure</p>
+                            <Link to={`/add-experience/step11/${match.params.id}`}>
+                                <i class="fa-solid fa-calendar-days fa-10x text-success" role="button"></i>
+                                <p className='fs-2 mt-2 text-black' role="button">Multiple Day Adventure</p>
+                            </Link>
                         </div>
                     </div>
                 </div>

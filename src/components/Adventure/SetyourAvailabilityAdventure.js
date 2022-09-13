@@ -1,18 +1,127 @@
 import React, { useState } from 'react'
 import { Link, useMatch } from 'react-router-dom'
+import henceforthApi from '../henceforthApi'
 
 
 const SetyourAvailabilityAdventure = () => {
 
     const match = useMatch('/add-experience/step7/:id')
     const weeks = ['sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'saturday']
-    const Time = ['1AM', '2AM', '3AM', '4AM', '5AM', '6AM', '7AM', '8AM', '9AM', '10AM', '11AM', '12PM', '1PM', '2PM', '3PM', '4PM', '5PM', '6PM']
+    const Time = ['1 AM', '2 AM', '3 AM', '4 AM', '5 AM', '6 AM', '7 AM', '8 AM', '9 AM', '10 AM', '11 AM', '12 PM', '1 PM', '4 PM', '3 PM', '4 PM', '5 PM', '6 PM']
 
-    const [showtime,setshowtime]=useState(false)
 
-    const addtime=()=>{
-        setshowtime(true)
+
+    const [showtime, setshowtime] = useState(false)
+    const [sizedata, setsizedata] = useState("")
+    const [timedata, settimedata] = useState("")
+    const [datastore, setdatastore] = useState("")
+    const [endtimestore, setendtimestore] = useState("")
+    const [addinput, setinput] = useState([])
+
+
+    let List = new Map()
+    const checkdata = (values, checked) => {
+        if (checked) {
+            List.set(values, values)
+        } else {
+            List.delete(values)
+        }
     }
+    let date = (Number(timedata.slice(11, 14)) + Number(sizedata))
+    console.log(date)
+    const dateformat = () => {
+        if (date == '13') {
+            return '1 PM'
+        }
+        else if (date == '14') {
+            return '2 PM'
+        }
+        else if (date == '15') {
+            return '3 PM'
+        }
+        else if (date == '16') {
+            return '4 PM'
+        }
+        else if (date == '17') {
+            return '5 PM'
+        }
+        else if (date == '18') {
+            return '6 PM'
+        }
+        else if (date == '19') {
+            return '7 PM'
+        }
+        else if (date == '20') {
+            return '8 PM'
+        }
+        else if (date == '21') {
+            return '9 PM'
+        }
+        else if (date == '22') {
+            return '10 PM'
+        }
+        else if (date == '23') {
+            return '11 PM'
+        }
+        else {
+            return date
+        }
+    }
+    const availabilitydata = async () => {
+
+        let AmenitiesList = []
+        List.forEach((data) => {
+            AmenitiesList.push(data)
+        })
+        let res = await henceforthApi.Auth.Updatedlisting(
+            {
+                id: match.params.id,
+                publicData: {
+                    stepsCompleted: [],
+
+                },
+                availabilityPlan: {
+                    duration: sizedata,
+                    timeSlots: [
+                        {
+                            abbr: "sun",
+                            dayOfWeek: 1,
+                            isChecked: true,
+                            name: "sunday",
+                            slots: [{
+                                startTime: (timedata.slice(11, 17)),
+                                endTime: (dateformat())
+                            }]
+                        }
+                    ],
+                    type: "availability-plan/time",
+                }
+            }
+        )
+
+
+    }
+    const addtime = () => {
+        setshowtime(true)
+        // setsizedata("")
+        settimedata("")
+        setdatastore(timedata)
+        setendtimestore(dateformat())
+        const abc = [...addinput,[]]
+        setinput(abc)
+
+    }
+    const handlechange = () => {
+
+    }
+    const handledelete=(i)=>{
+             const delval=[...addinput]
+             delval.slice(i,1)
+             setinput(delval)
+
+    }
+
+
 
     return (
         <div>
@@ -42,7 +151,7 @@ const SetyourAvailabilityAdventure = () => {
                             <p className='text-start'>As a host it is very important that you keep your availability accurate.</p>
                             <button className='bg-success float-start border-0 p-2 text-white'>Single Day slots</button><br /><br />
                             <p className='text-start'>Slot Size (In Hours)</p>
-                            <input type="text" className='float-start from-control' placeholder='Please Enter Size..' /><br /><br />
+                            <input type="text" className='float-start from-control' value={sizedata} onChange={(e) => { setsizedata(e.target.value); { console.log(e.target.value) } }} placeholder='Please Enter Size..' required /><br /><br />
                             <p className='text-start'>Set Schedule</p>
                         </div>
                         <div class="p-3 border bg-light mt-2 ">
@@ -51,8 +160,10 @@ const SetyourAvailabilityAdventure = () => {
                                     <>
                                         <div className='text-start'>
 
-                                            <input type="checkbox" className='ms-2' />
+                                            <input type="checkbox" value={items} onChange={(e) => { checkdata(items, e.target.checked); (console.log(items, e.target.checked)) }} className='ms-2' data-bs-toggle="modal" data-bs-target="#exampleModal9" />
                                             <span className='ms-2'>{items}</span>
+                                            {/* {console.log(items)} */}
+
                                             <span className='float-end text-success' role="button" data-bs-toggle="modal" data-bs-target="#exampleModal9"><i class="fa-solid fa-plus text-success" role="button" ></i> Add time slots</span>
 
                                         </div>
@@ -69,39 +180,56 @@ const SetyourAvailabilityAdventure = () => {
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body d-flex ">
-                                            <select class="form-select w-100" aria-label="Default select example">
+                                            <select class="form-select w-100" aria-label="Default select example" value={timedata} onChange={(e) => { settimedata(e.target.value); { console.log(e.target.value) } }}>
                                                 <option selected>Select Time</option>
                                                 {Time.map((time) => {
+                                                    console.log(timedata.slice(11, 17))
                                                     return (
                                                         <>
-                                                            <option value="1">Start Time:{time}</option>
+                                                            <option>Start Time: {time}</option>
                                                         </>
                                                     )
                                                 })}
 
 
                                             </select>
-                                            <select class="form-select w-100 ms-5" aria-label="Default select example">
-                                                <option selected>Select Time</option>
-                                                <option value="1">One</option>
-                                                <option value="2">Two</option>
-                                                <option value="3">Three</option>
-                                            </select>
+
+                                            <input value={"End Time:" + " " + dateformat()} className='ms-2 form-control' disabled />
+
+
+
                                             <button className='ms-5 rounded w-50 border bg-success text-white' onClick={addtime}>Add</button>
-                                            
+
 
                                         </div>
-                                        <div className='d-flex p-2'>
-                                        <input type="text" className='w-100 p-2 ms-3'/>
-                                        <input type="text" className='w-100 p-2 ms-3'/>
-                                        <button className='ms-5'>Remove</button>
-                                        </div>
+                                        {addinput.map((key,index) => {
+                                            return (
+                                                <>
+                                                    {showtime === true ?
+                                                        <div className='d-flex p-2'>
+                                                            <input type="text" value={"" + datastore} className='w-100 p-2 ms-3' onChange={(e)=>handlechange(index)} />
+                                                            <input type="text" value={"End Time:" + " " + endtimestore} className='w-100 p-2 ms-3' />
+                                                            <button className='ms-5 bg-success w-50 text-white rounded' onClick={handledelete} >Remove</button>
+                                                        </div> : ""}
+                                                </>
+                                            )
+                                        })} 
+
 
                                     </div>
                                 </div>
                             </div>
 
 
+                        </div>
+                        <div className='mt-5'>
+                            <i class="fa-solid fa-angle-left float-start" role="button"></i>
+
+                            <p className='float-start p-2' role="button">Back</p>
+
+                            <Link to="">
+                                <button className='float-end border-0 bg-primary  p-2 text-white' onClick={availabilitydata}>Next</button>
+                            </Link>
                         </div>
                     </div>
                     <div class="col mt-5">

@@ -17,3 +17,23 @@ button.bg-dark.position-absolute.rounded.p-2 {
     margin-left: 831px;
     color: white;
 }
+.scroll_div{
+    height: calc(100vh - 200px);
+     overflow: auto;
+}
+::-webkit-scrollbar {
+  width: 10px;
+}
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+  }
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background:red; 
+  }
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+  }
+  

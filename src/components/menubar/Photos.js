@@ -58,12 +58,13 @@ const Photos = () => {
     const updateimage = async (filename) => {
 
         let res = await heneceforthApi.Auth.Updatedlisting(
+            
             {
                 id: id,
                 images: [],
                 publicData: {
                     cover_photo: {
-                        id: id,
+                        id:match.params.id,
                         url: filename,
                         caption: ""
 
