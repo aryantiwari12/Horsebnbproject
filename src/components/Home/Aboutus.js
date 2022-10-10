@@ -4,7 +4,7 @@ import { Button } from 'rsuite'
 const Aboutus = () => {
   return (
     <div>
-        <div className='container mb-0 position-relative'>
+        <div className='container mb-0 position-relative mt-2'>
             <img src="https://horsebnb.com/assets/img/no_introducing_horsebnb.png" className='w-100 rounded'></img>
             <div className='text-block position-absolute text-white fs-5'>
                 <p>INTRODUCING</p>

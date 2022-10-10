@@ -54,4 +54,9 @@ p.data.mt-2.fs-1 {
     --bs-progress-height: 0.6rem !important;
     --bs-progress-bar-bg: #00A4B4 !important;
 }
+.badge-primary {
+    background-color: #00a4b4;
+    /* color: #00a4b4; */
+   
+}
 

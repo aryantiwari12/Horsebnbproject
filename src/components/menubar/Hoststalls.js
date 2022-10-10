@@ -18,7 +18,7 @@ const Hoststalls = () => {
                         </ul>
                         <form class="d-flex" role="search">
                             <Link to="/create-stall/step1">
-                                <button className='bg-primary rounded p-2 text-white border-0' type="submit">Get Started</button>
+                                <button className='badge-primary rounded p-2 text-white border-0' type="submit">Get Started</button>
                             </Link>
                         </form>
                     </div>

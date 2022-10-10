@@ -113,8 +113,8 @@ const Home = () => {
                                         <span class="form-control bg-white pl-0" style={{ color: "gray" }} data-bs-toggle="modal" data-bs-target="#exampleModal2">  Add stalls </span>
                                     </div>
                                     <div className=''>
-                                        <button className='btn btn-success'>
-                                            <i class="fa-solid fa-magnifying-glass"></i> Search
+                                        <button className='btn badge-primary text-white'>
+                                            <i class="fa-solid text-white fa-magnifying-glass"></i> Search
                                         </button>
                                     </div>
                                    
@@ -168,8 +168,8 @@ const Home = () => {
                                         <span class="form-control bg-white pl-0" style={{ color: "gray" }} data-bs-toggle="modal" data-bs-target="#exampleModal3">  Add stalls </span>
                                     </div>
                                     <div className=''>
-                                        <button className='btn btn-success'>
-                                            <i class="fa-solid fa-magnifying-glass"></i> Search
+                                        <button className='btn badge-primary text-white'>
+                                            <i class="fa-solid text-white fa-magnifying-glass"></i> Search
                                         </button>
                                     </div>
                                 </div>
@@ -221,8 +221,8 @@ const Home = () => {
                                         <span class="form-control bg-white pl-0" style={{ color: "gray" }} data-bs-toggle="modal" data-bs-target="#exampleModal4">  Add room </span>
                                     </div>
                                     <div className=''>
-                                        <button className='btn btn-success'>
-                                            <i class="fa-solid fa-magnifying-glass"></i> Search
+                                        <button className='btn badge-primary text-white'>
+                                            <i class="fa-solid text-white fa-magnifying-glass"></i> Search
                                         </button>
                                     </div>
                                 </div>
@@ -261,8 +261,8 @@ const Home = () => {
                                         <input type="date" placeholder='Add date' class="form-control pl-0" />
                                     </div>
                                     <div className='bttttt'>
-                                        <button className='btn btn-primary'>
-                                            <i class="fa-solid fa-magnifying-glass"></i> Search
+                                        <button className='btn badge-primary text-white'>
+                                            <i class="fa-solid text-white fa-magnifying-glass "></i> Search
                                         </button>
                                     </div>
                                 </div>

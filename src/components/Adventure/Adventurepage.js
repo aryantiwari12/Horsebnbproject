@@ -50,6 +50,9 @@ const Adventurepage = () => {
                     </div>
                 </div>
             </nav>
+            <div class="progress">
+                <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-label="Animated striped example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style={{ width: "35%" }}></div>
+            </div>
             <div class="container px-4 text-center p-5 ">
                 <div class="row gx-5">
                     <div class="col">

@@ -68,7 +68,14 @@ const Mulitpleavailability = () => {
             }
         })
     }
-    const handledelete = () => {
+    const handledelete = (ind) => {
+
+       const removedata=adddata.filter((index)=>{
+             return ind!==index
+             
+        })
+        setadddata(removedata)
+
 
     }
 
@@ -94,6 +101,9 @@ const Mulitpleavailability = () => {
                     </div>
                 </div>
             </nav>
+            <div class="progress">
+                <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-label="Animated striped example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style={{ width: "55%" }}></div>
+            </div>
             <div class="container px-4 text-center">
                 <div class="row row-cols-lg-2 row-cols-md-2">
                     <div class="col  p-5">
@@ -143,7 +153,7 @@ const Mulitpleavailability = () => {
                                             <p className='text-start fw-bold '>Date:</p>
                                             <span className='ms-2 fw-bold '>{moment(items.startDate).format('DD')} -  {moment(items.endDate).format('DD')}</span>
                                             <span className='ms-5 fw-bold'>Time:</span>
-                                            <span className='fw-bold ms-2'>{items.startTime} - {items.endTime} <i class="fa-sharp fa-solid fa-trash text-success ms-2 " role="button" onClick={() => handledelete(items.adddata)}></i> </span>
+                                            <span className='fw-bold ms-2'>{items.startTime} - {items.endTime} <i class="fa-sharp fa-solid fa-trash text-success ms-2 " role="button" onClick={() => handledelete(items)}></i> </span>
                                         </div>
                                     )
                                 })}
@@ -154,7 +164,7 @@ const Mulitpleavailability = () => {
 
                                 <p className='float-start p-2' role="button">Back</p>
 
-                                <Link to={`/add-experience/step8/${match.params.id}`}>
+                                <Link to={`/add-experience/calender-availability/${match.params.id}`}>
                                     <button className='float-end border-0 bg-primary  p-2 text-white'>Next</button>
                                 </Link>
                             </div>
@@ -165,7 +175,7 @@ const Mulitpleavailability = () => {
                         <div class="p-3 border bg-light h-50">
                             <div className='float-start'>
                                 <img src="https://horsebnb.com:8081/assets/img/lightbulb.svg" className='float-start' /><br /><br />
-                                <p>Important! Your calendar default set up is to show as available for the next 90 days. If you are unable to host any of those days please make sure to block off those days on your calendar so you don’t get any unwanted bookings.</p>
+                                <p className='text-start'>Important! Your calendar default set up is to show as available for the next 90 days. If you are unable to host any of those days please make sure to block off those days on your calendar so you don’t get any unwanted bookings.</p>
                             </div>
                         </div>
                     </div>

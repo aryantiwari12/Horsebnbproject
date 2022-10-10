@@ -62,6 +62,13 @@ import Mulitpleavailability from './components/Adventure/Mulitpleavailability';
 import Calendarandadventure from './components/Adventure/Calendarandadventure';
 import SecondRounting from './components/SecondRounting';
 import PricingAdventure from './components/Adventure/PricingAdventure';
+import Stripeadventure from './components/Adventure/Stripeadventure';
+import Finishadventure from './components/Adventure/Finishadventure';
+import Shorttermstalls from './components/shorttermstalls/Shorttermstalls';
+import ThirdRounting from './components/ThirdRounting';
+import { Preview } from './components/Preview/Preview';
+import Hostpreview from './components/Preview/Hostpreview';
+// import StripeAdventure from './components/Adventure/StripeAdventure';
 function App() {
 
 
@@ -81,18 +88,21 @@ function App() {
                 <Route path="/manage-listing/publish-listing/:id" element={<Getready />} />
                 <Route path="/manage-listing" element={<Managelisting />} />
                 <Route path="/list-details/dashboard" element={<Dashboard />} />
-                <Route path="/manage-listing/publish-listing/:id" element={<Readytohost />} />
+                {/* <Route path="/manage-listing/publish-listing/:id" element={<Readytohost />} /> */}
+               
+                <Route path="/booking-details/:id/:host_id" element={<Preview />} />
+                <Route path="/booking-details/:id" element={<Hostpreview/>}/>
 
-
+                {/* <Route path="/search" element={<Shorttermstalls />} /> */}
               </Routes>
             </HeaderRounting>} />
 
-            <Route path="/host-an-experience" element={
+          <Route path="/host-an-experience" element={
             <SecondRounting>
               <Routes>
                 <Route path="/" element={<Adventurehome />} />
               </Routes>
-            </SecondRounting>}/>
+            </SecondRounting>} />
 
 
 
@@ -134,7 +144,18 @@ function App() {
           <Route path="/add-experience/step7/:id" element={<SetyourAvailabilityAdventure />} />
           <Route path="/add-experience/step11/:id" element={<Mulitpleavailability />} />
           <Route path="/add-experience/calender-availability/:id" element={<Calendarandadventure />} />
-          <Route path="/add-experience/step8/:id" element={<PricingAdventure/>} />
+          <Route path="/add-experience/step8/:id" element={<PricingAdventure />} />
+          <Route path="/add-experience/step9/:id" element={<Stripeadventure />} />
+          <Route path="/add-experience/last-step/:id" element={<Finishadventure />} />
+           
+          <Route path='/Search/:type' element={
+            <ThirdRounting>
+              <Routes>
+                <Route path="/" element={<Shorttermstalls />} />
+              </Routes>
+            </ThirdRounting>
+          } />
+
 
         </Routes>
       </div>

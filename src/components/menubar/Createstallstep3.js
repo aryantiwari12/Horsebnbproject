@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import heneceforthApi from '../henceforthApi';
 import { Link, useMatch } from 'react-router-dom';
 
-let id = (localStorage.getItem('id'))
+// let id = (localStorage.getItem('id'))
 
 
 
@@ -48,7 +48,7 @@ const Createstallstep3 = () => {
 
         let res = await heneceforthApi.Auth.Updatedlisting(
             {
-                id: id,
+                id: match.params.id,
                 publicData: {
                     stalls: counter,
                     stepsCompleted: [counter]
@@ -116,7 +116,7 @@ const Createstallstep3 = () => {
                                     <p className='float-start p-2' role="button">Back</p>
                                 </Link>
                                 <Link to={`/create-stall/step5/${match?.params.id}`}>
-                                    <button className='float-end border-0 bg-primary  p-2 text-white' onClick={nextdata}>Next</button>
+                                    <button className='float-end border-0 badge-primary  p-2 text-white' onClick={nextdata}>Next</button>
                                 </Link>
                             </div>
                         </div>

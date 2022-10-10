@@ -1,5 +1,5 @@
-import React, { useState, useRef,useEffect } from 'react'
-import { Link,useMatch } from 'react-router-dom';
+import React, { useState, useRef, useEffect } from 'react'
+import { Link, useMatch } from 'react-router-dom';
 import { TimepickerUI } from 'timepicker-ui';
 import Common from '../../utils/Common';
 import heneceforthApi from '../henceforthApi';
@@ -16,7 +16,7 @@ const CheckinCheckout = () => {
     const [arive, setarrive] = useState("")
     const [Leave, setLeave] = useState("");
 
-   const timedata = async () => {
+    const timedata = async () => {
 
         let res = await heneceforthApi.Auth.Updatedlisting(
             {
@@ -35,11 +35,17 @@ const CheckinCheckout = () => {
     const onChangeTime = (time) => {
         let timeWithAmPm = Common.hhmmToampm(time).toUpperCase()
         console.log("timeWithAmPm", timeWithAmPm);
-        setarrive(timeWithAmPm)
+       
         setLeave(timeWithAmPm)
     }
-
-    const showalldata=async()=>{
+    const onChange1Time = (time) => {
+        let timeWithAmPm = Common.hhmmToampm(time).toUpperCase()
+        console.log("timeWithAmPm", timeWithAmPm);
+        setarrive(timeWithAmPm)
+    }
+    console.log(arive);
+    console.log(Leave);
+    const showalldata = async () => {
         let res = await heneceforthApi.Auth.Listid(match?.params.id)
         console.log(match.params.id)
     }
@@ -78,14 +84,14 @@ const CheckinCheckout = () => {
 
                             <div id="basic" >
                                 <p className='text-start'>Arrive After</p>
-                                <input type="time" onChange={(e) => onChangeTime(e.target.value)} className="w-100" />
+                                <input type="time" onChange={(e) =>onChange1Time(e.target.value)} className="w-100" />
 
                                 <p className='text-start mt-5'>Leave Before</p>
                                 <input type="time" className='float-start w-100' id="time" onChange={(e) => onChangeTime(e.target.value)} />
                                 <hr />
                             </div>
 
-                           
+
 
                         </div>
 
@@ -93,7 +99,7 @@ const CheckinCheckout = () => {
                             <i class="fa-solid fa-angle-left float-start" role="button"></i>
                             <p className='float-start p-2' role="button">Back</p>
                             <Link to={`/create-stall/sucessfull-hosting/${match?.params.id}`}>
-                            <button className='float-end border-0 bg-primary  p-2 text-white' onClick={timedata}>Next</button>
+                                <button className='float-end border-0 badge-primary p-2 text-white' onClick={timedata}>Next</button>
                             </Link>
                         </div>
                     </div>

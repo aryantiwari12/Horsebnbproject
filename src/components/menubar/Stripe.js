@@ -4,12 +4,17 @@ import henceforthApi from '../henceforthApi';
 const Stripe = () => {
 
 
+  const [typematch,settypematch]=useState("")
+
+
   const match = useMatch('/create-stall/step13/:id')
 
 
   const showalldata = async () => {
     let res = await henceforthApi.Auth.Listid(match?.params.id)
     console.log(match.params.id)
+    settypematch(res?.data)
+    console.log(typematch?.attributes?.publicData?.type)
   }
   useEffect(() => {
     return () => {
@@ -57,7 +62,7 @@ const Stripe = () => {
               <i class="fa-solid fa-angle-left float-start" role="button"></i>
               <p className='float-start p-2' role="button">Back</p>
 
-              <button className='float-end border-0 bg-primary  p-2 text-white' >Next</button>
+              <button className='float-end border-0 badge-primary p-2 text-white' >Next</button>
 
             </div>
           </div>

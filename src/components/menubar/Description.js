@@ -100,7 +100,7 @@ const Description = () => {
                                 <p className='float-start p-2' role="button">Back</p>
                                
                                 <Link to={`/create-stall${typedata?.attributes?.publicData?.type===1?'/checkin-and-checkout/':'/sucessfull-hosting/'}${match?.params.id}`}>
-                                    <button className='float-end border-0 bg-primary  p-2 text-white' onClick={Descriptiondata}>Next</button>
+                                    <button className='float-end border-0 badge-primary  p-2 text-white' onClick={Descriptiondata}>Next</button>
                                     {console.log(typedata?.attributes?.publicData?.type)}
                                 </Link>
 

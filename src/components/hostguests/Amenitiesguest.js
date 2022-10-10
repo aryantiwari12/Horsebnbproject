@@ -2,7 +2,7 @@ import React from 'react'
 import { Link,useMatch } from 'react-router-dom'
 import heneceforthApi from '../henceforthApi'
 
-let id = (localStorage.getItem('secondID'))
+
 
 const Amenitiesguest = () => {
 
@@ -27,7 +27,7 @@ const Amenitiesguest = () => {
         })
         let res = await heneceforthApi.Auth.Updatedlisting(
             {
-                id: id,
+                id: match.params.id,
                 publicData: {
                     amenities: { AmenitiesList },
                     stepsCompleted: [1, 3, 5, 6, 6, 6]

@@ -2,7 +2,7 @@ import React from 'react'
 import IMAGE from '../../IMG/publish.png';
 import { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
-import { Link,useMatch } from 'react-router-dom';
+import { Link, useMatch } from 'react-router-dom';
 import heneceforthApi from '../henceforthApi';
 
 heneceforthApi.setToken(localStorage.getItem("token"))
@@ -24,22 +24,13 @@ const Photos = () => {
     const match = useMatch('/create-stall/step7/:id')
     const [store, setstore] = useState()
     const fileRef = useRef();
-    // const [show, setshow] = useState(false)
+
     const [file, setfile] = useState("")
-    const uploadfile = (e) => {
-        console.log(e.target.files);
-        setfile(e.target.files[0])
-
-    }
-
-    const uploadImages = async () => {
-
-        if (file == null) {
-            return ""
-        }
+    const uploadfile = async (e) => {
+        let files = e.target.files[0]
         const url = `https://horsebnb.com:3001/v1/api/upload/aws?storageType=5&environment=4&isDefaultAsset=0`;
         const formdata = new FormData()
-        formdata.append("file", file)
+        formdata.append("file", files)
         const config = {
             headers: {
                 "content-type": "multipart/form-data",
@@ -48,23 +39,15 @@ const Photos = () => {
         };
         let res = await axios.post(url, formdata, config)
         let filename = res.data.filename
-        // console.log(filename)
+        let id = res?.data?.id
         setstore(filename)
-        updateimage(filename)
+        await heneceforthApi.Auth.Updatedlisting(
 
-
-    }
-
-    const updateimage = async (filename) => {
-
-        let res = await heneceforthApi.Auth.Updatedlisting(
-            
             {
-                id: id,
-                images: [],
+                id: match?.params.id,
                 publicData: {
                     cover_photo: {
-                        id:match.params.id,
+                        id: id,
                         url: filename,
                         caption: ""
 
@@ -73,13 +56,14 @@ const Photos = () => {
 
                 }
 
-            }
-        )
-
+            })
+            showalldata()
     }
 
+ 
+
     const showalldata = async () => {
-        
+
         let res = await heneceforthApi.Auth.Listid(match?.params.id)
         setimages(res.data.attributes.publicData.cover_photo.url)
     }
@@ -120,6 +104,7 @@ const Photos = () => {
                 </div>
             </nav>
             <div class="container px-4 text-center">
+
                 <div class="row gx-5">
                     <div class="col p-5">
                         <div class="p-3  rounded btn-square overflow-y-auto" >
@@ -127,10 +112,10 @@ const Photos = () => {
                             <p className='text-start'>Upload at least one photo to publish your listing. We strongly suggest adding multiple photos to attract attention to your listing. Do not include images of your barn name or contact information.</p>
                             <img src={IMAGE} /><br />
                             <input ref={fileRef} type="file" accept="image/*" hidden onChange={uploadfile} />
-                            <button className='border-0 bg-success text-white p-2' onClick={() => { fileRef.current.click(); }}>Upload Photos</button><br />
-                            <button onClick={uploadImages}>Click</button>
+                            <button className='border-0 badge-primary text-white p-2' onClick={() => { fileRef.current.click(); }}>Upload Photos</button><br />
+                           
                         </div>
-                        {/* {show===true? */}
+                      
                         <div className='p-2 border w-50 mt-2'>
                             <button className='float-start border '>Cover photo</button>
                             <span><i class="fa-solid fa-trash" role="button"></i></span>
@@ -145,7 +130,7 @@ const Photos = () => {
                             <p className='float-start p-2' role="button">Back</p>
 
                             <Link to={`/create-stall/step8/${match?.params.id}`}>
-                                <button className='float-end border-0 bg-primary  p-2 text-white' >Next</button>
+                                <button className='float-end border-0 badge-primary  p-2 text-white' >Next</button>
                             </Link>
                         </div>
                     </div>

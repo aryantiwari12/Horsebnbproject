@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { Link, useMatch } from 'react-router-dom';
 import henceforthApi from '../henceforthApi';
+import Error from "../../IMG/error.png"
+import check from "../../IMG/check-circle-primary.svg"
 
 
 const imageurl = `https://horsebnb.s3.us-east-2.amazonaws.com/Uploads/Images/Small/`;
@@ -50,21 +52,89 @@ const Finish = () => {
                         <div class="p-3 ">
                             <p className='text-start fs-2'>Finish your listing to start <br />earning..</p>
                             <p className='text-secondary text-start'>You can always edit your listing after you publish it.</p>
-                            {finish.map((res) => {
-                                return (
-                                    <>
-                                        <div className='d-flex align-items-center justify-content-between '>
-                                            <p className='font-medium-bold text-black  d-flex align-items-center my-2 text-decoration-underline'>
-                                                <img src="https://horsebnb.com:8081/assets/img/check-circle-primary.svg" />
-                                                <span className='ms-2' role="button">{res}</span>
-                                            </p>
-                                        </div>
-                                    </>
-                                )
-                            })}
+
+
                             <div className='d-flex align-items-center justify-content-between '>
                                 <p className='font-medium-bold text-black  d-flex align-items-center my-2 text-decoration-underline'>
-                                    <img src="https://horsebnb.com:8081/assets/img/error.png" />
+                                    {data?.attributes?.title ? <img src={check} /> : <img src={Error} />}
+                                    <span className='ms-2' role="button">Title</span>
+                                </p>
+                            </div>
+                            <div className='d-flex align-items-center justify-content-between '>
+                                <p className='font-medium-bold text-black  d-flex align-items-center my-2 text-decoration-underline'>
+
+                                    {data?.attributes?.publicData?.stalls ? <img src={check} /> : <img src={Error} />}
+                                    <span className='ms-2' role="button">Stalls</span>
+                                </p>
+                            </div>
+                            <div className='d-flex align-items-center justify-content-between '>
+                                <p className='font-medium-bold text-black  d-flex align-items-center my-2 text-decoration-underline'>
+
+                                    {data?.attributes?.publicData?.address?.location ? <img src={check} /> : <img src={Error} />}
+                                    <span className='ms-2' role="button">Location</span>
+                                </p>
+                            </div>
+                            <div className='d-flex align-items-center justify-content-between '>
+                                <p className='font-medium-bold text-black  d-flex align-items-center my-2 text-decoration-underline'>
+
+                                    {data?.attributes?.publicData?.amenities[0] ? <img src={check} /> : <img src={Error} />}
+                                    <span className='ms-2' role="button">Amenities</span>
+                                </p>
+                            </div>
+                            <div className='d-flex align-items-center justify-content-between '>
+                                <p className='font-medium-bold text-black  d-flex align-items-center my-2 text-decoration-underline'>
+
+                                    {data?.attributes?.publicData?.cover_photo ? <img src={check} /> : <img src={Error} />}
+                                    <span className='ms-2' role="button">Photos</span>
+                                </p>
+                            </div>
+                            <div className='d-flex align-items-center justify-content-between '>
+                                <p className='font-medium-bold text-black  d-flex align-items-center my-2 text-decoration-underline'>
+
+                                    {data?.attributes?.description ? <img src={check} /> : <img src={Error} />}
+                                    <span className='ms-2' role="button">Description</span>
+                                </p>
+                            </div>
+                            <div className='d-flex align-items-center justify-content-between '>
+                                <p className='font-medium-bold text-black  d-flex align-items-center my-2 text-decoration-underline'>
+
+                                    {data?.attributes?.publicData?.host_image ? <img src={check} /> : <img src={Error} />}
+                                    <span className='ms-2' role="button">Profile Photo</span>
+                                </p>
+                            </div>
+                            <div className='d-flex align-items-center justify-content-between '>
+                                <p className='font-medium-bold text-black  d-flex align-items-center my-2 text-decoration-underline'>
+
+                                    {data?.attributes?.publicData?.arrive_after && data?.attributes?.publicData?.arrive_before ? <img src={check} /> : <img src={Error} />}
+                                    <span className='ms-2' role="button">Check in and Check out</span>
+                                </p>
+                            </div>
+                            <div className='d-flex align-items-center justify-content-between '>
+                                <p className='font-medium-bold text-black  d-flex align-items-center my-2 text-decoration-underline'>
+
+                                    {data?.attributes?.publicData?.gotIt ? <img src={check} /> : <img src={Error} />}
+                                    <span className='ms-2' role="button">Agreement</span>
+                                </p>
+                            </div>
+                            <div className='d-flex align-items-center justify-content-between '>
+                                <p className='font-medium-bold text-black  d-flex align-items-center my-2 text-decoration-underline'>
+
+                                    {data?.attributes?.publicData?.daysToBlock[0] ? <img src={check} /> : <img src={Error} />}
+                                    <span className='ms-2' role="button">Calendar Availability</span>
+                                </p>
+                            </div>
+                            <div className='d-flex align-items-center justify-content-between '>
+                                <p className='font-medium-bold text-black  d-flex align-items-center my-2 text-decoration-underline'>
+
+
+                                    {data?.attributes?.price ? <img src={check} /> : <img src={Error} />}
+                                    <span className='ms-2' role="button">Pricing</span>
+                                </p>
+                            </div>
+                            <div className='d-flex align-items-center justify-content-between '>
+                                <p className='font-medium-bold text-black  d-flex align-items-center my-2 text-decoration-underline'>
+
+                                    <img src={Error} />
                                     <span className='ms-2' role="button">Stripe Connect</span>
                                 </p>
                             </div>
@@ -78,7 +148,9 @@ const Finish = () => {
                             <div className='row p-2'>
                                 <div className='col-6 mt-2'>
                                     <p>{`${data?.attributes?.title}`}</p>
-                                    <p className='fs-4 text-success' role="button">Preview</p>
+                                    <Link to={`/booking-details/${data?.id?.uuid};isFromPreview=${data?.attributes?.publicData?.type}`}>
+                                        <p className='fs-4 text-success' role="button">Preview</p>
+                                    </Link>
                                 </div>
                                 <div className='col-6 mt-2'>
                                     <img src={`${imageurl}${data?.attributes?.publicData?.cover_photo?.url}`} className='rounded w-100 h-100'></img>
@@ -93,7 +165,7 @@ const Finish = () => {
                         <p className='float-start p-2' role="button">Back</p>
 
                         <Link to={`/manage-listing/publish-listing/${match?.params.id}`}>
-                            <button className='float-end border-0 bg-primary  p-2 text-white' >Next</button>
+                            <button className='float-end border-0 badge-primary p-2 text-white' >Next</button>
                         </Link>
                     </div>
 

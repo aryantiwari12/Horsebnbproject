@@ -76,7 +76,7 @@ const Createstall = () => {
                                 <p>Catch guest's attention with a listing title that highlights what makes your place special. This can not be your business name.</p>
                                 <input type="text" className='form-control'  placeholder='Enter a Title' value={titledata.title} onChange={(e)=>settitledata(e.target.value)} name="title" required/>
                                 {/* <Link to="/create-stall/step3/651"> */}
-                                <button className='mt-5 bg-success border p-2 text-white' value="Validate"  onClick={Continuedata}>Continue</button>
+                                <button className='mt-5 badge-primary border p-2 text-white' value="Validate"  onClick={Continuedata}>Continue</button>
                                 {/* </Link> */}
                         </div>
                     </div>

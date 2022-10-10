@@ -30,10 +30,14 @@ button.bg-dark.position-absolute.rounded.p-2 {
   }
   /* Handle */
   ::-webkit-scrollbar-thumb {
-    background:red; 
+    background:rgb(3, 3, 3); 
   }
   /* Handle on hover */
   ::-webkit-scrollbar-thumb:hover {
     background: #555; 
   }
+  .badge-primary {
+    background-color: #00a4b4;
+    color: #00a4b4;
+}
   

@@ -9,15 +9,15 @@ const Settingability = () => {
 
     const singleday = async () => {
 
-        let res = await henceforthApi.Auth.Updatedlisting(
-            {
-                id: match.params.id,
-                availabilityPlan: {
-                    type: "availability-plan/time",
+        // let res = await henceforthApi.Auth.Updatedlisting(
+        //     {
+        //         id: match.params.id,
+        //         availabilityPlan: {
+        //             type: "availability-plan/time",
 
-                }
-            }
-        )
+        //         }
+        //     }
+        // )
 
     }
 
@@ -41,6 +41,9 @@ const Settingability = () => {
                     </div>
                 </div>
             </nav>
+            <div class="progress">
+                <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-label="Animated striped example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style={{ width: "50%" }}></div>
+            </div>
             <h1 className='text-center'>Select Availability Type</h1>
             <div class="container px-4 text-center">
                 <div class="row gx-5 p-5">

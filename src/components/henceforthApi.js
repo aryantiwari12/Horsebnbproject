@@ -64,40 +64,27 @@ import _superagent from "superagent";
         Uploadimage: (info) => requests.post("/upload/aws?storageType=5&environment=2&isDefaultAsset=0", info),
         getalllisting: (info) => requests.get("/listings/query?pub_type=1&perPage=8&page=1", info),
         montnlygetalllisting: (info) => requests.get("/listings/query?pub_type=2&perPage=8&page=1", info),
-        Guestgetalllisting: (info) => requests.get("/listings/query?pub_type=4&perPage=8&page=1", info),
+        Guestgetalllisting: (q) => requests.get(`/listings/query?${q ?`${q}`:""}&perPage=8&page=1`),
         Equestrian: (info) => requests.get("/listings/query?pub_type=3&perPage=8&page=1", info),
         Listid: (id) => requests.get(`/own_listings/show?id=${id}`),
         publishData: (info) => requests.post(`/own_listings/publish_draft`,info),
         listedalltype: (info) => requests.get("/own_listings/query?perPage=10&page=1", info),
         availabiltycreate: (info) => requests.post("/availability_exceptions/create", info),
+        hostlisting:(id)=> requests.get(`/host/listing?host_id=${id}&perPage=3`),
+        
+    
     };
 
+    const Host={
+         hostlisted:(id)=>requests.get(`/host/listing?host_id=${id}`)
+    }
+   
+
     export default {
-        // token,
-        // ContactUs,
-        // Divident,
-        // Faq,
-        // Reports,
+        
+        Host,
         Auth,
-        // Administrator,
-        // Staff,
-        // Common,
-        // Profile,
-        // Dashboard,
-        // Facility,
-        // Listing,
-        // Transaction,
-        // PromoCode,
-        // User,
-        // Policies,
-        // Creator,
-        // Message,
-        // Nfts,
-        // API_ROOT,
-        // API_FILE_ROOT_SMALL,
-        // API_FILE_ROOT_MEDIUM,
-        // API_FILE_ROOT_ORIGINAL,
-        // API_FILE_ROOT_VIDEO,
+        
         setToken: (_token) => {
           token = _token;
         },

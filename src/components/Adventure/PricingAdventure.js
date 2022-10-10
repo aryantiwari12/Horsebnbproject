@@ -1,12 +1,37 @@
 import React, { useState } from 'react'
 import { Link, useMatch } from 'react-router-dom'
+import henceforthApi from '../henceforthApi'
 
 
 const PricingAdventure = () => {
 
-    const [inputdata,setinputdata]=useState(0)
+  
 
     const match = useMatch(`/add-experience/step8/:id`)
+
+
+    const [typedata,settypedata]=useState("")
+    const [pricedata,setpricedata]=useState("")
+
+    const adventureprice=async()=>{
+
+        let res = await henceforthApi.Auth.Updatedlisting({
+              id:match.params.id,
+              price:{amount:pricedata*113,
+                currency:"USD"
+            },
+            publicData:{stepsCompleted:[1, 2, 4, 5, 6, 7, 20, 8, 8],
+                listing_price:pricedata,
+                bookingAcceptType:"",
+                guestPay:"",
+                youEarn:"",
+            }
+           
+
+        })
+
+    }
+
 
     return (
         <div>
@@ -28,6 +53,9 @@ const PricingAdventure = () => {
                     </div>
                 </div>
             </nav>
+            <div class="progress">
+                <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-label="Animated striped example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style={{ width: "60%" }}></div>
+            </div>
             <div className='row mx-0 p-5'>
                 <div className='col-lg-6 py-5  steps-frame-height overflow-scroll '>
                     <div className='ms-5  '>
@@ -36,7 +64,7 @@ const PricingAdventure = () => {
                         <p>This will be your nightly price per stall</p>
                         <div class="input-group mb-3 w-75">
                             <span class="input-group-text">$</span>
-                            <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)" value={inputdata} onChange={(e)=>setinputdata(e.target.value)} />
+                            <input type="number" placeholder='0' onChange={(e)=>{setpricedata(e.target.value);{console.log(e.target.value)}}}/>
                         </div>
                     </div>
                     <div className=''>
@@ -59,8 +87,8 @@ const PricingAdventure = () => {
                         <div className='mt-5'>
                             <i class="fa-solid fa-angle-left float-start" role="button"></i>
                             <p className='float-start p-2' role="button">Back</p>
-                            <Link to={`/create-stall/step13/${match?.params.id}`}>
-                                <button className='float-end border-0 bg-primary  p-2 text-white' >Next</button>
+                            <Link  to={`/add-experience/step9/${match.params.id}`}>
+                                <button className='float-end border-0 bg-primary  p-2 text-white' onClick={adventureprice}>Next</button>
                             </Link>
                         </div>
                     </div>

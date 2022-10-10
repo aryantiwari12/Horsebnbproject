@@ -40,7 +40,7 @@ const Calendarandadventure = () => {
                                 <div className='mt-2'>
                                     <i class="fa-solid fa-angle-left float-start" role="button"></i>
                                     <p className='float-start p-2' role="button">Back</p>
-                                    <Link to={`/create-stall/step12/${match?.params.id}`}>
+                                    <Link to={`/add-experience/step8/${match?.params.id}`}>
                                         <button className='float-end border-0 bg-primary  p-2 text-white ms-5'>Next</button>
                                     </Link>
                                 </div>

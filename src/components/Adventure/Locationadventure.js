@@ -31,18 +31,21 @@ const Locationadventure = () => {
                         </ul>
                         <form class="d-flex" role="search">
 
-                            <button class=" border-0 bg-white text-primary fs-3">Save & Exit</button>
+                            <button class=" border-0 bg-white badge badge-primary fs-3">Save & Exit</button>
                         </form>
                     </div>
                 </div>
             </nav>
+            <div class="progress">
+                <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-label="Animated striped example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style={{ width: "25%" }}></div>
+            </div>
             <div class="container px-4 text-center p-5">
                 <div class="row gx-5">
                     <div class="col">
                         <div class="p-3">
                             <p className='fs-3 fw-bold text-start'>Where is your place located?</p>
                             <p className='text-start'>Please input your exact address. Guests will not be able to see your exact address until they have made a booking.</p>
-                            <button type="button" class="btn btn-outline-primary float-start p-2 mb-4" onClick={showdata}><i class="fa-solid fa-location-arrow"></i>  Use current Location </button>
+                            <button type="button" class="border-0 p-3 fs-6 badge badge-primary text-white float-start p-2 mb-4" onClick={showdata}><i class="fa-solid fa-location-arrow"></i>  Use current Location </button>
                             <span></span>
                             <input type="text" className='form-control mt-2' placeholder='Enter the location' />
 
@@ -65,7 +68,7 @@ const Locationadventure = () => {
                                 <p className='float-start p-2' role="button">Back</p>
 
                                 <Link to={`/add-experience/step4/${match?.params.id}`}>
-                                    <button className='float-end border-0 bg-primary  p-2 text-white' >Next</button>
+                                    <button className='float-end fs-4 border-0 badge badge-primary  p-3 text-white' >Next</button>
                                 </Link>
                             </div>
                         </div>

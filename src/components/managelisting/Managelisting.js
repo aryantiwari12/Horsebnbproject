@@ -2,15 +2,22 @@ import React, { useState, useEffect } from 'react'
 import heneceforthApi from '../henceforthApi'
 import ReactPaginate from "react-paginate";
 import axios from 'axios';
+import moment from 'moment';
+import { Link, useMatch } from 'react-router-dom';
+import "../managelisting/manage.css"
 
 
 
 const imageurl = `https://horsebnb.s3.us-east-2.amazonaws.com/Uploads/Images/Small/`;
 
+// const match=useMatch("/manage-listing:id")
+
 const Managelisting = () => {
+    const match = useMatch('/manage-listing')
 
 
     const [data, setdata] = useState([])
+    const [countdata,setcountdata]=useState('')
     
     // let limit = 10;
     
@@ -21,7 +28,8 @@ const Managelisting = () => {
 
         let res = await heneceforthApi.Auth.listedalltype()
         setdata(res?.data)
-       
+        setcountdata(res?.count)
+        console.log(res?.count)
 
 
     }
@@ -43,7 +51,7 @@ const Managelisting = () => {
     return (
         <div>
             <div className='container p-5'>
-                <p className='fs-3 mt-5 '>39 Listing</p>
+                <p className='fs-3 mt-5 '>{countdata} Listing</p>
                 <div className='header'>
                     <table class="table">
                         <thead>
@@ -70,16 +78,19 @@ const Managelisting = () => {
                                                 <span className='ms-5'>{item?.attributes?.title}</span>
                                             </td>
                                             <td>
-                                                <button type="button" class="btn btn-outline-primary">{item?.attributes?.state}</button>
+                                                <Link to={`/manage-listing/publish-listing/${item.id.uuid}`}>
+                                                <button type="button" class="btn btn-primary-outline px-3">{item?.attributes?.state}</button>
+                                                </Link>
                                             </td>
                                             {/* <td>{item?.attributes?.publicData?.type === 1 ? "short tem" : "montly"}</td> */}
-                                            <td>{item?.attributes?.publicData?.type === 1 ? "short tem" : item?.attributes?.publicData?.type === 2 ?"Montly":item?.attributes?.publicData?.type === 3?"Guest Accommodations":"Adventure" }</td>
+                                            <td>{item?.attributes?.publicData?.type === 1 ? "short tem" : item?.attributes?.publicData?.type === 2 ?"Montly":item?.attributes?.publicData?.type === 3?"Adventure":"Guest Accommodations" }</td>
                                             {console.log(data?.attributes?.publicData?.type)}
-                                            <td>Mohali</td>
-                                            <td>{item?.attributes?.createdAt}</td>
+                                            <td>C-196a, Times Square, 3rd Floor, Industrial Area, Sector 74, Sahibzada Ajit Singh Nagar, Punjab 160071, India</td>
+                                            <td>{moment(item?.attributes?.createdAt).format("MMM Do YY")}{}</td>
                                             <td role="button"><i class="fa-solid fa-ellipsis" data-bs-toggle="dropdown" aria-expanded="false"></i>
                                                 <ul class="dropdown-menu">
-                                                    <li><a class="dropdown-item" href="#">Edit</a></li>
+                                                    <Link to={item?.attributes?.publicData?.type === 1?`/create-stall/step1${item.id.uuid}`:""}>
+                                                    <li><a class="dropdown-item" href="#">Edit</a></li></Link>
                                                     {item?.attributes?.state === "published" ? <li><a class="dropdown-item" href="#">Deactivate</a></li> : ''}
                                                     <li><a class="dropdown-item" href="#">Preview</a></li>
                                                 </ul>

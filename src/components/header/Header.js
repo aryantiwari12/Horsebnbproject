@@ -4,7 +4,7 @@ import "../header/style.css";
 import 'react-phone-number-input/style.css'
 import { useState } from 'react';
 import { useContext } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { CounterContext } from "../context/CounterContext"
 import heneceforthApi from "../henceforthApi";
 import PhoneInput, { formatPhoneNumber, formatPhoneNumberIntl } from 'react-phone-number-input'
@@ -140,7 +140,7 @@ const Header = () => {
 
     }
 
-
+  const Location=useLocation()
 
     return (
         <div>
@@ -155,6 +155,7 @@ const Header = () => {
                             </button>
                             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center">
+                                    {Location.pathname !=='/Search/1' && Location.pathname !=='/Search/2'  && Location.pathname !=='/Search/3' && Location.pathname !=='/Search/4' ?
                                     <li class="nav-item border rounded">
                                         <a href='' class="pointer search-btn col-lg-12 col-md-6">
                                             <span className="text-black">Start your search</span>
@@ -162,7 +163,7 @@ const Header = () => {
                                                 <img src={IMAGE1}></img>
                                             </span>
                                         </a>
-                                    </li>
+                                    </li>:""}
                                     <li className='nav-item'>
                                         <Link to="/host-stalls">
                                             <a href='#' className="text-black">Host your Stalls</a>

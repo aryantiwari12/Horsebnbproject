@@ -83,7 +83,7 @@ const Calendarandavailability = () => {
                             <i class="fa-solid fa-angle-left float-start" role="button"></i>
                             <p className='float-start p-2' role="button">Back</p>
                             <Link to={`/create-stall${typedata?.attributes?.publicData?.type===1?'/step11/1/':'/availability/2/'}${match?.params.id}`}>
-                            <button className='float-end border-0 bg-primary  p-2 text-white' onClick={calendardata}>Next</button>
+                            <button className='float-end border-0 badge-primary  p-2 text-white' onClick={calendardata}>Next</button>
                             {console.log(typedata?.attributes?.publicData?.type)}
                             </Link>
                         </div>

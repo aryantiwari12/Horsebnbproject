@@ -1,0 +1,31 @@
+h6.text-muted.position-absloute {
+    position: absolute;
+    margin-top: 54px;
+    left: 200px;
+}
+img.position-absloute {
+    margin-top: -23px;
+    margin-right: 21px;
+}
+button.mrttty {
+    position: absolute;
+    margin-top: 63px;
+    margin-left: 44px;
+}
+#zoom {
+    /* padding: px; */
+    transition: transform .2s;
+    width: 200px;
+    height: 200px;
+    margin: 0 auto;
+  }
+  
+  #zoom:hover {
+    -ms-transform: scale(1.5);
+    -webkit-transform: scale(1.5); 
+    transform: scale(1.5); 
+  }
+  button.position-absolute.mt-5.float-start {
+    /* margin-right: 44px; */
+    margin-left: -521px;
+}
